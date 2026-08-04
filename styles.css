@@ -1,0 +1,445 @@
+/* ============================================================
+   MOAT Studio — Landing Page Styles
+   Warm, spacious editorial composition.
+   ============================================================ */
+
+:root {
+  /* Palette — warm editorial */
+  --color-bg: #faf8f5;
+  --color-text: #1a1a1a;
+  --color-muted: #6b6560;
+  --color-accent: #2c2825;
+  --color-cta-bg: #1a1a1a;
+  --color-cta-text: #f5f0eb;
+  --color-border: #e2ddd7;
+
+  /* Mosaic gradients — warm, abstract */
+  --gradient-one: linear-gradient(145deg, #eeaf96, #efdfae);
+  --gradient-two: linear-gradient(130deg, #7999a6, #d8e0c7);
+  --gradient-three: linear-gradient(145deg, #e7dfd2, #a37e69);
+  --gradient-four: linear-gradient(160deg, #2c2825, #4a3f35);
+
+  /* Typography */
+  --font-body: 'Georgia', 'Times New Roman', serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 8rem;
+
+  /* Layout */
+  --max-width: 1200px;
+  --content-padding: var(--space-md);
+
+  /* Motion */
+  --transition-speed: 0.3s;
+}
+
+/* Reduced motion — respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-speed: 0s;
+  }
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   Page wrapper — centred, max-width container
+   ============================================================ */
+
+.page-wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--content-padding);
+}
+
+/* ============================================================
+   Header / Navigation
+   ============================================================ */
+
+.site-header {
+  padding: var(--space-md) 0;
+}
+
+.site-header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.wordmark {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.wordmark:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.nav-links a:hover {
+  color: var(--color-text);
+}
+
+.nav-links a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.nav-cta {
+  color: var(--color-text) !important;
+  font-weight: 500;
+}
+
+/* ============================================================
+   Hero — huge centred type, spacious
+   ============================================================ */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60vh;
+  padding: var(--space-xxl) 0;
+  gap: var(--space-md);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0;
+  max-width: 900px;
+}
+
+.hero-caption {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-muted);
+  max-width: 680px;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   CTA Button — restrained dark
+   ============================================================ */
+
+.cta-button {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-cta-text);
+  background-color: var(--color-cta-bg);
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color var(--transition-speed) ease,
+              transform var(--transition-speed) ease;
+  margin-top: var(--space-xs);
+}
+
+.cta-button:hover {
+  background-color: #333;
+  transform: translateY(-1px);
+}
+
+.cta-button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   Trust line — subtle, editorial
+   ============================================================ */
+
+.trust-line {
+  text-align: center;
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.trust-line p {
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  color: var(--color-muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   Proof mosaic — abstract 2x2 grid (hierarchy only)
+   ============================================================ */
+
+.proof-mosaic {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 260px;
+  gap: 14px;
+  padding-bottom: var(--space-lg);
+}
+
+.mosaic-piece {
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-sm);
+  border-radius: 4px;
+}
+
+.piece-label {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+.piece-one {
+  background: var(--gradient-one);
+}
+
+.piece-two {
+  background: var(--gradient-two);
+}
+
+.piece-three {
+  background: var(--gradient-three);
+}
+
+.piece-four {
+  background: var(--gradient-four);
+  align-items: flex-start;
+}
+
+.piece-statement {
+  font-family: var(--font-ui);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 500;
+  color: var(--color-cta-text);
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   Contact section — dark counterweight to the pale hero
+   ============================================================ */
+
+.contact-section {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  padding: var(--space-xxl) 0;
+}
+
+.contact-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.contact-section h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.contact-body {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #c4bdb6;
+  max-width: 520px;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.contact-action {
+  margin-top: var(--space-xs);
+  padding: 0.85rem 2rem;
+  border: 1px solid rgba(250, 248, 245, 0.3);
+  border-radius: 4px;
+}
+
+.contact-cta-placeholder {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #c4bdb6;
+  letter-spacing: 0.02em;
+}
+
+.contact-cta {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-bg);
+  background-color: rgba(250, 248, 245, 0.15);
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color var(--transition-speed) ease,
+              transform var(--transition-speed) ease;
+}
+
+.contact-cta:hover {
+  background-color: rgba(250, 248, 245, 0.25);
+  transform: translateY(-1px);
+}
+
+.contact-cta:focus-visible {
+  outline: 2px solid var(--color-bg);
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   Footer — minimal
+   ============================================================ */
+
+.site-footer {
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.site-footer p {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+/* ============================================================
+   Responsive — narrow viewport (390px)
+   ============================================================ */
+
+@media (max-width: 650px) {
+  :root {
+    --content-padding: var(--space-sm);
+  }
+
+  .site-header nav {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .hero {
+    min-height: 50vh;
+    padding: var(--space-lg) 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .hero-caption {
+    font-size: 1rem;
+  }
+
+  /* Mosaic collapses to 2x2 on narrow */
+  .proof-mosaic {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+  }
+
+  .piece-four {
+    grid-column: span 2;
+  }
+
+  .contact-section {
+    padding: var(--space-lg) 0;
+  }
+
+  .contact-section h2 {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+
+  .contact-body {
+    font-size: 1rem;
+  }
+}
+
+/* ============================================================
+   Focus-visible — keyboard navigation evidence
+   ============================================================ */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   Skip link — accessibility
+   ============================================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-sm);
+  background: var(--color-cta-bg);
+  color: var(--color-cta-text);
+  padding: var(--space-xs) var(--space-sm);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  text-decoration: none;
+  border-radius: 0 0 4px 4px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
