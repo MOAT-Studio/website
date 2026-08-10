@@ -268,6 +268,75 @@ body {
 }
 
 /* ============================================================
+   Founder profile — warm cream / deep green / gold editorial split
+   ============================================================ */
+
+.founder-profile {
+  background-color: #f5f0eb;
+  padding: var(--space-xxl) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.founder-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.founder-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a6b50; /* deep green */
+  margin: 0;
+}
+
+.founder-profile h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.founder-body {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.founder-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-left: var(--space-sm);
+  border-left: 2px solid #c9a84c; /* gold accent */
+}
+
+.founder-details p {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.founder-mark {
+  display: block;
+  margin-top: var(--space-sm);
+  max-width: 160px;
+  height: auto;
+  opacity: 0.7;
+}
+
+/* ============================================================
    Contact section — dark counterweight to the pale hero
    ============================================================ */
 
@@ -409,6 +478,27 @@ body {
 
   .contact-body {
     font-size: 1rem;
+  }
+
+  /* Founder profile stacks cleanly at narrow */
+  .founder-profile {
+    padding: var(--space-lg) 0;
+  }
+
+  .founder-profile h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .founder-body {
+    font-size: 1rem;
+  }
+
+  .founder-details p {
+    font-size: 0.85rem;
+  }
+
+  .founder-mark {
+    max-width: 120px;
   }
 }
 
