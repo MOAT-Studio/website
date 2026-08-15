@@ -1,0 +1,274 @@
+* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  background: #F8F9FA;
+  color: #050505;
+  font-family: Figtree, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #050505;
+  text-decoration: none;
+  transition: opacity .2s cubic-bezier(.22, .61, .36, 1);
+}
+a:hover { opacity: .68 }
+
+::selection { background: #FFE100; color: #050505 }
+
+input::placeholder,
+textarea::placeholder { color: rgba(255, 248, 225, .5) }
+
+button { transition: opacity .2s cubic-bezier(.22, .61, .36, 1) }
+button:hover { opacity: .85 }
+
+@keyframes moatHue {
+  0%, 100% { fill: #FFBA08 }
+  20% { fill: #FFC917 }
+  40% { fill: #FFE100 }
+  60% { fill: #DC2F02 }
+  80% { fill: #D00000 }
+}
+
+.page { max-width: 1440px; margin: 0 auto }
+
+/* ── Highlight (yellow rotated marker) ── */
+.hl { position: relative; display: inline-block; padding: .04em .18em .09em }
+.hl-bg { position: absolute; inset: 0; background: #FFE100; border-radius: 5px; transform: rotate(-3.6deg) }
+.hl-text { position: relative; color: #03071E }
+
+/* ── Dot-grid canvas + gradient scrim (hero and contact panel) ── */
+.dot-canvas { position: absolute; inset: 0; width: 100%; height: 100% }
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #03071E 6%, rgba(3, 7, 30, .72) 52%, rgba(3, 7, 30, .25));
+  pointer-events: none;
+}
+
+/* ── Hero ── */
+.hero {
+  background: #03071E;
+  color: #FFF8E1;
+  border-radius: 0 0 36px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 64px;
+  pointer-events: none;
+}
+.hero-logo { display: flex; align-items: center; gap: 14px; color: #FFF8E1; pointer-events: auto }
+.nav { display: flex; gap: 34px; align-items: center; font-size: 15px; pointer-events: auto }
+.nav-link { color: #FFF8E1 }
+.nav-cta {
+  background: #FFE100;
+  color: #03071E;
+  border-radius: 8px;
+  padding: 11px 22px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.hero-copy { position: relative; padding: 110px 64px 128px; max-width: 1000px; pointer-events: none }
+.hero-copy h1 {
+  font-size: clamp(46px, 5.4vw, 82px);
+  font-weight: 760;
+  letter-spacing: -.028em;
+  line-height: .98;
+  margin: 0;
+  text-wrap: balance;
+}
+.hero-copy p {
+  font-size: 20px;
+  line-height: 1.5;
+  color: rgba(255, 248, 225, .72);
+  max-width: 660px;
+  margin: 36px 0 0;
+}
+
+/* ── Two-column labeled sections (Approach / Programs) ── */
+.section {
+  display: grid;
+  grid-template-columns: minmax(180px, 300px) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+#approach { padding: 110px 64px 96px }
+#programs { padding: 84px 64px 120px }
+.section-label { font-size: 17px; color: #6c757d }
+#approach .section-label { padding-top: 14px }
+#programs .section-label { padding-top: 16px }
+.section-title {
+  font-size: clamp(36px, 4.2vw, 58px);
+  font-weight: 760;
+  letter-spacing: -.028em;
+  line-height: 1.02;
+  margin: 0;
+}
+#approach .section-title { max-width: 820px }
+#programs .section-title { margin-bottom: 54px; max-width: 760px }
+
+.approach-copy p { font-size: 19px; line-height: 1.6; color: #050505; max-width: 620px; margin: 26px 0 0 }
+.approach-copy h2 + p { margin-top: 56px }
+
+/* ── Divider dots ── */
+#divider {
+  padding: 0 64px;
+  display: grid;
+  grid-template-columns: minmax(180px, 300px) minmax(0, 1fr);
+  gap: 64px;
+}
+#divider svg { display: block; overflow: visible }
+#divider circle {
+  opacity: .85;
+  animation: moatHue 15s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .25s cubic-bezier(.22, .61, .36, 1);
+}
+#divider circle:hover { transform: scale(1.45) }
+
+/* ── Programs ── */
+.program { border-top: 1px solid #D9D9D9; padding: 34px 0 38px }
+.program-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px }
+.program-name { font-size: 23px; font-weight: 700; letter-spacing: -.01em }
+.program-num { font-family: 'Fira Mono', monospace; font-size: 22px; color: #050505 }
+.program p { font-size: 18px; line-height: 1.55; color: #6c757d; margin: 18px 0 0; max-width: 640px }
+.program-meta { font-family: 'Fira Mono', monospace; font-size: 12px; color: #D00000; margin-top: 16px }
+
+/* ── Founder ── */
+#founder { padding: 0 64px 120px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center }
+.founder-photo {
+  background: #E9ECEF;
+  border-radius: 8px;
+  aspect-ratio: 1;
+  width: 340px;
+  flex: none;
+  object-fit: cover;
+  object-position: 52% 42%;
+  display: block;
+}
+.founder-body { flex: 1; min-width: 300px; max-width: 600px }
+.founder-body h2 { margin: 0 0 22px }
+.founder-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 26px;
+  font-size: clamp(28px, 2.8vw, 38px);
+  font-weight: 760;
+  letter-spacing: -.028em;
+  line-height: 1.06;
+}
+.founder-name-lines { display: flex; flex-direction: column }
+.founder-name-lines span:last-child { padding-left: .6em }
+.founder-mark { display: block; width: 1.6em; height: 1.6em; object-fit: contain; border-radius: 50% }
+.founder-body p { font-size: 18px; line-height: 1.55; color: #6c757d; margin: 0 0 16px }
+.founder-links { display: flex; gap: 16px; flex-wrap: wrap; align-items: baseline }
+.founder-links .sep { font-family: 'Fira Mono', monospace; font-size: 12px; color: #6c757d }
+.mono-link {
+  font-family: 'Fira Mono', monospace;
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: #050505;
+  border-bottom: 1px solid #D00000;
+  padding-bottom: 2px;
+}
+
+/* ── Contact ── */
+#contact { padding: 0 44px 44px }
+.contact-panel {
+  background: #03071E;
+  color: #FFF8E1;
+  border-radius: 36px;
+  padding: 104px 72px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.contact-copy { position: relative }
+.contact-copy h2 {
+  font-size: clamp(38px, 4.4vw, 58px);
+  font-weight: 760;
+  letter-spacing: -.028em;
+  line-height: 1;
+  margin: 0;
+}
+.contact-copy p { font-size: 19px; line-height: 1.5; color: rgba(255, 248, 225, .7); max-width: 430px; margin: 28px 0 0 }
+.contact-form { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1 }
+.contact-form input,
+.contact-form textarea {
+  background: rgba(3, 7, 30, .72);
+  border: 1px solid rgba(255, 248, 225, .35);
+  border-radius: 8px;
+  padding: 16px 18px;
+  font-family: Figtree, sans-serif;
+  font-size: 16px;
+  color: #FFF8E1;
+  outline: none;
+}
+.contact-form textarea { resize: vertical }
+.contact-form button {
+  background: #FFE100;
+  color: #03071E;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: Figtree, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── Footer ── */
+#footer {
+  padding: 0 64px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-family: 'Fira Mono', monospace;
+  font-size: 11.5px;
+  color: #6c757d;
+}
+#footer a { color: #6c757d }
+.footer-links { display: flex; gap: 22px }
+
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .hero { border-radius: 0 0 24px 24px }
+  .hero-bar { padding: 18px 24px }
+  .hero-copy { padding: 64px 24px 88px }
+  .hero-logo svg { width: 54px; height: 54px }
+  .nav { gap: 14px; font-size: 14px }
+  .nav a:not(:last-child) { display: none }
+  #approach, #programs { grid-template-columns: 1fr; gap: 22px; padding-left: 24px; padding-right: 24px }
+  #approach { padding-top: 72px; padding-bottom: 56px }
+  #programs { padding-top: 56px; padding-bottom: 80px }
+  #approach .section-label, #programs .section-label {
+    padding-top: 0;
+    font-family: 'Fira Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .18em;
+    color: #6c757d;
+  }
+  .approach-copy p, .approach-copy h2 + p { margin-top: 28px; font-size: 17px }
+  #programs .section-title { margin-bottom: 34px }
+  #divider { grid-template-columns: 1fr; padding: 0 24px }
+  #divider .spacer { display: none }
+  #divider svg { width: 100%; height: auto }
+  #founder { padding: 0 24px 80px; gap: 28px }
+  .founder-photo { width: 100%; max-width: none }
+  .founder-body { min-width: 0 }
+  #contact { padding: 0 12px 24px }
+  .contact-panel { grid-template-columns: 1fr; padding: 56px 24px; border-radius: 24px; gap: 36px }
+  #footer { padding: 0 24px 36px; flex-direction: column; align-items: flex-start; gap: 14px }
+}
