@@ -22,7 +22,7 @@ const PROGRAMS = [
 export default function Programs() {
   return (
     <div id="programs" className="section">
-      <div className="section-label">Programs</div>
+      <div className="section-label">How we work</div>
       <div>
         <h2 className="section-title">Map → Build → Loop.</h2>
         {PROGRAMS.map((p) => (

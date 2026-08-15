@@ -15,7 +15,7 @@ export default function Hero() {
           </a>
           <nav id="nav" className="nav">
             <a href="#approach" className="nav-link">Approach</a>
-            <a href="#programs" className="nav-link">Programs</a>
+            <a href="#programs" className="nav-link">How we work</a>
             <a href="#contact" className="nav-cta">Get in touch</a>
           </nav>
         </div>

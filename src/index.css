@@ -1,5 +1,7 @@
 * { box-sizing: border-box }
 
+html { scroll-behavior: smooth }
+
 body {
   margin: 0;
   background: #F8F9FA;
@@ -67,7 +69,8 @@ button:hover { opacity: .85 }
 }
 .hero-logo { display: flex; align-items: center; gap: 14px; color: #FFF8E1; pointer-events: auto }
 .nav { display: flex; gap: 34px; align-items: center; font-size: 15px; pointer-events: auto }
-.nav-link { color: #FFF8E1 }
+.nav-link { color: #FFF8E1; transition: color .2s cubic-bezier(.22, .61, .36, 1) }
+.nav-link:hover { opacity: 1; color: #FFE100 }
 .nav-cta {
   background: #FFE100;
   color: #03071E;
@@ -75,10 +78,13 @@ button:hover { opacity: .85 }
   padding: 11px 22px;
   font-weight: 600;
   font-size: 14px;
+  transition: background .2s cubic-bezier(.22, .61, .36, 1);
 }
-.hero-copy { position: relative; padding: 170px 64px 190px; max-width: 1000px; pointer-events: none }
+.nav-cta:hover { opacity: 1; background: #FFF8E1 }
+.hero-logo:hover { opacity: 1 }
+.hero-copy { position: relative; padding: 220px 64px 240px; max-width: 1100px; pointer-events: none }
 .hero-copy h1 {
-  font-size: clamp(46px, 5.4vw, 82px);
+  font-size: clamp(50px, 6.2vw, 96px);
   font-weight: 760;
   letter-spacing: -.028em;
   line-height: .98;
@@ -86,11 +92,11 @@ button:hover { opacity: .85 }
   text-wrap: balance;
 }
 .hero-copy p {
-  font-size: 20px;
+  font-size: 21px;
   line-height: 1.5;
   color: rgba(255, 248, 225, .72);
-  max-width: 660px;
-  margin: 36px 0 0;
+  max-width: 680px;
+  margin: 40px 0 0;
 }
 
 /* ── Two-column labeled sections (Approach / Programs) ── */
@@ -100,8 +106,8 @@ button:hover { opacity: .85 }
   gap: 64px;
   align-items: start;
 }
-#approach { padding: 150px 64px 120px }
-#programs { padding: 110px 64px 150px }
+#approach { padding: 200px 64px 160px }
+#programs { padding: 150px 64px 200px }
 .section-label { font-size: 17px; color: #6c757d }
 #approach .section-label { padding-top: 14px }
 #programs .section-label { padding-top: 16px }
@@ -144,7 +150,7 @@ button:hover { opacity: .85 }
 .program-meta { font-family: 'Fira Mono', monospace; font-size: 12px; color: #D00000; margin-top: 16px }
 
 /* ── Founder ── */
-#founder { padding: 0 64px 150px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center }
+#founder { padding: 0 64px 200px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center }
 .founder-photo {
   background: #E9ECEF;
   border-radius: 8px;
@@ -217,6 +223,10 @@ button:hover { opacity: .85 }
   outline: none;
 }
 .contact-form textarea { resize: vertical }
+.contact-form .honeypot { position: absolute; left: -9999px; opacity: 0; pointer-events: none }
+.contact-form button:disabled { opacity: .6; cursor: default }
+.form-note { font-size: 14px; color: rgba(255, 248, 225, .7); margin: 4px 0 0 }
+.form-note a { color: #FFE100 }
 .contact-form button {
   background: #FFE100;
   color: #03071E;
@@ -248,13 +258,13 @@ button:hover { opacity: .85 }
 @media (max-width: 900px) {
   .hero { border-radius: 0 0 24px 24px }
   .hero-bar { padding: 18px 24px }
-  .hero-copy { padding: 96px 24px 120px }
+  .hero-copy { padding: 120px 24px 148px }
   .hero-logo svg { width: 54px; height: 54px }
   .nav { gap: 14px; font-size: 14px }
   .nav a:not(:last-child) { display: none }
   #approach, #programs { grid-template-columns: 1fr; gap: 22px; padding-left: 24px; padding-right: 24px }
-  #approach { padding-top: 96px; padding-bottom: 72px }
-  #programs { padding-top: 72px; padding-bottom: 104px }
+  #approach { padding-top: 128px; padding-bottom: 96px }
+  #programs { padding-top: 96px; padding-bottom: 136px }
   #approach .section-label, #programs .section-label {
     padding-top: 0;
     font-family: 'Fira Mono', monospace;
@@ -267,7 +277,7 @@ button:hover { opacity: .85 }
   #divider { grid-template-columns: 1fr; padding: 0 24px }
   #divider .spacer { display: none }
   #divider svg { width: 100%; height: auto }
-  #founder { padding: 0 24px 104px; gap: 28px }
+  #founder { padding: 0 24px 136px; gap: 28px }
   .founder-photo { width: 100%; max-width: none }
   .founder-body { min-width: 0 }
   #contact { padding: 0 12px 24px }
