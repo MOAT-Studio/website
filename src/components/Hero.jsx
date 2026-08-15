@@ -25,8 +25,8 @@ export default function Hero() {
             AI that compounds into a <Highlight>moat.</Highlight>
           </h1>
           <p>
-            MOAT Studio builds AI systems around your own workflows and knowledge — so
-            the longer they run, the harder your advantage is to copy.
+            MOAT Studio builds AI systems around your own workflows and knowledge.
+            The longer they run, the harder your advantage is to copy.
           </p>
         </div>
       </div>

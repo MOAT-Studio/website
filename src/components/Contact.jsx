@@ -13,7 +13,7 @@ export default function Contact() {
           </h2>
           <p>
             Tell us what you're trying to change. We'll tell you whether there's a
-            useful first move — and if there isn't one, we'll say so.
+            useful first move. If there isn't one, we'll say so.
           </p>
         </div>
         <div className="contact-form">

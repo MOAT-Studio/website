@@ -2,19 +2,19 @@ const PROGRAMS = [
   {
     num: '01',
     name: 'Map',
-    body: 'Discovery from the top down. We work with your leadership and the people doing the work — each sees a different half of the problem — to find where AI creates real advantage, and where it doesn’t. You leave with a ranked map you own either way.',
+    body: 'Discovery from the top down. Leadership and the people doing the work each see a different half of the problem, so we work with both to find where AI creates real advantage, and where it doesn’t. You leave with a ranked map you own either way.',
     meta: '1–3 weeks · fixed scope · yours either way',
   },
   {
     num: '02',
     name: 'Build',
-    body: 'We implement what the Map decided — our engineers embedded in your team, or building alongside your own. Working software against your real systems, done when it runs in production, not when the deck is delivered.',
+    body: 'We implement what the Map decided: our engineers embedded in your team, or building alongside your own. Working software against your real systems, done when it runs in production, not when the deck is delivered.',
     meta: 'by scope · a working system, not a pilot',
   },
   {
     num: '03',
     name: 'Loop',
-    body: 'A system left alone decays: models move, data shifts, edge cases surface. So we measure everything we build in production and make it improve — the numbers reported, not asserted. Hand the loop to your team whenever you want; it’s yours.',
+    body: 'A system left alone decays: models move, data shifts, edge cases surface. So we measure everything we build in production and make it improve. The numbers are reported, not asserted. Hand the loop to your team whenever you want; it’s yours.',
     meta: 'ongoing · improvement you can see',
   },
 ]
