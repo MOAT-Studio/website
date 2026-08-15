@@ -48,6 +48,7 @@ button:hover { opacity: .85 }
 }
 
 /* ── Hero ── */
+/* Full-bleed: the hero sits outside .page; its content aligns via .hero-inner. */
 .hero {
   background: #03071E;
   color: #FFF8E1;
@@ -55,6 +56,7 @@ button:hover { opacity: .85 }
   position: relative;
   overflow: hidden;
 }
+.hero-inner { max-width: 1440px; margin: 0 auto }
 .hero-bar {
   position: relative;
   display: flex;

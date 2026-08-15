@@ -8,14 +8,16 @@ import Footer from './components/Footer.jsx'
 
 export default function App() {
   return (
-    <div className="page">
+    <>
       <Hero />
-      <Approach />
-      <Divider />
-      <Programs />
-      <Founder />
-      <Contact />
-      <Footer />
-    </div>
+      <div className="page">
+        <Approach />
+        <Divider />
+        <Programs />
+        <Founder />
+        <Contact />
+        <Footer />
+      </div>
+    </>
   )
 }
