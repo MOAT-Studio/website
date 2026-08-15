@@ -8,7 +8,7 @@ export default function Founder() {
       />
       <div className="founder-body">
         <h2>
-          <a href="https://franciscovarisco.com" className="founder-name">
+          <a href="https://franciscovarisco.com" target="_blank" rel="noopener noreferrer" className="founder-name">
             <span className="founder-name-lines">
               <span>I am</span>
               <span>francisco</span>
@@ -17,18 +17,15 @@ export default function Founder() {
           </a>
         </h2>
         <p>
-          MOAT Studio was founded to help expert-led businesses build AI systems around
-          their own workflows and knowledge — not the other way around.
-        </p>
-        <p>
-          Technical co-founder of Paradise Bunker, an autonomous operations platform.
-          Builder of systems that run without constant oversight. Based in Brisbane,
-          Australia.
+          Twenty years building technology inside real businesses. Still curious enough
+          to take things apart to see why they work.
         </p>
         <span className="founder-links">
-          <a href="https://franciscovarisco.com" className="mono-link">franciscovarisco.com</a>
+          <a href="https://franciscovarisco.com" target="_blank" rel="noopener noreferrer" className="mono-link">franciscovarisco.com</a>
           <span className="sep">•</span>
-          <a href="https://linkedin.com/in/xicovarisco" className="mono-link">linkedin.com/in/xicovarisco</a>
+          <a href="https://linkedin.com/in/xicovarisco" target="_blank" rel="noopener noreferrer" className="mono-link">linkedin</a>
+          <span className="sep">•</span>
+          <a href="mailto:francisco@moatstudio.ai" className="mono-link">email</a>
         </span>
       </div>
     </div>

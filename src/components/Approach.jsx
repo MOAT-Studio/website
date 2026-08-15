@@ -3,18 +3,19 @@ export default function Approach() {
     <div id="approach" className="section">
       <div className="section-label">Approach</div>
       <div className="approach-copy">
-        <h2 className="section-title">Built on your ground, handed back to you</h2>
+        <h2 className="section-title">We start where you are</h2>
         <p>
-          Most AI makes you faster. A system built around your own workflow, judgment
-          and knowledge makes you harder to copy. We are vendor-neutral: no reseller
-          margin, no platform to defend, and the right tool for the workflow — including
-          none at all.
+          Every organisation is at a different place with AI. Some are choosing a first
+          project. Some have pilots that stalled. Some are ready to scale what already
+          works. So every engagement starts with discovery, inside your operation and
+          with your people. We only build once we know where AI genuinely pays.
         </p>
         <p>
-          What we build sits inside your operating reality: your recurring internal
-          work, your systems of record, your quality bar, rather than a template rolled
-          out sideways. Then we hand it over. Your team runs it when we’re done, because
-          dependency on a consultant is the opposite of a moat.
+          We work as consultants, deployment engineers and adoption partners, in
+          organisations of every size. We're vendor-neutral: the right tool for the
+          workflow, including none at all. We build with your team in the room, so
+          the capability stays when we leave. The goal was never AI for its own sake.
+          It's AI as your competitive advantage.
         </p>
       </div>
     </div>

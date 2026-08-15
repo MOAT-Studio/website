@@ -15,20 +15,18 @@ export default function Hero() {
           </a>
           <nav id="nav" className="nav">
             <a href="#approach" className="nav-link">Approach</a>
-            <a href="#programs" className="nav-link">Programs</a>
+            <a href="#programs" className="nav-link">How we work</a>
             <a href="#contact" className="nav-cta">Get in touch</a>
           </nav>
         </div>
 
         <div className="hero-copy">
           <h1>
-            AI systems that compound into an advantage your competitors{' '}
-            <Highlight>cannot copy.</Highlight>
+            AI that compounds into a <Highlight>moat.</Highlight>
           </h1>
           <p>
-            MOAT Studio helps expert-led businesses improve internal performance with AI
-            systems built around their own workflows and knowledge—then, where privacy,
-            data control or independence matters, deploy them on infrastructure they control.
+            MOAT Studio builds AI around the way your people actually work: your
+            workflows, your knowledge, your judgement. What compounds is yours.
           </p>
         </div>
       </div>

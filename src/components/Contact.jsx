@@ -1,7 +1,37 @@
+import { useState } from 'react'
 import DotCanvas from './DotCanvas.jsx'
 import Highlight from './Highlight.jsx'
 
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/francisco@moatstudio.ai'
+
 export default function Contact() {
+  const [status, setStatus] = useState('idle')
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const data = Object.fromEntries(new FormData(e.target))
+    if (data._honey) return // bot filled the hidden field
+    setStatus('sending')
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          message: data.message,
+          _subject: 'New enquiry — moatstudio.ai',
+          _captcha: 'false',
+        }),
+      })
+      if (!res.ok) throw new Error(`FormSubmit responded ${res.status}`)
+      setStatus('sent')
+      e.target.reset()
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
     <div id="contact">
       <div className="contact-panel">
@@ -13,15 +43,24 @@ export default function Contact() {
           </h2>
           <p>
             Tell us what you're trying to change. We'll tell you whether there's a
-            useful first move.
+            useful first move. If there isn't one, we'll say so.
           </p>
         </div>
-        <div className="contact-form">
-          <input placeholder="Name" />
-          <input placeholder="Work email" />
-          <textarea placeholder="What are you trying to change?" rows={4} />
-          <button>Get in touch</button>
-        </div>
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <input name="name" placeholder="Name" required />
+          <input name="email" type="email" placeholder="Work email" required />
+          <textarea name="message" placeholder="What are you trying to change?" rows={4} required />
+          <input name="_honey" type="text" tabIndex={-1} autoComplete="off" className="honeypot" aria-hidden="true" />
+          <button type="submit" disabled={status === 'sending'}>
+            {status === 'sending' ? 'Sending…' : status === 'sent' ? 'Sent — talk soon' : 'Start a conversation'}
+          </button>
+          {status === 'error' && (
+            <p className="form-note">
+              Something went wrong. Email us directly at{' '}
+              <a href="mailto:francisco@moatstudio.ai">francisco@moatstudio.ai</a>.
+            </p>
+          )}
+        </form>
       </div>
     </div>
   )

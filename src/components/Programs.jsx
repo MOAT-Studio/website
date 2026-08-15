@@ -1,30 +1,30 @@
 const PROGRAMS = [
   {
     num: '01',
-    name: 'Moat Map',
-    body: 'Identify performance opportunities and classify each by data sensitivity, integration need, reliability requirement and fit for cloud, hybrid or local deployment.',
-    meta: '1–3 weeks · fixed scope · you keep the roadmap either way',
+    name: 'Map',
+    body: 'Discovery from the top down. Leadership and the people doing the work each see a different half of the problem, so we work with both to find where AI creates real advantage, and where it doesn’t. You leave with a ranked map you own either way.',
+    meta: '1–3 weeks · fixed scope · yours either way',
   },
   {
     num: '02',
-    name: 'Moat Build',
-    body: 'Implement the selected workflow against your real systems, with the deployment path chosen in the Map.',
-    meta: 'by scope · a working system, not a pilot deck',
+    name: 'Build',
+    body: 'We implement what the Map decided: our engineers embedded in your team, or building alongside your own. Working software against your real systems, done when it runs in production, not when the deck is delivered.',
+    meta: 'by scope · a working system, not a pilot',
   },
   {
     num: '03',
-    name: 'Moat Keep',
-    body: 'Monitor, improve and retain control — or equip your team to run it themselves and step away.',
-    meta: 'ongoing · your call which one',
+    name: 'Loop',
+    body: 'A system left alone decays: models move, data shifts, edge cases surface. So we measure everything we build in production and make it improve. The numbers are reported, not asserted. Hand the loop to your team whenever you want; it’s yours.',
+    meta: 'ongoing · improvement you can see',
   },
 ]
 
 export default function Programs() {
   return (
     <div id="programs" className="section">
-      <div className="section-label">Programs</div>
+      <div className="section-label">How we work</div>
       <div>
-        <h2 className="section-title">Three steps. You own the output of each.</h2>
+        <h2 className="section-title">Map → Build → Loop.</h2>
         {PROGRAMS.map((p) => (
           <div className="program" key={p.num}>
             <div className="program-head">
