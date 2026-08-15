@@ -20,9 +20,6 @@ export default function Founder() {
           Twenty years building technology inside real businesses. Still curious enough
           to take things apart to see why they work.
         </p>
-        <p>
-          Based in Brisbane, Australia.
-        </p>
         <span className="founder-links">
           <a href="https://franciscovarisco.com" className="mono-link">franciscovarisco.com</a>
           <span className="sep">•</span>
