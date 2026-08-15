@@ -22,13 +22,11 @@ export default function Hero() {
 
         <div className="hero-copy">
           <h1>
-            AI systems that compound into an advantage your competitors{' '}
-            <Highlight>cannot copy.</Highlight>
+            AI that compounds into a <Highlight>moat.</Highlight>
           </h1>
           <p>
-            MOAT Studio helps expert-led businesses improve internal performance with AI
-            systems built around their own workflows and knowledge—then, where privacy,
-            data control or independence matters, deploy them on infrastructure they control.
+            MOAT Studio builds AI systems around your own workflows and knowledge — so
+            the longer they run, the harder your advantage is to copy.
           </p>
         </div>
       </div>

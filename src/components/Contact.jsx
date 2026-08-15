@@ -13,14 +13,14 @@ export default function Contact() {
           </h2>
           <p>
             Tell us what you're trying to change. We'll tell you whether there's a
-            useful first move.
+            useful first move — and if there isn't one, we'll say so.
           </p>
         </div>
         <div className="contact-form">
           <input placeholder="Name" />
           <input placeholder="Work email" />
           <textarea placeholder="What are you trying to change?" rows={4} />
-          <button>Get in touch</button>
+          <button>Start a conversation</button>
         </div>
       </div>
     </div>

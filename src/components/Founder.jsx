@@ -17,13 +17,11 @@ export default function Founder() {
           </a>
         </h2>
         <p>
-          MOAT Studio was founded to help expert-led businesses build AI systems around
-          their own workflows and knowledge — not the other way around.
+          Twenty years building technology inside real businesses. Still curious enough
+          to take things apart to see why they work.
         </p>
         <p>
-          Technical co-founder of Paradise Bunker, an autonomous operations platform.
-          Builder of systems that run without constant oversight. Based in Brisbane,
-          Australia.
+          Based in Brisbane, Australia.
         </p>
         <span className="founder-links">
           <a href="https://franciscovarisco.com" className="mono-link">franciscovarisco.com</a>

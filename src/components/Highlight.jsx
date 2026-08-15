@@ -1,4 +1,4 @@
-/** Yellow rotated marker behind a phrase (hero "cannot copy.", contact "uncopyable."). */
+/** Yellow rotated marker behind a phrase (hero "moat.", contact "uncopyable."). */
 export default function Highlight({ children }) {
   return (
     <span className="hl">
