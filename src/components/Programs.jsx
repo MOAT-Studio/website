@@ -24,7 +24,7 @@ export default function Programs() {
     <div id="programs" className="section">
       <div className="section-label">Programs</div>
       <div>
-        <h2 className="section-title">Map → Build → Loop. Three ways to start, or one arc through all three.</h2>
+        <h2 className="section-title">Map → Build → Loop.</h2>
         {PROGRAMS.map((p) => (
           <div className="program" key={p.num}>
             <div className="program-head">
