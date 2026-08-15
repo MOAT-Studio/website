@@ -1,78 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MOAT Studio — AI systems that compound into an advantage your competitors cannot copy</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOAT Studio — AI systems that compound into an advantage your competitors cannot copy</title>
+<meta name="description" content="MOAT Studio helps expert-led businesses improve internal performance with AI systems built around their own workflows and knowledge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Fira+Mono:wght@400;500&display=swap">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#F8F9FA;color:#050505;font-family:Figtree,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#050505;text-decoration:none;transition:opacity .2s cubic-bezier(.22,.61,.36,1)}
+  a:hover{opacity:.68}
+  ::selection{background:#FFE100;color:#050505}
+  input::placeholder,textarea::placeholder{color:rgba(255,248,225,.5)}
+  button{transition:opacity .2s cubic-bezier(.22,.61,.36,1)}
+  button:hover{opacity:.85}
+  @keyframes moatHue{0%,100%{fill:#FFBA08}20%{fill:#FFC917}40%{fill:#FFE100}60%{fill:#DC2F02}80%{fill:#D00000}}
+  #divider circle:hover{transform:scale(1.45)}
+  /* !important is required throughout: these override the inline styles used for layout */
+  @media (max-width:900px){
+    #hero{border-radius:0 0 24px 24px !important}
+    #hero > div:nth-child(3){padding:18px 24px !important}
+    #hero > div:nth-child(4){padding:64px 24px 88px !important}
+    #hero svg[role="img"]{width:54px;height:54px}
+    #nav{gap:14px !important;font-size:14px !important}
+    #nav a:not(:last-child){display:none}
+    #approach,#programs{grid-template-columns:1fr !important;gap:22px !important;padding-left:24px !important;padding-right:24px !important}
+    #approach{padding-top:72px !important;padding-bottom:56px !important}
+    #programs{padding-top:56px !important;padding-bottom:80px !important}
+    #approach > div:first-child,#programs > div:first-child{padding-top:0 !important;font-family:'Fira Mono',monospace !important;font-size:12px !important;letter-spacing:.18em;color:#6c757d !important}
+    #approach p{margin-top:28px !important;font-size:17px !important}
+    #programs h2{margin-bottom:34px !important}
+    #divider{grid-template-columns:1fr !important;padding:0 24px !important}
+    #divider > div{display:none}
+    #divider svg{width:100%;height:auto}
+    #founder{padding:0 24px 80px !important;gap:28px !important}
+    #founder > img{width:100% !important;max-width:none !important}
+    #founder > div{min-width:0 !important}
+    #contact{padding:0 12px 24px !important}
+    #contact-panel{grid-template-columns:1fr !important;padding:56px 24px !important;border-radius:24px !important;gap:36px !important}
+    #footer{padding:0 24px 36px !important;flex-direction:column !important;align-items:flex-start !important;gap:14px !important}
+  }
+</style>
 </head>
-<body>
-  <div class="page-wrapper">
-    <header class="site-header">
-      <nav aria-label="Primary navigation">
-        <a href="/" class="wordmark" aria-label="MOAT Studio home">MOAT STUDIO</a>
-        <div class="nav-links">
-          <a href="#contact" class="nav-cta">Contact</a>
-        </div>
-      </nav>
-    </header>
+<body id="top">
+<div style="max-width:1440px;margin:0 auto">
 
-    <main id="main-content">
-      <section class="hero" aria-labelledby="hero-heading">
-        <h1 id="hero-heading">AI systems that compound into an advantage your competitors cannot copy.</h1>
-        <p class="hero-caption">MOAT Studio helps expert-led businesses improve internal performance with AI systems built around their own workflows and knowledge&mdash;then, where privacy, data control or independence matters, deploy them on infrastructure they control.</p>
-        <a href="#contact" class="cta-button">Start a conversation</a>
-      </section>
+<div id="hero" style="background:#03071E;color:#FFF8E1;border-radius:0 0 36px 36px;position:relative;overflow:hidden">
+  <canvas data-kind="live" data-mode="wave" data-step="16" data-fade="5" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,#03071E 6%,rgba(3,7,30,.72) 52%,rgba(3,7,30,.25));pointer-events:none"></div>
 
-      <section class="trust-line" aria-label="Deployment options">
-        <p>Cloud, hybrid or locally deployed&mdash;chosen deliberately for your workflow, risk profile and control requirements.</p>
-      </section>
-
-      <section class="proof-mosaic" aria-label="Proof mosaic">
-        <div class="mosaic-piece piece-one">
-          <span class="piece-label">Workflow artefacts</span>
-        </div>
-        <div class="mosaic-piece piece-two">
-          <span class="piece-label">Case studies</span>
-        </div>
-        <div class="mosaic-piece piece-three">
-          <span class="piece-label">Founder notes</span>
-        </div>
-        <div class="mosaic-piece piece-four">
-          <span class="piece-statement">Original art direction</span>
-        </div>
-      </section>
-
-      <section class="founder-profile" aria-labelledby="founder-heading">
-        <div class="founder-inner">
-          <p class="founder-eyebrow">Founder</p>
-          <h2 id="founder-heading">Francisco Varisco</h2>
-          <p class="founder-body">MOAT Studio was founded to help expert-led businesses build AI systems around their own workflows and knowledge — not the other way around.</p>
-          <div class="founder-details">
-            <p>Technical co-founder of Paradise Bunker, an autonomous operations platform.</p>
-            <p>Builder of systems that run without constant oversight.</p>
-            <p>Based in Brisbane, Australia.</p>
-          </div>
-          <img src="assets/xico-mark.png" alt="Xico — Francisco Varisco's personal signature mark, a compact founder identifier separate from the MOAT Studio wordmark" class="founder-mark" width="160" height="160" loading="lazy">
-        </div>
-      </section>
-
-      <section id="contact" class="contact-section" aria-labelledby="contact-heading">
-        <div class="contact-inner">
-          <h2 id="contact-heading">Build something that lasts.</h2>
-          <p class="contact-body">Tell us what you're trying to change. We'll tell you whether there's a useful first move.</p>
-          <div class="contact-action" role="status">
-            <span class="contact-cta-placeholder">Contact details coming soon</span>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <p>&copy; 2026 MOAT Studio</p>
-    </footer>
+  <div style="position:relative;display:flex;align-items:center;justify-content:space-between;padding:28px 64px;pointer-events:none">
+    <a href="#top" style="display:flex;align-items:center;gap:14px;color:#FFF8E1;pointer-events:auto">
+      <svg viewBox="0 0 260 260" width="73" height="73" role="img" aria-label="MOAT Studio">
+        <defs>
+          <symbol id="glyph-m" viewBox="0 0 100 100"><path fill="currentColor" d="M8 90V10h20l22 34 22-34h20v80H70V47L50 77 30 47v43Z"></path></symbol>
+          <symbol id="glyph-o" viewBox="0 0 100 100"><path fill="currentColor" fill-rule="evenodd" d="M50 7a43 43 0 1 0 0 86 43 43 0 1 0 0-86Zm0 22a21 21 0 1 1 0 42 21 21 0 1 1 0-42Z"></path></symbol>
+          <symbol id="glyph-a" viewBox="0 0 100 100"><path fill="currentColor" fill-rule="evenodd" d="M5 90 40 10h20l35 80H71l-7-18H36l-7 18Zm39-39h12l-6-17Z"></path></symbol>
+          <symbol id="glyph-t" viewBox="0 0 100 100"><path fill="currentColor" d="M5 10h90v22H62v58H38V32H5Z"></path></symbol>
+          <mask id="cut-m" maskUnits="userSpaceOnUse" x="0" y="0" width="110" height="110"><rect width="110" height="110" fill="#fff"></rect><g color="#000"><use href="#glyph-m" x="18" y="18" width="74" height="74"></use></g></mask>
+          <mask id="cut-o" maskUnits="userSpaceOnUse" x="0" y="0" width="110" height="110"><rect width="110" height="110" fill="#fff"></rect><g color="#000"><use href="#glyph-o" x="18" y="18" width="74" height="74"></use></g></mask>
+          <mask id="cut-a" maskUnits="userSpaceOnUse" x="0" y="0" width="110" height="110"><rect width="110" height="110" fill="#fff"></rect><g color="#000"><use href="#glyph-a" x="18" y="18" width="74" height="74"></use></g></mask>
+          <mask id="cut-t" maskUnits="userSpaceOnUse" x="0" y="0" width="110" height="110"><rect width="110" height="110" fill="#fff"></rect><g color="#000"><use href="#glyph-t" x="18" y="18" width="74" height="74"></use></g></mask>
+          <symbol id="tile-m" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-m)"></rect></symbol>
+          <symbol id="tile-o" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-o)"></rect></symbol>
+          <symbol id="tile-a" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-a)"></rect></symbol>
+          <symbol id="tile-t" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-t)"></rect></symbol>
+        </defs>
+        <g style="color:#FFF8E1"><use href="#tile-m" x="13" y="13" width="110" height="110"></use></g>
+        <g style="color:#FFE100"><use href="#tile-o" x="137" y="13" width="110" height="110"></use></g>
+        <g style="color:#FFF8E1"><use href="#tile-a" x="13" y="137" width="110" height="110"></use></g>
+        <g style="color:#FFF8E1"><use href="#tile-t" x="137" y="137" width="110" height="110"></use></g>
+      </svg>
+    </a>
+    <nav id="nav" style="display:flex;gap:34px;align-items:center;font-size:15px;pointer-events:auto">
+      <a href="#approach" style="color:#FFF8E1">Approach</a>
+      <a href="#programs" style="color:#FFF8E1">Programs</a>
+      <a href="#contact" style="background:#FFE100;color:#03071E;border-radius:8px;padding:11px 22px;font-weight:600;font-size:14px">Get in touch</a>
+    </nav>
   </div>
 
-  <script src="app.js"></script>
+  <div style="position:relative;padding:110px 64px 128px;max-width:1000px;pointer-events:none">
+    <h1 style="font-size:clamp(46px,5.4vw,82px);font-weight:760;letter-spacing:-.028em;line-height:.98;margin:0;text-wrap:balance">AI systems that compound into an advantage your competitors <span style="position:relative;display:inline-block;padding:.04em .18em .09em"><span style="position:absolute;inset:0;background:#FFE100;border-radius:5px;transform:rotate(-3.6deg)"></span><span style="position:relative;color:#03071E">cannot copy.</span></span></h1>
+    <p style="font-size:20px;line-height:1.5;color:rgba(255,248,225,.72);max-width:660px;margin:36px 0 0">MOAT Studio helps expert-led businesses improve internal performance with AI systems built around their own workflows and knowledge—then, where privacy, data control or independence matters, deploy them on infrastructure they control.</p>
+  </div>
+</div>
+
+
+<div id="approach" style="padding:110px 64px 96px;display:grid;grid-template-columns:minmax(180px,300px) minmax(0,1fr);gap:64px;align-items:start">
+  <div style="font-size:17px;color:#6c757d;padding-top:14px">Approach</div>
+  <div>
+    <h2 style="font-size:clamp(36px,4.2vw,58px);font-weight:760;letter-spacing:-.028em;line-height:1.02;margin:0;max-width:820px">Built on your ground, handed back to you</h2>
+    <p style="font-size:19px;line-height:1.6;color:#050505;max-width:620px;margin:56px 0 0">Most AI makes you faster. A system built around your own workflow, judgment and knowledge makes you harder to copy. We are vendor-neutral: no reseller margin, no platform to defend, and the right tool for the workflow — including none at all.</p>
+    <p style="font-size:19px;line-height:1.6;color:#050505;max-width:620px;margin:26px 0 0">What we build sits inside your operating reality: your recurring internal work, your systems of record, your quality bar, rather than a template rolled out sideways. Then we hand it over. Your team runs it when we’re done, because dependency on a consultant is the opposite of a moat.</p>
+  </div>
+</div>
+
+<div id="divider" style="padding:0 64px;display:grid;grid-template-columns:minmax(180px,300px) minmax(0,1fr);gap:64px">
+  <div></div>
+  <svg viewBox="0 0 382 22" width="382" height="22" role="presentation" style="display:block;overflow:visible"><circle cx="11" cy="11" r="11" fill="#FFBA08" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-0.00s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="41" cy="11" r="11" fill="#FFC917" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-1.15s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="71" cy="11" r="11" fill="#FFE100" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-2.30s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="101" cy="11" r="11" fill="#DC2F02" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-3.45s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="131" cy="11" r="11" fill="#D00000" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-4.60s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="161" cy="11" r="11" fill="#FFBA08" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-5.75s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="191" cy="11" r="11" fill="#FFC917" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-6.90s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="221" cy="11" r="11" fill="#FFE100" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-8.05s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="251" cy="11" r="11" fill="#DC2F02" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-9.20s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="281" cy="11" r="11" fill="#D00000" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-10.35s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="311" cy="11" r="11" fill="#FFBA08" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-11.50s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="341" cy="11" r="11" fill="#FFC917" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-12.65s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle><circle cx="371" cy="11" r="11" fill="#FFE100" opacity=".85" style="animation:moatHue 15s ease-in-out infinite;animation-delay:-13.80s;transform-box:fill-box;transform-origin:center;transition:transform .25s cubic-bezier(.22,.61,.36,1)"></circle></svg>
+</div>
+
+<div id="programs" style="padding:84px 64px 120px;display:grid;grid-template-columns:minmax(180px,300px) minmax(0,1fr);gap:64px;align-items:start">
+  <div style="font-size:17px;color:#6c757d;padding-top:16px">Programs</div>
+  <div>
+    <h2 style="font-size:clamp(36px,4.2vw,58px);font-weight:760;letter-spacing:-.028em;line-height:1.02;margin:0 0 54px;max-width:760px">Three steps. You own the output of each.</h2>
+
+    <div style="border-top:1px solid #D9D9D9;padding:34px 0 38px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px">
+        <div style="font-size:23px;font-weight:700;letter-spacing:-.01em">Moat Map</div>
+        <div style="font-family:'Fira Mono',monospace;font-size:22px;color:#050505">01</div>
+      </div>
+      <p style="font-size:18px;line-height:1.55;color:#6c757d;margin:18px 0 0;max-width:640px">Identify performance opportunities and classify each by data sensitivity, integration need, reliability requirement and fit for cloud, hybrid or local deployment.</p>
+      <div style="font-family:'Fira Mono',monospace;font-size:12px;color:#D00000;margin-top:16px">1–3 weeks · fixed scope · you keep the roadmap either way</div>
+    </div>
+
+    <div style="border-top:1px solid #D9D9D9;padding:34px 0 38px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px">
+        <div style="font-size:23px;font-weight:700;letter-spacing:-.01em">Moat Build</div>
+        <div style="font-family:'Fira Mono',monospace;font-size:22px;color:#050505">02</div>
+      </div>
+      <p style="font-size:18px;line-height:1.55;color:#6c757d;margin:18px 0 0;max-width:640px">Implement the selected workflow against your real systems, with the deployment path chosen in the Map.</p>
+      <div style="font-family:'Fira Mono',monospace;font-size:12px;color:#D00000;margin-top:16px">by scope · a working system, not a pilot deck</div>
+    </div>
+
+    <div style="border-top:1px solid #D9D9D9;padding:34px 0 38px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px">
+        <div style="font-size:23px;font-weight:700;letter-spacing:-.01em">Moat Keep</div>
+        <div style="font-family:'Fira Mono',monospace;font-size:22px;color:#050505">03</div>
+      </div>
+      <p style="font-size:18px;line-height:1.55;color:#6c757d;margin:18px 0 0;max-width:640px">Monitor, improve and retain control — or equip your team to run it themselves and step away.</p>
+      <div style="font-family:'Fira Mono',monospace;font-size:12px;color:#D00000;margin-top:16px">ongoing · your call which one</div>
+    </div>
+  </div>
+</div>
+
+<div id="founder" style="padding:0 64px 120px;display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+  <img src="assets/founder.jpg" alt="Francisco Varisco" style="background:#E9ECEF;border-radius:8px;aspect-ratio:1;width:340px;flex:none;object-fit:cover;object-position:52% 42%;display:block">
+  <div style="flex:1;min-width:300px;max-width:600px">
+    <h2 style="margin:0 0 22px"><a href="https://franciscovarisco.com" style="display:inline-flex;align-items:center;gap:26px;font-size:clamp(28px,2.8vw,38px);font-weight:760;letter-spacing:-.028em;line-height:1.06"><span style="display:flex;flex-direction:column"><span>I am</span><span style="padding-left:.6em">francisco</span></span><img src="assets/xico-mark.png" alt="" style="display:block;width:1.6em;height:1.6em;object-fit:contain;border-radius:50%"></a></h2>
+    <p style="font-size:18px;line-height:1.55;color:#6c757d;margin:0 0 16px">MOAT Studio was founded to help expert-led businesses build AI systems around their own workflows and knowledge — not the other way around.</p>
+    <p style="font-size:18px;line-height:1.55;color:#6c757d;margin:0 0 16px">Technical co-founder of Paradise Bunker, an autonomous operations platform. Builder of systems that run without constant oversight. Based in Brisbane, Australia.</p>
+    <span style="display:flex;gap:16px;flex-wrap:wrap;align-items:baseline">
+      <a href="https://franciscovarisco.com" style="font-family:'Fira Mono',monospace;font-size:12px;letter-spacing:.06em;color:#050505;border-bottom:1px solid #D00000;padding-bottom:2px">franciscovarisco.com</a>
+      <span style="font-family:'Fira Mono',monospace;font-size:12px;color:#6c757d">•</span>
+      <a href="https://linkedin.com/in/xicovarisco" style="font-family:'Fira Mono',monospace;font-size:12px;letter-spacing:.06em;color:#050505;border-bottom:1px solid #D00000;padding-bottom:2px">linkedin.com/in/xicovarisco</a>
+    </span>
+  </div>
+</div>
+
+<div id="contact" style="padding:0 44px 44px">
+  <div id="contact-panel" style="background:#03071E;color:#FFF8E1;border-radius:36px;padding:104px 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:64px;align-items:center;position:relative;overflow:hidden">
+    <canvas data-kind="live" data-mode="wave" data-step="16" data-fade="5" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,#03071E 6%,rgba(3,7,30,.72) 52%,rgba(3,7,30,.25));pointer-events:none"></div>
+    <div style="position:relative">
+      <h2 style="font-size:clamp(38px,4.4vw,58px);font-weight:760;letter-spacing:-.028em;line-height:1;margin:0">Become <span style="position:relative;display:inline-block;padding:.04em .18em .09em"><span style="position:absolute;inset:0;background:#FFE100;border-radius:5px;transform:rotate(-3.6deg)"></span><span style="position:relative;color:#03071E">uncopyable.</span></span></h2>
+      <p style="font-size:19px;line-height:1.5;color:rgba(255,248,225,.7);max-width:430px;margin:28px 0 0">Tell us what you're trying to change. We'll tell you whether there's a useful first move.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;position:relative;z-index:1">
+      <input placeholder="Name" style="background:rgba(3,7,30,.72);border:1px solid rgba(255,248,225,.35);border-radius:8px;padding:16px 18px;font-family:Figtree,sans-serif;font-size:16px;color:#FFF8E1;outline:none">
+      <input placeholder="Work email" style="background:rgba(3,7,30,.72);border:1px solid rgba(255,248,225,.35);border-radius:8px;padding:16px 18px;font-family:Figtree,sans-serif;font-size:16px;color:#FFF8E1;outline:none">
+      <textarea placeholder="What are you trying to change?" rows="4" style="background:rgba(3,7,30,.72);border:1px solid rgba(255,248,225,.35);border-radius:8px;padding:16px 18px;font-family:Figtree,sans-serif;font-size:16px;color:#FFF8E1;outline:none;resize:vertical"></textarea>
+      <button style="background:#FFE100;color:#03071E;border:none;border-radius:8px;padding:16px;font-family:Figtree,sans-serif;font-size:16px;font-weight:600;cursor:pointer">Get in touch</button>
+    </div>
+  </div>
+</div>
+
+<div id="footer" style="padding:0 64px 48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-family:'Fira Mono',monospace;font-size:11.5px;color:#6c757d">
+  <span>© 2026 moat studio · brisbane, australia</span>
+  <span style="display:flex;gap:22px"><a href="https://franciscovarisco.com" style="color:#6c757d">franciscovarisco.com</a><a href="#contact" style="color:#6c757d">linkedin</a><a href="#contact" style="color:#6c757d">email</a></span>
+</div>
+
+</div>
+<script>
+(function(){
+  document.querySelectorAll('canvas[data-kind]').forEach(function(cv){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), W, H, g, dots = [], raf = 0, t0 = performance.now();
+    var step = +(cv.dataset.step || 16), fade = +(cv.dataset.fade || 5);
+    var hold = Math.pow(0.012, 1 / (fade * 60)), R = 130, mx = -999, my = -999;
+    function size(){ W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; g = cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); }
+    function build(){ dots = []; for (var y = step/2; y < H; y += step) for (var x = step/2; x < W; x += step) dots.push({x:x,y:y,e:0}); }
+    size(); build();
+    window.addEventListener('pointermove', function(ev){ var r = cv.getBoundingClientRect(); mx = ev.clientX - r.left; my = ev.clientY - r.top; });
+    cv.addEventListener('mouseleave', function(){ mx = -999; my = -999; });
+    window.addEventListener('resize', function(){ size(); build(); });
+    function draw(now){
+      var t = (now - t0) / 1000;
+      g.clearRect(0,0,W,H);
+      for (var i = 0; i < dots.length; i++) {
+        var d = dots[i];
+        if (mx > -900) { var dist = Math.hypot(d.x - mx, d.y - my); if (dist < R) d.e = Math.min(1, d.e + (1 - dist / R) * 0.09); }
+        d.e *= hold;
+        var idle = 0.5 + 0.5 * Math.sin(d.x * 0.017 + d.y * 0.011 - t * 1.1);
+        var lit = Math.min(1, idle * 0.42 + d.e);
+        g.beginPath();
+        g.arc(d.x, d.y, 1.2 + lit * 2.2, 0, 6.2832);
+        g.fillStyle = 'rgba(255,' + Math.round(248 - 23 * lit) + ',' + Math.round(225 - 225 * lit) + ',' + (0.16 + 0.7 * lit) + ')';
+        g.fill();
+      }
+      raf = requestAnimationFrame(draw);
+    }
+    draw(performance.now());
+  });
+})();
+</script>
 </body>
 </html>
