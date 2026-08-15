@@ -1,0 +1,25 @@
+/** MOAT tile logo: four letter glyphs cut out of solid tiles, the O in yellow. */
+export default function MoatLogo({ size = 73 }) {
+  return (
+    <svg viewBox="0 0 260 260" width={size} height={size} role="img" aria-label="MOAT Studio">
+      <defs>
+        <symbol id="glyph-m" viewBox="0 0 100 100"><path fill="currentColor" d="M8 90V10h20l22 34 22-34h20v80H70V47L50 77 30 47v43Z" /></symbol>
+        <symbol id="glyph-o" viewBox="0 0 100 100"><path fill="currentColor" fillRule="evenodd" d="M50 7a43 43 0 1 0 0 86 43 43 0 1 0 0-86Zm0 22a21 21 0 1 1 0 42 21 21 0 1 1 0-42Z" /></symbol>
+        <symbol id="glyph-a" viewBox="0 0 100 100"><path fill="currentColor" fillRule="evenodd" d="M5 90 40 10h20l35 80H71l-7-18H36l-7 18Zm39-39h12l-6-17Z" /></symbol>
+        <symbol id="glyph-t" viewBox="0 0 100 100"><path fill="currentColor" d="M5 10h90v22H62v58H38V32H5Z" /></symbol>
+        <mask id="cut-m" maskUnits="userSpaceOnUse" x="0" y="0" width="110" height="110"><rect width="110" height="110" fill="#fff" /><g color="#000"><use href="#glyph-m" x="18" y="18" width="74" height="74" /></g></mask>
+        <mask id="cut-o" maskUnits="userSpaceOnUse" x="0" y="0" width="110" height="110"><rect width="110" height="110" fill="#fff" /><g color="#000"><use href="#glyph-o" x="18" y="18" width="74" height="74" /></g></mask>
+        <mask id="cut-a" maskUnits="userSpaceOnUse" x="0" y="0" width="110" height="110"><rect width="110" height="110" fill="#fff" /><g color="#000"><use href="#glyph-a" x="18" y="18" width="74" height="74" /></g></mask>
+        <mask id="cut-t" maskUnits="userSpaceOnUse" x="0" y="0" width="110" height="110"><rect width="110" height="110" fill="#fff" /><g color="#000"><use href="#glyph-t" x="18" y="18" width="74" height="74" /></g></mask>
+        <symbol id="tile-m" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-m)" /></symbol>
+        <symbol id="tile-o" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-o)" /></symbol>
+        <symbol id="tile-a" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-a)" /></symbol>
+        <symbol id="tile-t" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-t)" /></symbol>
+      </defs>
+      <g style={{ color: '#FFF8E1' }}><use href="#tile-m" x="13" y="13" width="110" height="110" /></g>
+      <g style={{ color: '#FFE100' }}><use href="#tile-o" x="137" y="13" width="110" height="110" /></g>
+      <g style={{ color: '#FFF8E1' }}><use href="#tile-a" x="13" y="137" width="110" height="110" /></g>
+      <g style={{ color: '#FFF8E1' }}><use href="#tile-t" x="137" y="137" width="110" height="110" /></g>
+    </svg>
+  )
+}
