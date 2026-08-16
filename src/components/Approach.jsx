@@ -5,7 +5,8 @@ export default function Approach() {
       <div className="approach-copy">
         <h2 className="section-title">We start where you are</h2>
         <p>
-          Every organisation is at a different place with AI. Some are choosing a first
+          MOAT Studio is an AI consultancy based in Brisbane, Australia, working
+          with expert-led businesses. Every organisation is at a different place with AI. Some are choosing a first
           project. Some have pilots that stalled. Some are ready to scale what already
           works. So every engagement starts with discovery, inside your operation and
           with your people. We only build once we know where AI genuinely pays.

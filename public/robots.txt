@@ -1,0 +1,64 @@
+# moatstudio.ai — all crawlers welcome.
+# AI bots are listed explicitly: the *-SearchBot / *-User agents control
+# whether we can be cited in AI answers. Note robots.txt groups don't merge —
+# any future Disallow under * must be repeated in each named block.
+
+# --- Traditional search (feeds Google AI Overviews; Bing feeds ChatGPT + Copilot) ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# --- OpenAI ---
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# --- Anthropic ---
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# --- Perplexity ---
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# --- AI training / grounding control tokens ---
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Other AI crawlers ---
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# --- Default ---
+User-agent: *
+Allow: /
+
+Sitemap: https://moatstudio.ai/sitemap.xml
