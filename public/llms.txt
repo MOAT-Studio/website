@@ -1,0 +1,15 @@
+# MOAT Studio
+
+> MOAT Studio is an AI consultancy based in Brisbane, Australia. It helps expert-led businesses improve internal performance with AI systems built around their own workflows, knowledge, and judgement — so what compounds belongs to the business, not to a vendor.
+
+MOAT Studio was founded by Francisco Varisco. It is vendor-neutral: the right tool for the workflow, including none at all. Engagements follow three programs: Map (discovery — a ranked map of where AI creates real advantage, 1–3 weeks, fixed scope), Build (implementation — working software against real systems, done when it runs in production), and Loop (ongoing measurement and improvement of systems in production).
+
+## Site
+
+- [Homepage](https://moatstudio.ai/): positioning, approach, the Map/Build/Loop programs, founder, and contact form
+
+## Contact
+
+- [Email](mailto:francisco@moatstudio.ai): francisco@moatstudio.ai
+- [Founder — Francisco Varisco](https://franciscovarisco.com): personal site
+- [LinkedIn](https://linkedin.com/in/xicovarisco): Francisco Varisco
