@@ -411,3 +411,7 @@ button:hover { opacity: .85 }
   .moat-scores { gap: 36px; margin-top: 32px }
   .hero-actions { margin-top: 34px }
 }
+
+/* Keyboard focus on the assessment entry point: the browser default ring is
+   low-contrast on the night hero; match the overlay's solar focus treatment. */
+.hero-cta:focus-visible { outline: 2px solid #FFE100; outline-offset: 3px }
