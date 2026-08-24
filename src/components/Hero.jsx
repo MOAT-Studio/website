@@ -2,7 +2,7 @@ import DotCanvas from './DotCanvas.jsx'
 import Highlight from './Highlight.jsx'
 import MoatLogo from './MoatLogo.jsx'
 
-export default function Hero() {
+export default function Hero({ onOpenAssessment }) {
   return (
     <div id="hero" className="hero">
       <DotCanvas />
@@ -28,6 +28,17 @@ export default function Hero() {
             MOAT Studio builds AI around the way your people actually work: your
             workflows, your knowledge, your judgement. What compounds is yours.
           </p>
+          <div className="hero-actions">
+            <button
+              type="button"
+              id="map-your-moat-cta"
+              className="hero-cta"
+              onClick={onOpenAssessment}
+            >
+              Map your moat
+            </button>
+            <span className="hero-cta-note">12 questions · 3 minutes · no sign-up</span>
+          </div>
         </div>
       </div>
     </div>
