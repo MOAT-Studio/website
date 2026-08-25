@@ -1,3 +1,5 @@
+import SectionEyebrow from './SectionEyebrow.jsx'
+
 const PROGRAMS = [
   {
     num: '01',
@@ -22,7 +24,7 @@ const PROGRAMS = [
 export default function Programs() {
   return (
     <div id="programs" className="section">
-      <div className="section-label">How we work</div>
+      <SectionEyebrow index="02" label="How we work" />
       <div>
         <h2 className="section-title">Map → Build → Loop.</h2>
         {PROGRAMS.map((p) => (
