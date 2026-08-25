@@ -112,6 +112,12 @@ a:hover { opacity: .68 }
 
 ::selection { background: var(--moat-solar); color: var(--moat-ink) }
 
+/* Visible keyboard focus (PAR-180): ink ring on paper grounds, solar ring
+   on night grounds. The browser default is low-contrast on the hero navy. */
+:focus-visible { outline: 2px solid var(--moat-ink); outline-offset: 3px }
+.hero :focus-visible,
+.contact-panel :focus-visible { outline-color: var(--moat-solar) }
+
 input::placeholder,
 textarea::placeholder { color: rgba(255, 248, 225, .5) }
 
@@ -142,8 +148,10 @@ button:hover { opacity: .85 }
   pointer-events: none;
 }
 
-/* ── Hero ── */
-/* Full-bleed: the hero sits outside .page; its content aligns via .hero-inner. */
+/* ── Hero (v2 editorial, PAR-180) ── */
+/* Full-bleed: the hero sits outside .page; its content aligns via .hero-inner.
+   The orb composition is layered behind the text: pointer-events stay off it,
+   and every decorative element is aria-hidden in markup. */
 .hero {
   background: var(--moat-navy);
   color: var(--moat-cream);
@@ -151,17 +159,20 @@ button:hover { opacity: .85 }
   position: relative;
   overflow: hidden;
 }
-.hero-inner { max-width: var(--moat-page-max); margin: 0 auto }
+.hero-inner { max-width: var(--moat-page-max); margin: 0 auto; position: relative }
+
+/* Header bar — logo home link left, primary navigation right. */
 .hero-bar {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--moat-space-6);
   padding: 28px var(--moat-space-16);
-  pointer-events: none;
 }
-.hero-logo { display: flex; align-items: center; gap: 14px; color: var(--moat-cream); pointer-events: auto }
-.nav { display: flex; gap: 34px; align-items: center; font-size: 15px; pointer-events: auto }
+.hero-logo { display: flex; align-items: center; gap: 14px; color: var(--moat-cream) }
+.hero-wordmark { font-size: 17px; font-weight: 600; letter-spacing: -.01em }
+.nav { display: flex; gap: 34px; align-items: center; font-size: 15px }
 .nav-link { color: var(--moat-cream); transition: color var(--moat-duration-fast) var(--moat-ease) }
 .nav-link:hover { opacity: 1; color: var(--moat-solar) }
 .nav-cta {
@@ -175,16 +186,41 @@ button:hover { opacity: .85 }
 }
 .nav-cta:hover { opacity: 1; background: var(--moat-cream) }
 .hero-logo:hover { opacity: 1 }
-.hero-copy { position: relative; padding: 220px var(--moat-space-16) 240px; max-width: 1100px; pointer-events: none }
-.hero-copy h1 {
-  font-size: clamp(50px, 6.2vw, 96px);
-  font-weight: 760;
-  letter-spacing: -.028em;
+
+/* Orb composition — original SVG artwork behind the copy. */
+.hero-orbs { position: absolute; inset: 0; pointer-events: none }
+.hero-orb-main {
+  position: absolute;
+  top: -150px;
+  right: -90px;
+  width: min(46vw, 560px);
+  height: auto;
+}
+.hero-orb-satellite { position: absolute; top: 46%; right: 27% }
+.hero-gesture { position: absolute; bottom: 13%; right: 6% }
+
+/* Editorial copy column. */
+.hero-copy { position: relative; padding: 150px var(--moat-space-16) 200px; max-width: 1100px }
+.hero-kicker {
+  font-family: var(--moat-font-mono);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--moat-cream-60);
+  margin: 0 0 var(--moat-space-8);
+}
+.hero-title {
+  font-family: var(--moat-font-display);
+  font-size: clamp(52px, 6.4vw, 100px);
+  font-weight: 700;
+  letter-spacing: -.02em;
   line-height: .98;
   margin: 0;
-  text-wrap: balance;
 }
-.hero-copy p {
+/* Semantic responsive line breaks: each .line is a block span, so the text
+   stays real text (selectable, readable) while breaking where intended. */
+.hero-title .line { display: block }
+.hero-prop {
   font-size: 21px;
   line-height: 1.5;
   color: var(--moat-cream-72);
@@ -354,11 +390,19 @@ button:hover { opacity: .85 }
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .hero { border-radius: 0 0 var(--moat-radius-md) var(--moat-radius-md) }
-  .hero-bar { padding: 18px var(--moat-space-6) }
-  .hero-copy { padding: 120px var(--moat-space-6) 148px }
+  /* Intentional two-row header: logo on its own row, full navigation below.
+     No links are hidden — the desktop pill row would clip at 390px. */
+  .hero-bar { flex-wrap: wrap; padding: 18px var(--moat-space-6) }
   .hero-logo svg { width: 54px; height: 54px }
-  .nav { gap: 14px; font-size: 14px }
-  .nav a:not(:last-child) { display: none }
+  .nav { gap: 18px; font-size: 14px; flex-basis: 100%; order: 2 }
+  .nav-cta { padding: 9px 16px; font-size: 13px }
+  .hero-copy { padding: 96px var(--moat-space-6) 120px }
+  .hero-kicker { margin-bottom: var(--moat-space-5) }
+  .hero-title { font-size: clamp(38px, 10.5vw, 46px) }
+  .hero-prop { font-size: 17px; margin-top: var(--moat-space-6) }
+  .hero-orb-main { top: -120px; right: -60px; width: min(78vw, 340px) }
+  .hero-orb-satellite { display: none }
+  .hero-gesture { width: 150px; bottom: 8%; right: 4% }
   #approach, #programs { grid-template-columns: 1fr; gap: 22px; padding-left: var(--moat-space-6); padding-right: var(--moat-space-6) }
   #approach { padding-top: 128px; padding-bottom: 96px }
   #programs { padding-top: 96px; padding-bottom: 136px }
@@ -512,10 +556,6 @@ button:hover { opacity: .85 }
   .moat-scores { gap: 36px; margin-top: 32px }
   .hero-actions { margin-top: 34px }
 }
-
-/* Keyboard focus on the assessment entry point: the browser default ring is
-   low-contrast on the night hero; match the overlay's solar focus treatment. */
-.hero-cta:focus-visible { outline: 2px solid var(--moat-solar); outline-offset: 3px }
 
 /* ════════════════════════════════════════════════════════════════════
    MOAT v2 primitives (PAR-179)
