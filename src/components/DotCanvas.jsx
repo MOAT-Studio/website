@@ -3,6 +3,8 @@ import { useEffect, useRef } from 'react'
 /**
  * Interactive dot-grid canvas: a slow idle wave plus a pointer-proximity
  * glow that fades out over `fade` seconds. Fills its positioned parent.
+ * With prefers-reduced-motion it renders one static frame instead of the
+ * animated loop (PAR-179) — the canvas stays visible, nothing is trapped.
  */
 export default function DotCanvas({ step = 16, fade = 5 }) {
   const ref = useRef(null)
@@ -33,19 +35,8 @@ export default function DotCanvas({ step = 16, fade = 5 }) {
     size()
     build()
 
-    const onMove = (ev) => {
-      const r = cv.getBoundingClientRect()
-      mx = ev.clientX - r.left
-      my = ev.clientY - r.top
-    }
-    const onLeave = () => { mx = -999; my = -999 }
-    const onResize = () => { size(); build() }
-    window.addEventListener('pointermove', onMove)
-    cv.addEventListener('mouseleave', onLeave)
-    window.addEventListener('resize', onResize)
-
-    function draw(now) {
-      const t = (now - t0) / 1000
+    // One frame at time t; the pointer glow only applies while mx/my are live.
+    function frame(t) {
       g.clearRect(0, 0, W, H)
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i]
@@ -61,6 +52,29 @@ export default function DotCanvas({ step = 16, fade = 5 }) {
         g.fillStyle = 'rgba(255,' + Math.round(248 - 23 * lit) + ',' + Math.round(225 - 225 * lit) + ',' + (0.16 + 0.7 * lit) + ')'
         g.fill()
       }
+    }
+
+    // Reduced motion: a single static frame, no rAF loop or pointer glow.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      frame(0)
+      const onResizeStatic = () => { size(); build(); frame(0) }
+      window.addEventListener('resize', onResizeStatic)
+      return () => window.removeEventListener('resize', onResizeStatic)
+    }
+
+    const onMove = (ev) => {
+      const r = cv.getBoundingClientRect()
+      mx = ev.clientX - r.left
+      my = ev.clientY - r.top
+    }
+    const onLeave = () => { mx = -999; my = -999 }
+    const onResize = () => { size(); build() }
+    window.addEventListener('pointermove', onMove)
+    cv.addEventListener('mouseleave', onLeave)
+    window.addEventListener('resize', onResize)
+
+    function draw(now) {
+      frame((now - t0) / 1000)
       raf = requestAnimationFrame(draw)
     }
     draw(performance.now())

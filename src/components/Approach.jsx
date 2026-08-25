@@ -1,7 +1,9 @@
+import SectionEyebrow from './SectionEyebrow.jsx'
+
 export default function Approach() {
   return (
     <div id="approach" className="section">
-      <div className="section-label">Approach</div>
+      <SectionEyebrow index="01" label="Approach" />
       <div className="approach-copy">
         <h2 className="section-title">We start where you are</h2>
         <p>
