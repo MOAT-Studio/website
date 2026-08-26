@@ -1,57 +1,57 @@
 [
   {
-    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-gate-mobile.png",
+    "file": "evidence/PAR-171/result-gate-mobile.png",
     "dimensions": "390x844",
     "theme": "night (v1 single theme)",
     "fixture": "answers = all first options (12x A) → Compounding archetype",
     "mock": "success",
     "submit": false,
-    "detail": "gate shown, email filled, no submission",
-    "overflowCheck": "no horizontal overflow",
-    "actualPngDimensions": "390x844"
+    "detail": "result screen, email gate shown, email filled with fixture value, no submission",
+    "actualPngDimensions": "390x844",
+    "overflowCheck": "no horizontal overflow"
   },
   {
-    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-revealed-mobile.png",
+    "file": "evidence/PAR-171/result-revealed-mobile.png",
     "dimensions": "390x844",
     "theme": "night (v1 single theme)",
     "fixture": "answers = all first options (12x A) → Compounding archetype",
     "mock": "success",
     "submit": true,
-    "detail": "detailed section revealed after mocked success",
-    "overflowCheck": "no horizontal overflow",
-    "actualPngDimensions": "390x844"
+    "detail": "detailed recommendations revealed in-browser after mocked success (HTTP 200); no reload",
+    "actualPngDimensions": "390x844",
+    "overflowCheck": "no horizontal overflow"
   },
   {
-    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-gate-error-mobile.png",
+    "file": "evidence/PAR-171/result-gate-error-mobile.png",
     "dimensions": "390x844",
     "theme": "night (v1 single theme)",
     "fixture": "answers = all first options (12x A) → Compounding archetype",
     "mock": "failure",
     "submit": true,
-    "detail": "honest failure note shown after mocked 500",
-    "overflowCheck": "no horizontal overflow",
-    "actualPngDimensions": "390x844"
+    "detail": "gate submitted with mocked failure (HTTP 500); honest failure note with the MOAT contact email shown; detailed stays hidden",
+    "actualPngDimensions": "390x844",
+    "overflowCheck": "no horizontal overflow"
   },
   {
-    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-gate-desktop.png",
+    "file": "evidence/PAR-171/result-gate-desktop.png",
     "dimensions": "1440x900",
     "theme": "night (v1 single theme)",
     "fixture": "answers = all first options (12x A) → Compounding archetype",
     "mock": "success",
     "submit": false,
-    "detail": "gate shown, email empty, no submission",
-    "overflowCheck": "no horizontal overflow",
-    "actualPngDimensions": "1440x900"
+    "detail": "result screen, email gate shown, email empty, no submission",
+    "actualPngDimensions": "1440x900",
+    "overflowCheck": "no horizontal overflow"
   },
   {
-    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-revealed-desktop.png",
+    "file": "evidence/PAR-171/result-revealed-desktop.png",
     "dimensions": "1440x900",
     "theme": "night (v1 single theme)",
     "fixture": "answers = all first options (12x A) → Compounding archetype",
     "mock": "success",
     "submit": true,
-    "detail": "detailed section revealed after mocked success",
-    "overflowCheck": "no horizontal overflow",
-    "actualPngDimensions": "1440x900"
+    "detail": "detailed recommendations revealed in-browser after mocked success (HTTP 200); no reload",
+    "actualPngDimensions": "1440x900",
+    "overflowCheck": "no horizontal overflow"
   }
 ]
