@@ -87,5 +87,6 @@ export default function DotCanvas({ step = 16, fade = 5 }) {
     }
   }, [step, fade])
 
-  return <canvas ref={ref} className="dot-canvas" />
+  // Decorative texture: hidden from assistive technology (PAR-180).
+  return <canvas ref={ref} className="dot-canvas" aria-hidden="true" />
 }

@@ -4,22 +4,28 @@
  * satellite; the ring group drifts slowly (decorative). Pure SVG —
  * no external assets. With prefers-reduced-motion the drift stops and
  * the full mark stays visible (see index.css).
+ *
+ * `tone` picks the orbit-ring colour: 'ink' on paper grounds, 'cream'
+ * on night grounds (hero, PAR-180). `decorative` marks the mark as
+ * presentation-only so assistive technology ignores it when it is used
+ * purely as background artwork.
  */
-export default function OrbMark({ size = 120, className }) {
+export default function OrbMark({ size = 120, className, tone = 'ink', decorative = false }) {
+  const ringColor = tone === 'cream' ? 'var(--moat-cream)' : 'var(--moat-ink)'
   return (
     <svg
       viewBox="0 0 120 120"
       width={size}
       height={size}
       className={`orb-mark${className ? ` ${className}` : ''}`}
-      role="img"
-      aria-label="MOAT orb mark"
+      role={decorative ? 'presentation' : 'img'}
+      aria-hidden={decorative || undefined}
     >
       <g className="orb-mark-orbit">
         <circle
           cx="60" cy="60" r="50"
           fill="none"
-          stroke="var(--moat-ink)"
+          stroke={ringColor}
           strokeOpacity=".32"
           strokeWidth="1.5"
           strokeDasharray="2 7"
