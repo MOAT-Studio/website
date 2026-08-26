@@ -239,6 +239,36 @@ export function archetypeFor({ moat, exposure }) {
   return ARCHETYPES.exposed
 }
 
+// ── Evidence fixture (PAR-171) ────────────────────────────────────────
+// Deterministic answer set for the committed evidence captures: the
+// strongest option on every question under the instrument's own value
+// scale (strongest-moat / lowest-exposure end of each scale). It drives a
+// genuine Compounding result — moat 100, exposure 0. The capture runner
+// and manifest derive their fixture labels from fixtureExpected() below,
+// so the committed evidence can never claim an archetype the scoring code
+// does not actually produce (2026-08-26 exact-head review blocker).
+export const FIXTURE = {
+  id: 'compounding-strongest',
+  answers: QUESTIONS.map((q) => {
+    let best = 0
+    let bestValue = -1
+    q.options.forEach((o, i) => {
+      if (o.value > bestValue) { bestValue = o.value; best = i }
+    })
+    return best
+  }),
+}
+
+export function fixtureExpected(fixture = FIXTURE) {
+  const result = scoreAnswers(fixture.answers)
+  return { ...result, archetype: archetypeFor(result) }
+}
+
+export function fixtureLabel(fixture = FIXTURE) {
+  const e = fixtureExpected(fixture)
+  return `fixture ${fixture.id}: strongest option on every question (strongest-moat / lowest-exposure end of each scale) → moat ${e.moat}/100, AI exposure ${e.exposure}/100 → ${e.archetype.name} (${e.archetype.reading})`
+}
+
 // Locked preview rows — honest placeholder for the production assessment.
 // Rendered non-interactive; nothing here collects or sends anything.
 export const LOCKED_PREVIEW = [

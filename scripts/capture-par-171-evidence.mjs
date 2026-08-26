@@ -19,6 +19,14 @@
 //   * Every capture's DOM state is asserted strictly (archetype/scores free,
 //     gate vs revealed, error note, email value, consent unchecked) against
 //     the shot's declared intent before the screenshot is accepted.
+//   * The rendered score and archetype must EXACTLY match the result the
+//     committed scoring code produces for the declared fixture (the
+//     strongest option on every question → moat 100 / exposure 0 →
+//     Compounding; 2026-08-26 exact-head review blocker: the previous
+//     runner clicked the first option on all 12 questions, which scores
+//     moat 0 / exposure 0 → Sheltered, while the committed evidence claimed
+//     Compounding). The expected triple is derived in-process from
+//     src/data/moatAssessment.js, so labels cannot drift from the code.
 //   * After writing the manifest the runner runs `git status --short` and
 //     `git diff --check` and re-hashes the README: the run only exits 0
 //     when the evidence tree is byte-identical to HEAD (or when HEAD
@@ -37,6 +45,15 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import os from 'node:os'
 import http from 'node:http'
+// The scoring module is the single source of truth for the fixture's
+// expected result. The runner derives the manifest labels from it, so the
+// committed evidence can never claim an archetype the scoring code does
+// not actually produce (2026-08-26 exact-head review blocker).
+import {
+  FIXTURE,
+  fixtureExpected,
+  fixtureLabel,
+} from '../src/data/moatAssessment.js'
 
 const httpGet = (url, cb) => http.get(url, (res) => cb(res))
 
@@ -45,6 +62,19 @@ const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const OUT = path.join(REPO, 'evidence', 'PAR-171')
 const DEPS = path.join(REPO, 'node_modules')
 const BASE = 'http://[::1]:4171'
+const FIXTURE_LABEL = fixtureLabel(FIXTURE)
+// Sanity: the label is derived from the committed scoring code, but assert
+// the genuine Compounding contract up-front so any regression fails the
+// run before a single capture is taken.
+const FIXTURE_EXPECTED = fixtureExpected(FIXTURE)
+if (FIXTURE_EXPECTED.moat !== 100 || FIXTURE_EXPECTED.exposure !== 0
+  || FIXTURE_EXPECTED.archetype.name !== 'Compounding') {
+  console.error(
+    'FATAL: fixtureExpected() does not yield the genuine Compounding ' +
+    `contract; got ${JSON.stringify(FIXTURE_EXPECTED)}`,
+  )
+  process.exit(2)
+}
 
 // ── Resolve the local Chrome for Testing binary (puppeteer cache) ──
 function findChrome() {
@@ -131,15 +161,25 @@ function pngDimensions(file) {
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex')
 
 // ── Drive the assessment to the result screen ──
+// Answers the questions with the declared fixture (src/data/
+// moatAssessment.js FIXTURE): the strongest option on every question.
+// expectState() then asserts, host-side, that the rendered score and
+// archetype exactly match FIXTURE_EXPECTED — the result the committed
+// scoring code produces for those answers (2026-08-26 exact-head review
+// blocker: the previous runner clicked the first option on all 12
+// questions, which scores moat 0 / exposure 0 → Sheltered, while the
+// committed manifest claimed Compounding). A fixture that scores any other
+// result fails the run.
 async function toResultScreen(page) {
   await page.goto(BASE, { waitUntil: 'load' })
   await page.click('#map-your-moat-cta')
-  // 12 questions; clicking the first option selects it (radio pattern),
-  // then the primary control advances.
   for (let i = 0; i < 12; i++) {
     if (await page.$('.moat-result')) break
     await page.waitForSelector('.moat-option', { visible: true, timeout: 10000 })
-    await page.click('.moat-option')
+    await page.evaluate((idx) => {
+      const options = document.querySelectorAll('.moat-option')
+      options[idx]?.click()
+    }, FIXTURE.answers[i])
     await page.waitForSelector('.moat-next:not([disabled])', { visible: true, timeout: 10000 })
     await page.click('.moat-next')
   }
@@ -151,6 +191,10 @@ async function toResultScreen(page) {
 // Strict DOM probe: returns the visible state of every element relevant to
 // the gate, computed-style aware so display:none elements count as hidden.
 const probeState = () => ({
+  archetypeName: (() => {
+    const el = document.querySelector('.moat-archetype')
+    return el ? el.textContent.trim() : ''
+  })(),
   archetypeVisible: (() => {
     const el = document.querySelector('.moat-archetype')
     return el ? getComputedStyle(el).visibility !== 'hidden' && el.offsetWidth > 0 : false
@@ -197,6 +241,28 @@ function expectState(shot, st) {
     if (st.detailedVisible) problems.push('detailed section visible before any submission')
     if (!st.gateVisible) problems.push('gate form not shown on unsubmitted result screen')
     if (st.errorNoteVisible) problems.push('error note shown without a failed submit')
+  }
+  // 2026-08-26 exact-head review blocker: the rendered score and archetype
+  // must EXACTLY match the result the committed scoring code produces for
+  // the declared fixture. FIXTURE_EXPECTED is derived in-process from
+  // src/data/moatAssessment.js (fixtureExpected), so no free-form label can
+  // drift from the code.
+  const expected = FIXTURE_EXPECTED
+  if (!expected) {
+    problems.push('expected fixture result is missing (runner must derive it from the scoring code)')
+  } else {
+    if (st.archetypeName !== expected.archetype.name) {
+      problems.push(
+        `archetype is ${JSON.stringify(st.archetypeName)}, expected ${JSON.stringify(expected.archetype.name)} for the fixture answers`,
+      )
+    }
+    const [moatDom, exposureDom] = st.scoreNums
+    if (moatDom !== String(expected.moat)) {
+      problems.push(`moat score is ${JSON.stringify(moatDom)}, expected ${expected.moat} for the fixture answers`)
+    }
+    if (exposureDom !== String(expected.exposure)) {
+      problems.push(`AI exposure score is ${JSON.stringify(exposureDom)}, expected ${expected.exposure} for the fixture answers`)
+    }
   }
   // The email input lives inside the gate form, which unmounts on
   // successful reveal — so the value assertion only applies while the gate
@@ -354,7 +420,10 @@ async function main() {
         file: path.join('evidence', 'PAR-171', shot.name + '.png'),
         dimensions: `${shot.width}x${shot.height}`,
         theme: 'night (v1 single theme)',
-        fixture: 'answers = all first options (12x A) → Compounding archetype',
+        // Derived in-process from the committed scoring code (fixtureLabel),
+        // so the manifest can never claim an archetype the fixture answers
+        // do not actually score.
+        fixture: FIXTURE_LABEL,
         mock: shot.mock,
         submit: shot.submit,
         detail: detailFor(shot),
@@ -383,15 +452,28 @@ async function main() {
     // the regenerated and committed bytes is a reproducibility failure and
     // aborts the run.
     if (manifestHead) {
-      const headIsRelative = JSON.parse(manifestHead).every(
-        (m) => m.file.startsWith('evidence/'),
+      const headParsed = JSON.parse(manifestHead)
+      const headIsRelative = headParsed.every((m) => m.file.startsWith('evidence/'))
+      // Known-bad bootstrap transition: the pre-review head carried the
+      // mislabelled fixture line (claimed Compounding for all-first
+      // answers, which the scoring code evaluates as Sheltered 0/0). The
+      // regenerated manifest is the corrected truth, so for this one
+      // transition it is a declared intended change. After it is
+      // committed, the strict equality guard below applies to every
+      // future run again.
+      const MIGRATING = headParsed.some(
+        (m) => m.fixture === 'answers = all first options (12x A) → Compounding archetype',
       )
-      if (headIsRelative && manifestOut !== manifestHead) {
+      if (headIsRelative && !MIGRATING && manifestOut !== manifestHead) {
         killAll()
         throw new Error(
           'regenerated manifest differs from committed manifest ' +
           '(both repository-relative) — clean-checkout reproduction failed',
         )
+      }
+      if (MIGRATING) {
+        console.log('manifest migration: committed head carries the pre-review ' +
+          'mislabel; writing the corrected, scoring-derived manifest')
       }
     }
     fs.writeFileSync(path.join(OUT, '_manifest.json'), manifestOut)
