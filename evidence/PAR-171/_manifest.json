@@ -1,0 +1,57 @@
+[
+  {
+    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-gate-mobile.png",
+    "dimensions": "390x844",
+    "theme": "night (v1 single theme)",
+    "fixture": "answers = all first options (12x A) → Compounding archetype",
+    "mock": "success",
+    "submit": false,
+    "detail": "gate shown, email filled, no submission",
+    "overflowCheck": "no horizontal overflow",
+    "actualPngDimensions": "390x844"
+  },
+  {
+    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-revealed-mobile.png",
+    "dimensions": "390x844",
+    "theme": "night (v1 single theme)",
+    "fixture": "answers = all first options (12x A) → Compounding archetype",
+    "mock": "success",
+    "submit": true,
+    "detail": "detailed section revealed after mocked success",
+    "overflowCheck": "no horizontal overflow",
+    "actualPngDimensions": "390x844"
+  },
+  {
+    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-gate-error-mobile.png",
+    "dimensions": "390x844",
+    "theme": "night (v1 single theme)",
+    "fixture": "answers = all first options (12x A) → Compounding archetype",
+    "mock": "failure",
+    "submit": true,
+    "detail": "honest failure note shown after mocked 500",
+    "overflowCheck": "no horizontal overflow",
+    "actualPngDimensions": "390x844"
+  },
+  {
+    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-gate-desktop.png",
+    "dimensions": "1440x900",
+    "theme": "night (v1 single theme)",
+    "fixture": "answers = all first options (12x A) → Compounding archetype",
+    "mock": "success",
+    "submit": false,
+    "detail": "gate shown, email empty, no submission",
+    "overflowCheck": "no horizontal overflow",
+    "actualPngDimensions": "1440x900"
+  },
+  {
+    "file": "/Users/paradisebunker/Documents/Paradise-Bunker/ai-workspace/runtime/link-worktree/moat-studio-website/evidence/PAR-171/result-revealed-desktop.png",
+    "dimensions": "1440x900",
+    "theme": "night (v1 single theme)",
+    "fixture": "answers = all first options (12x A) → Compounding archetype",
+    "mock": "success",
+    "submit": true,
+    "detail": "detailed section revealed after mocked success",
+    "overflowCheck": "no horizontal overflow",
+    "actualPngDimensions": "1440x900"
+  }
+]
