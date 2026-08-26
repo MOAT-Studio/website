@@ -24,11 +24,11 @@ npm run build && node scripts/capture-par-182-evidence.mjs
 
 | File | Dimensions | Size | Hash |
 | --- | --- | --- | --- |
-| desktop-process-1440x900.png | 1440 x 900 | 75652 bytes | sha256:99d603a03b9d91b9… |
-| desktop-process-section-1440w.png | 1440 x 2087 | 537704 bytes | sha256:dfb53a4f2ebde1ac… |
-| narrow-process-390x844.png | 390 x 844 | 52466 bytes | sha256:e8f40abe5e8e8be9… |
-| narrow-process-section-390w.png | 390 x 1547 | 196673 bytes | sha256:a363eacf24564259… |
-| desktop-process-reduced-motion-1440x900.png | 1440 x 900 | 78414 bytes | sha256:695daa4c26e437d3… |
+| desktop-process-1440x900.png | 1440 x 900 | 101777 bytes | sha256:3b35305e0d9c511a… |
+| desktop-process-section-1440w.png | 1440 x 974 | 501752 bytes | sha256:c7aa9ed9bcc82a33… |
+| narrow-process-390x844.png | 390 x 844 | 50265 bytes | sha256:2add601a2a637db3… |
+| narrow-process-section-390w.png | 390 x 1547 | 197723 bytes | sha256:6db06a25d8f0f3d9… |
+| desktop-process-reduced-motion-1440x900.png | 1440 x 900 | 98700 bytes | sha256:55f9a5e3fc89995e… |
 
 ## Scenes
 
@@ -47,12 +47,13 @@ npm run build && node scripts/capture-par-182-evidence.mjs
 
 ## Assertion results (this run)
 
-- Desktop chapter: cards=[{"name":"Map","num":"01","left":120,"top":649},{"name":"Build","num":"02","left":200,"top":649},{"name":"Loop","num":"03","left":324,"top":649}]
+- Desktop chapter: cards=[{"name":"Map","num":"01","left":120,"right":437,"width":317,"top":635},{"name":"Build","num":"02","left":561,"right":879,"width":318,"top":635},{"name":"Loop","num":"03","left":1003,"right":1320,"width":317,"top":635}]
+- Desktop arrows (gap placement): [{"left":477,"right":521},{"left":919,"right":963}]
 - Stage ground: rgb(3, 7, 30) vs body rgb(248, 249, 250)
-- Narrow chapter: cards=[{"name":"Map","num":"01","top":573,"inViewport":true},{"name":"Build","num":"02","top":1008,"inViewport":true},{"name":"Loop","num":"03","top":1417,"inViewport":true}]
+- Narrow chapter: cards=[{"name":"Map","num":"01","top":574,"inViewport":true},{"name":"Build","num":"02","top":1009,"inViewport":true},{"name":"Loop","num":"03","top":1418,"inViewport":true}]
 - Desktop no page-level horizontal overflow: 1440 <= 1440
 - Narrow no page-level horizontal overflow: 390 <= 390
 - Reduced motion: {"reducedMedia":true,"cardCount":3,"allCardsVisible":true,"numbersVisible":true,"arrowsRendered":true,"noAnimatedConnectorParts":true}
 - Promises/meta intact: true / true
 
-Total: 30 passed, 0 failed.
+Total: 34 passed, 0 failed.

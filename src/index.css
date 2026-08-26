@@ -307,7 +307,12 @@ button:hover { opacity: .85 }
   border-radius: var(--moat-radius-lg);
   padding: 64px 56px 72px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) auto auto;
+  /* Five emitted children alternate card → arrow → card → arrow → card, so
+     the tracks must alternate too: each card takes a 1fr track (at least
+     its content width) and each arrow takes its own 44px auto track.
+     Plain `repeat(3, 1fr) auto auto` put the arrows in the wide tracks and
+     the last card in a shrinking auto track. */
+  grid-template-columns: minmax(auto, 1fr) auto minmax(auto, 1fr) auto minmax(auto, 1fr);
   align-items: stretch;
   column-gap: 40px;
   row-gap: 0;

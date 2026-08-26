@@ -156,13 +156,18 @@ async function measureChapter(page) {
     })
     const stageStyle = stage ? getComputedStyle(stage) : null
     const bodyBg = getComputedStyle(document.body).backgroundColor
-    const arrows = [...(section?.querySelectorAll('.process-arrow') || [])].map((el) => {
+    const arrows = [...(section?.querySelectorAll('.process-arrow') || [])]
+    const arrowRects = arrows.map((el) => {
       const r = el.getBoundingClientRect()
       return {
         visible: r.width > 0 && r.height > 0,
         ariaHidden: el.getAttribute('aria-hidden') === 'true',
         role: el.getAttribute('role') ?? null,
         transform: getComputedStyle(el).transform,
+        left: Math.round(r.left),
+        right: Math.round(r.right),
+        top: Math.round(r.top),
+        bottom: Math.round(r.bottom),
       }
     })
     // ARIA list children must be listitem, presentation or none; count the
@@ -183,7 +188,7 @@ async function measureChapter(page) {
       bodyBg,
       cardCount: cards.length,
       cards: cardData,
-      arrows,
+      arrows: arrowRects,
       listChildRoles: listChildren,
       leakedChildren,
       promisesIntact:
@@ -370,6 +375,23 @@ async function main() {
     results.desktopChapter.stageBg === 'rgb(3, 7, 30)' && results.desktopChapter.bodyBg === 'rgb(248, 249, 250)')
   assert('desktop: all three cards visible', results.desktopChapter.cards.every((c) => c.visible))
   assert('desktop: cards read left-to-right in Map/Build/Loop order', orderByLeft(results.desktopChapter.cards))
+  // AC2 hardening (Alex review): non-decreasing-left is not enough — each
+  // desktop card must have a meaningful width and strictly non-overlapping
+  // ordered bounds, and each arrow must sit inside the gap between the
+  // cards it connects (card / arrow / card / arrow / card).
+  const widths = (cards) => cards.map((c) => c.right - c.left)
+  assert('desktop: every card has a meaningful width (>= 280px at 1440px)',
+    widths(results.desktopChapter.cards).every((w) => w >= 280))
+  assert('desktop: card widths are comparable (max/min ratio <= 1.5)',
+    (() => { const w = widths(results.desktopChapter.cards); return Math.max(...w) / Math.min(...w) <= 1.5 })())
+  assert('desktop: card bounds are ordered and non-overlapping (right[i] < left[i+1])',
+    results.desktopChapter.cards.every((c, i) => i === 0 || c.left > results.desktopChapter.cards[i - 1].right))
+  assert('desktop: each arrow sits strictly inside the gap between its two cards',
+    results.desktopChapter.arrows.every((a, i) => {
+      const from = results.desktopChapter.cards[i]
+      const to = results.desktopChapter.cards[i + 1]
+      return a.left > from.right && a.right < to.left && a.left >= from.right - 1 && a.top <= a.bottom
+    }))
   assert('desktop: night text on the stage (readable cream copy)',
     results.desktopChapter.cards.every((c) => c.nameColor === 'rgb(255, 248, 225)' && c.bodyColor === 'rgba(255, 248, 225, 0.72)'))
   assert('desktop: two arrow connectors between cards, decorative',
@@ -460,7 +482,8 @@ ${rows.join('\n')}
 
 ## Assertion results (this run)
 
-- Desktop chapter: cards=${JSON.stringify(results.desktopChapter.cards.map((c) => ({ name: c.name, num: c.num, left: c.left, top: c.top })))}
+- Desktop chapter: cards=${JSON.stringify(results.desktopChapter.cards.map((c) => ({ name: c.name, num: c.num, left: c.left, right: c.right, width: c.right - c.left, top: c.top })))}
+- Desktop arrows (gap placement): ${JSON.stringify(results.desktopChapter.arrows.map((a) => ({ left: a.left, right: a.right })))}
 - Stage ground: ${results.desktopChapter.stageBg} vs body ${results.desktopChapter.bodyBg}
 - Narrow chapter: cards=${JSON.stringify(results.narrowChapter.cards.map((c) => ({ name: c.name, num: c.num, top: c.top, inViewport: c.inViewport })))}
 - Desktop no page-level horizontal overflow: ${results.desktopOverflow.scrollWidth} <= ${results.desktopOverflow.innerWidth}
