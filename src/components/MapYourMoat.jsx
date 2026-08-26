@@ -3,13 +3,30 @@ import {
   QUESTIONS,
   scoreAnswers,
   archetypeFor,
-  LOCKED_PREVIEW,
   DISCLAIMER,
+  DETAILED_RECOMMENDATIONS,
+  GATE_SUBJECT,
+  GATE_PRIVACY,
+  GATE_ERROR_NOTE,
+  MOAT_CONTACT_EMAIL,
+  dimensionSummary,
 } from '../data/moatAssessment.js'
 
-// Full-screen, in-app "Map your Moat" POC (PAR-170). Pure client state:
-// no route, no network, no storage — answers live and die in this component.
-// Question bank and scoring rules live in src/data/moatAssessment.js.
+// Full-screen, in-app "Map your Moat" POC (PAR-170) with the PAR-171 lead
+// hand-off: the result screen reveals the free headline (score + archetype),
+// then gates the detailed recommendations behind a required, accessible
+// email field. Answers live and die in this component; the only transport is
+// a browser-side FormSubmit notification to Francisco — no routes, no
+// storage, no visitor-visible result email. Question bank, scoring and the
+// gate copy live in src/data/moatAssessment.js.
+
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/francisco@moatstudio.ai'
+
+// Syntactic email check for the gate; the HTML `type="email"` validation is
+// the browser's first line and this guards the JS path (keyboard submits,
+// programmatic dispatch) so a malformed value can never be sent or reveal
+// the detailed section.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const TOTAL = QUESTIONS.length
 const RESULT_STEP = TOTAL // steps 0..11 are questions; TOTAL = result screen
@@ -20,6 +37,16 @@ export default function MapYourMoat({ onClose }) {
   const headingRef = useRef(null)
   const rootRef = useRef(null)
   const optionRefs = useRef([])
+
+  // PAR-171 lead gate: required email + explicit optional marketing
+  // consent (default off). The detailed recommendations stay hidden until
+  // a syntactically valid email is submitted successfully.
+  const [gateEmail, setGateEmail] = useState('')
+  const [gateConsent, setGateConsent] = useState(false)
+  const [gateStatus, setGateStatus] = useState('idle') // idle|sending|sent|error
+  const [gateError, setGateError] = useState('')
+  const [revealed, setRevealed] = useState(false)
+  const emailRef = useRef(null)
 
   const atResult = step === RESULT_STEP
   const question = atResult ? null : QUESTIONS[step]
@@ -54,7 +81,7 @@ export default function MapYourMoat({ onClose }) {
       }
       if (e.key !== 'Tab' || !rootRef.current) return
       const focusables = rootRef.current.querySelectorAll(
-        'button:not([disabled]):not([tabindex="-1"])',
+        'button:not([disabled]):not([tabindex="-1"]), input:not([tabindex="-1"]), [tabindex="0"]',
       )
       if (!focusables.length) return
       const first = focusables[0]
@@ -114,6 +141,47 @@ export default function MapYourMoat({ onClose }) {
   const restart = () => {
     setAnswers(Array(TOTAL).fill(null))
     setStep(0)
+  }
+
+  // PAR-171: a separate Map your Moat submission handler — the Contact form
+  // keeps its own untouched FormSubmit flow. Sends Francisco one concise
+  // notification: captured email, timestamp, provisional score, archetype
+  // and per-dimension summary. Never the raw answer text.
+  async function handleGateSubmit(e) {
+    e.preventDefault()
+    const email = gateEmail.trim()
+    if (!EMAIL_RE.test(email)) {
+      setGateError('Enter a syntactically valid email so we can follow up.')
+      emailRef.current?.focus()
+      return
+    }
+    if (gateStatus === 'sending') return
+    setGateError('')
+    setGateStatus('sending')
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          email,
+          marketingConsent: gateConsent ? 'yes' : 'no',
+          timestamp: new Date().toISOString(),
+          provisionalScore: `${result.moat} / 100 moat strength, ${result.exposure} / 100 AI exposure`,
+          archetype: `${archetype.name} (${archetype.reading})`,
+          dimensionSummary: Object.values(dimensionSummary(answers))
+            .map((d) => `${d.label}: ${d.score} / 100`)
+            .join('; '),
+          _subject: GATE_SUBJECT,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      })
+      if (!res.ok) throw new Error(`FormSubmit responded ${res.status}`)
+      setGateStatus('sent')
+      setRevealed(true)
+    } catch {
+      setGateStatus('error')
+    }
   }
 
   return (
@@ -198,19 +266,86 @@ export default function MapYourMoat({ onClose }) {
             <p className="moat-summary">{archetype.summary}</p>
             <p className="moat-disclaimer">{DISCLAIMER}</p>
 
-            <div className="moat-locked" aria-label="Locked: coming in the production assessment">
-              <p className="moat-locked-title">
-                <span aria-hidden="true">🔒 </span>Coming in the production assessment
-              </p>
-              <ul className="moat-locked-list">
-                {LOCKED_PREVIEW.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className="moat-locked-note">
-                Not available in this prototype — no sign-up will unlock it yet, and nothing you answered here has been stored or sent.
-              </p>
-            </div>
+            {revealed && (
+              <section className="moat-detailed" aria-label="Detailed recommendations">
+                <h3 className="moat-detailed-title">Your detailed reading</h3>
+                <p className="moat-detailed-intro">
+                  Three things the production assessment opens with, on the back of the provisional reading above:
+                </p>
+                <ul className="moat-detailed-list">
+                  {DETAILED_RECOMMENDATIONS.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {!revealed && (
+              <section
+                className="moat-gate"
+                aria-label="Unlock your detailed recommendations"
+              >
+                <h3 className="moat-gate-title">
+                  <span aria-hidden="true">🔓 </span>See your detailed recommendations
+                </h3>
+                <p className="moat-gate-copy">
+                  The free reading above is the headline. The detailed recommendations —
+                  your per-dimension breakdown, benchmark context and prioritised next move —
+                  unlock here. Enter your email to receive your reading.
+                </p>
+                <form className="moat-gate-form" onSubmit={handleGateSubmit}>
+                  <label className="moat-gate-label" htmlFor="moat-gate-email">
+                    Your email <span className="moat-gate-req" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id="moat-gate-email"
+                    ref={emailRef}
+                    className="moat-gate-input"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    placeholder="you@company.com"
+                    value={gateEmail}
+                    onChange={(e) => setGateEmail(e.target.value)}
+                    aria-describedby="moat-gate-privacy"
+                    disabled={gateStatus === 'sending'}
+                  />
+                  {gateError && (
+                    <p className="moat-gate-field-error" role="alert">
+                      {gateError}
+                    </p>
+                  )}
+                  <label className="moat-gate-consent">
+                    <input
+                      type="checkbox"
+                      className="moat-gate-checkbox"
+                      checked={gateConsent}
+                      onChange={(e) => setGateConsent(e.target.checked)}
+                      disabled={gateStatus === 'sending'}
+                    />
+                    <span>
+                      Optional — also send me occasional Moat Studio marketing. You can
+                      unsubscribe anytime.
+                    </span>
+                  </label>
+                  <p id="moat-gate-privacy" className="moat-gate-privacy">
+                    {GATE_PRIVACY}
+                  </p>
+                  <button
+                    type="submit"
+                    className="moat-next moat-gate-submit"
+                    disabled={gateStatus === 'sending'}
+                  >
+                    {gateStatus === 'sending' ? 'Sending…' : 'Unlock my detailed reading'}
+                  </button>
+                  {gateStatus === 'error' && (
+                    <p className="moat-gate-error" role="alert">
+                      {GATE_ERROR_NOTE.replace('{email}', MOAT_CONTACT_EMAIL)}
+                    </p>
+                  )}
+                </form>
+              </section>
+            )}
 
             <div className="moat-controls">
               <button type="button" className="moat-back" onClick={restart}>

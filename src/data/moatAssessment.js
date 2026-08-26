@@ -239,6 +239,36 @@ export function archetypeFor({ moat, exposure }) {
   return ARCHETYPES.exposed
 }
 
+// ── Evidence fixture (PAR-171) ────────────────────────────────────────
+// Deterministic answer set for the committed evidence captures: the
+// strongest option on every question under the instrument's own value
+// scale (strongest-moat / lowest-exposure end of each scale). It drives a
+// genuine Compounding result — moat 100, exposure 0. The capture runner
+// and manifest derive their fixture labels from fixtureExpected() below,
+// so the committed evidence can never claim an archetype the scoring code
+// does not actually produce (2026-08-26 exact-head review blocker).
+export const FIXTURE = {
+  id: 'compounding-strongest',
+  answers: QUESTIONS.map((q) => {
+    let best = 0
+    let bestValue = -1
+    q.options.forEach((o, i) => {
+      if (o.value > bestValue) { bestValue = o.value; best = i }
+    })
+    return best
+  }),
+}
+
+export function fixtureExpected(fixture = FIXTURE) {
+  const result = scoreAnswers(fixture.answers)
+  return { ...result, archetype: archetypeFor(result) }
+}
+
+export function fixtureLabel(fixture = FIXTURE) {
+  const e = fixtureExpected(fixture)
+  return `fixture ${fixture.id}: strongest option on every question (strongest-moat / lowest-exposure end of each scale) → moat ${e.moat}/100, AI exposure ${e.exposure}/100 → ${e.archetype.name} (${e.archetype.reading})`
+}
+
 // Locked preview rows — honest placeholder for the production assessment.
 // Rendered non-interactive; nothing here collects or sends anything.
 export const LOCKED_PREVIEW = [
@@ -249,3 +279,52 @@ export const LOCKED_PREVIEW = [
 
 export const DISCLAIMER =
   'This is a prototype reading based on 12 self-reported answers. It is not a benchmark, a validated score, or professional advice — the production assessment is being built.'
+
+// ── Detailed recommendations (PAR-171) ────────────────────────────────
+// The production assessment's detailed diagnosis, split from the free
+// headline result. Revealed in the browser only after the visitor hands
+// over a valid email (see components/MapYourMoat.jsx); never shown before.
+export const DETAILED_RECOMMENDATIONS = [
+  'Dimension-by-dimension breakdown of your five defensibility scores',
+  'Benchmark context against comparable Australian businesses',
+  'Prioritised recommendations for your weakest dimension',
+]
+
+// Notification subject identifying the Map your Moat process. Francisco
+// receives one concise assessment response per completed submission.
+export const GATE_SUBJECT = 'Map your Moat — new assessment response'
+
+// Privacy wording for the email gate. Explains the collected email, the
+// optional marketing consent, and that the POC result is provisional.
+export const GATE_PRIVACY =
+  'Your email is collected so a Map your Moat response can be sent to the studio for follow-up. It is stored by our form service; we will only email you about marketing if you tick the box below. This prototype result is provisional and unvalidated — nothing you answer is shared, sold, or benchmarked here.'
+
+// Honest failure state: point at the existing MOAT contact email.
+export const MOAT_CONTACT_EMAIL = 'francisco@moatstudio.ai'
+export const GATE_ERROR_NOTE =
+  'Something went wrong sending your response — no notification went out. Email us directly at {email} with “Map your Moat” in the subject and we will follow up personally.'
+
+// One entry per dimension for the notification's dimension summary.
+// Scores are 0–100; exposure is the instrument's own 0–100 exposure
+// score (higher = more exposed). Deliberately carries no answer text.
+export function dimensionSummary(answers) {
+  const byDimension = {}
+  QUESTIONS.forEach((q, i) => {
+    const idx = answers[i]
+    if (idx == null) return
+    if (!byDimension[q.dimension]) byDimension[q.dimension] = []
+    byDimension[q.dimension].push(q.options[idx].value)
+  })
+  const out = {}
+  for (const [key, meta] of Object.entries(DIMENSIONS)) {
+    const values = byDimension[key] || []
+    if (!values.length) continue
+    const mean = values.reduce((a, b) => a + b, 0) / values.length
+    const score =
+      meta.axis === 'exposure'
+        ? Math.round((1 - mean / 3) * 100)
+        : Math.round((mean / 3) * 100)
+    out[key] = { label: meta.label, score }
+  }
+  return out
+}

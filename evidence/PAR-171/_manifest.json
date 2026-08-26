@@ -1,0 +1,57 @@
+[
+  {
+    "file": "evidence/PAR-171/result-gate-mobile.png",
+    "dimensions": "390x844",
+    "theme": "night (v1 single theme)",
+    "fixture": "fixture compounding-strongest: strongest option on every question (strongest-moat / lowest-exposure end of each scale) → moat 100/100, AI exposure 0/100 → Compounding (Defended, low exposure)",
+    "mock": "success",
+    "submit": false,
+    "detail": "result screen, email gate shown, email filled with fixture value, no submission",
+    "actualPngDimensions": "390x844",
+    "overflowCheck": "no horizontal overflow"
+  },
+  {
+    "file": "evidence/PAR-171/result-revealed-mobile.png",
+    "dimensions": "390x844",
+    "theme": "night (v1 single theme)",
+    "fixture": "fixture compounding-strongest: strongest option on every question (strongest-moat / lowest-exposure end of each scale) → moat 100/100, AI exposure 0/100 → Compounding (Defended, low exposure)",
+    "mock": "success",
+    "submit": true,
+    "detail": "detailed recommendations revealed in-browser after mocked success (HTTP 200); no reload",
+    "actualPngDimensions": "390x844",
+    "overflowCheck": "no horizontal overflow"
+  },
+  {
+    "file": "evidence/PAR-171/result-gate-error-mobile.png",
+    "dimensions": "390x844",
+    "theme": "night (v1 single theme)",
+    "fixture": "fixture compounding-strongest: strongest option on every question (strongest-moat / lowest-exposure end of each scale) → moat 100/100, AI exposure 0/100 → Compounding (Defended, low exposure)",
+    "mock": "failure",
+    "submit": true,
+    "detail": "gate submitted with mocked failure (HTTP 500); honest failure note with the MOAT contact email shown; detailed stays hidden",
+    "actualPngDimensions": "390x844",
+    "overflowCheck": "no horizontal overflow"
+  },
+  {
+    "file": "evidence/PAR-171/result-gate-desktop.png",
+    "dimensions": "1440x900",
+    "theme": "night (v1 single theme)",
+    "fixture": "fixture compounding-strongest: strongest option on every question (strongest-moat / lowest-exposure end of each scale) → moat 100/100, AI exposure 0/100 → Compounding (Defended, low exposure)",
+    "mock": "success",
+    "submit": false,
+    "detail": "result screen, email gate shown, email empty, no submission",
+    "actualPngDimensions": "1440x900",
+    "overflowCheck": "no horizontal overflow"
+  },
+  {
+    "file": "evidence/PAR-171/result-revealed-desktop.png",
+    "dimensions": "1440x900",
+    "theme": "night (v1 single theme)",
+    "fixture": "fixture compounding-strongest: strongest option on every question (strongest-moat / lowest-exposure end of each scale) → moat 100/100, AI exposure 0/100 → Compounding (Defended, low exposure)",
+    "mock": "success",
+    "submit": true,
+    "detail": "detailed recommendations revealed in-browser after mocked success (HTTP 200); no reload",
+    "actualPngDimensions": "1440x900",
+    "overflowCheck": "no horizontal overflow"
+  }
+]

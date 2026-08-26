@@ -570,10 +570,40 @@ button:hover { opacity: .85 }
 .moat-summary { font-size: 18px; line-height: 1.55; color: rgba(255, 248, 225, .82); max-width: 640px; margin: 40px 0 0 }
 .moat-disclaimer { font-size: 14px; line-height: 1.5; color: rgba(255, 248, 225, .55); max-width: 640px; margin: var(--moat-space-5) 0 0 }
 
-.moat-locked { background: rgba(255, 248, 225, .045); border-radius: var(--moat-radius-sm); padding: 28px 28px 24px; margin-top: 48px }
-.moat-locked-title { font-family: var(--moat-font-mono); font-size: 13px; letter-spacing: .06em; color: rgba(255, 248, 225, .75); margin: 0 }
-.moat-locked-list { margin: var(--moat-space-4) 0 0; padding: 0 0 0 var(--moat-space-5); color: rgba(255, 248, 225, .45); font-size: 16px; line-height: 1.7 }
-.moat-locked-note { font-size: 13.5px; color: rgba(255, 248, 225, .5); margin: var(--moat-space-4) 0 0 }
+/* PAR-171 email gate — the detailed recommendations stay hidden until a
+   valid email is submitted. Solar marks the one action; everything else
+   keeps the night-panel restraint. */
+.moat-gate { background: rgba(255, 248, 225, .045); border: 1px solid var(--moat-cream-16); border-radius: var(--moat-radius-sm); padding: 28px; margin-top: 48px }
+.moat-gate-title { font-family: var(--moat-font-mono); font-size: 14px; letter-spacing: .04em; color: rgba(255, 248, 225, .85); margin: 0 }
+.moat-gate-copy { font-size: 15px; line-height: 1.55; color: rgba(255, 248, 225, .6); max-width: 560px; margin: var(--moat-space-4) 0 0 }
+.moat-gate-form { margin-top: var(--moat-space-6); display: flex; flex-direction: column; gap: var(--moat-space-4); align-items: flex-start }
+.moat-gate-label { font-family: var(--moat-font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255, 248, 225, .7) }
+.moat-gate-req { color: var(--moat-solar) }
+.moat-gate-input {
+  width: 100%;
+  max-width: 380px;
+  background: var(--moat-cream-05);
+  border: 1px solid var(--moat-cream-22);
+  border-radius: var(--moat-radius-sm);
+  color: var(--moat-cream);
+  font-family: Figtree, sans-serif;
+  font-size: 16px;
+  padding: 12px var(--moat-space-4);
+}
+.moat-gate-input::placeholder { color: rgba(255, 248, 225, .4) }
+.moat-gate-input:focus-visible { outline: 2px solid var(--moat-solar); outline-offset: 2px }
+.moat-gate-input:disabled { opacity: .6 }
+.moat-gate-consent { display: flex; align-items: flex-start; gap: 10px; color: rgba(255, 248, 225, .65); font-size: 14px; line-height: 1.45; cursor: pointer }
+.moat-gate-checkbox { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--moat-solar); flex: none; cursor: pointer }
+.moat-gate-privacy { font-size: 13px; line-height: 1.55; color: rgba(255, 248, 225, .5); max-width: 560px }
+.moat-gate-field-error { color: var(--moat-cream); font-size: 14px; margin: 0 }
+.moat-gate-error { font-size: 14px; line-height: 1.5; color: rgba(255, 248, 225, .7); max-width: 560px; margin: 0 }
+
+/* Revealed after a successful submission — no reload. */
+.moat-detailed { background: rgba(255, 248, 225, .045); border-radius: var(--moat-radius-sm); padding: 28px; margin-top: 48px }
+.moat-detailed-title { font-family: var(--moat-font-mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--moat-solar); margin: 0 }
+.moat-detailed-intro { font-size: 15px; line-height: 1.5; color: rgba(255, 248, 225, .65); max-width: 560px; margin: var(--moat-space-4) 0 0 }
+.moat-detailed-list { margin: var(--moat-space-4) 0 0; padding: 0 0 0 var(--moat-space-5); color: rgba(255, 248, 225, .75); font-size: 16px; line-height: 1.7 }
 
 @media (max-width: 900px) {
   .moat-assess-inner { padding: var(--moat-space-5) var(--moat-space-5) 72px }
@@ -582,6 +612,7 @@ button:hover { opacity: .85 }
   .moat-option { font-size: 15.5px; padding: 15px var(--moat-space-4) }
   .moat-controls { margin-top: 36px }
   .moat-scores { gap: 36px; margin-top: 32px }
+  .moat-gate, .moat-detailed { padding: 22px var(--moat-space-5) }
   .hero-actions { margin-top: 34px }
 }
 
