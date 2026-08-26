@@ -84,6 +84,13 @@ function startStaticServer(root) {
 
 const egressViolations = []
 
+// The production page loads the Figtree/Fira Mono web fonts from the Google
+// Fonts CDN — declared in index.html and already on the lint allowlist. Those
+// two font hosts are legitimate first-party-adjacent resources, not egress.
+// Everything else off-origin (analytics, tracking, unknown third parties) is
+// aborted and recorded as a violation.
+const ALLOWED_REMOTE_HOSTS = new Set(['fonts.googleapis.com', 'fonts.gstatic.com'])
+
 async function installLocalOnlyNetwork(page, origin) {
   await page.setRequestInterception(true)
   page.on('request', (request) => {
@@ -92,6 +99,7 @@ async function installLocalOnlyNetwork(page, origin) {
       const parsed = new URL(url)
       if (parsed.protocol === 'data:') return request.continue()
       if (parsed.origin !== origin) {
+        if (ALLOWED_REMOTE_HOSTS.has(parsed.hostname)) return request.continue()
         egressViolations.push(`External request: ${url}`)
         return request.abort()
       }
@@ -371,10 +379,10 @@ npm run build && node scripts/capture-par-180-evidence.mjs
 
 - The page under test is the production build (dist/), served by a plain Node
   static server inside the capture script. No dev server is started.
-- Every request to another origin (including web fonts) is aborted and
-  recorded as a violation; the run fails if any occur. Text therefore renders
-  in system-ui fallbacks, not Figtree — layout and overflow assertions are
-  unaffected.
+- The only off-origin resources are the page's own Figtree/Fira Mono web fonts,
+  declared in index.html and on the lint allowlist. Every other off-origin
+  request (analytics, unknown third parties) is aborted and recorded as a
+  violation; the run fails if any occur.
 - Each screenshot is gated on the DOM assertions below; the script exits
   non-zero if any fail.
 

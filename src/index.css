@@ -395,6 +395,8 @@ button:hover { opacity: .85 }
   .hero-bar { flex-wrap: wrap; padding: 18px var(--moat-space-6) }
   .hero-logo svg { width: 54px; height: 54px }
   .nav { gap: 18px; font-size: 14px; flex-basis: 100%; order: 2 }
+  /* Full-width nav row: give every link a comfortable, consistent tap target. */
+  .nav a { line-height: 1; padding: 9px 0 }
   .nav-cta { padding: 9px 16px; font-size: 13px }
   .hero-copy { padding: 96px var(--moat-space-6) 120px }
   .hero-kicker { margin-bottom: var(--moat-space-5) }
