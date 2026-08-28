@@ -370,6 +370,58 @@ button:hover { opacity: .85 }
 }
 .process-arrow circle { fill: var(--moat-solar) }
 
+/* ── Proof-principles chapter (PAR-183) ──
+   "Built around your business." The editorial bridge between the navy
+   inverse process stage and the founder chapter. Deliberately light:
+   it stays on the warm paper (no inverse panel) so the dark slab reads
+   as process and this chapter reads as claim — the page alternates
+   dark / light / light as it moves from method to proof to person.
+   Three numbered principles in a 3-up editorial grid, each opening
+   with one small original diagram (orbit / overlap / focus). */
+.proof-section { display: block; padding: 120px var(--moat-space-16) 160px }
+.proof-section .section-eyebrow { margin-bottom: var(--moat-space-4) }
+.proof-section .section-title { margin: 0 0 var(--moat-space-5); max-width: 760px }
+.proof-intro { font-size: 19px; line-height: 1.55; color: var(--moat-muted); max-width: 680px; margin: 0 0 var(--moat-space-12) }
+.proof-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--moat-space-8);
+  row-gap: 0;
+}
+/* Each principle: a quiet hairline-top rule, the small diagram, the
+   number + name baseline row, then the explanatory copy. Order is
+   carried by number, position and the DOM order of the list — never
+   by colour alone. */
+.proof-item { border-top: 1px solid var(--moat-line); padding-top: var(--moat-space-5) }
+.proof-diagram { width: 56px; height: 56px; display: block; margin: 0 0 var(--moat-space-6) }
+/* Quiet colouring of the three original diagrams: rings and strokes in
+   the rule colour, one solid solar point per diagram so the accent
+   appears once and small. */
+.proof-diagram ellipse,
+.proof-diagram circle { fill: none; stroke: var(--moat-line); stroke-width: 1.5 }
+.proof-diagram path { fill: var(--moat-cream-05); stroke: var(--moat-line); stroke-width: 1.5 }
+.proof-diagram ellipse:first-of-type,
+.proof-diagram circle:first-of-type { stroke: var(--moat-ink); stroke-width: 2 }
+.proof-diagram circle[r="4.5"],
+.proof-diagram circle[r="3"],
+.proof-diagram circle[r="15"] { fill: var(--moat-solar); stroke: none }
+.proof-item-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--moat-space-4) }
+.proof-name { font-size: 22px; font-weight: 700; letter-spacing: -.01em; margin: 0 }
+/* The number is the primary order marker — display type, red detail
+   (5.2:1 on paper, AA) — mirroring the solar numbers on the navy stage. */
+.proof-num {
+  font-family: var(--moat-font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--moat-red);
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+.proof-body { font-size: 16.5px; line-height: 1.55; color: var(--moat-muted); margin: var(--moat-space-4) 0 0 }
+
 /* ── Founder ── */
 #founder { padding: 0 var(--moat-space-16) 200px; display: flex; flex-wrap: wrap; gap: var(--moat-space-12); align-items: center }
 .founder-photo {
@@ -521,6 +573,16 @@ button:hover { opacity: .85 }
     transform: rotate(90deg);
     align-self: center;
   }
+  /* 390px proof chapter: the three principles form a readable single-
+     column sequence; the diagrams stay small and quiet above each one. */
+  .proof-section { padding: 96px var(--moat-space-6) 110px }
+  .proof-section .section-eyebrow { margin-bottom: var(--moat-space-3) }
+  .proof-section .section-title { margin-bottom: var(--moat-space-5) }
+  .proof-intro { font-size: 17px; margin-bottom: var(--moat-space-8) }
+  .proof-grid { grid-template-columns: 1fr; row-gap: var(--moat-space-10) }
+  .proof-diagram { width: 48px; height: 48px }
+  .proof-name { font-size: 20px }
+  .proof-body { font-size: 16px }
   .approach-copy p, .approach-copy h2 + p { margin-top: 28px; font-size: 17px }
   #divider { grid-template-columns: 1fr; padding: 0 var(--moat-space-6) }
   .divider-orb { display: none }
