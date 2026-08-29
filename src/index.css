@@ -422,35 +422,64 @@ button:hover { opacity: .85 }
 }
 .proof-body { font-size: 16.5px; line-height: 1.55; color: var(--moat-muted); margin: var(--moat-space-4) 0 0 }
 
-/* ── Founder ── */
-#founder { padding: 0 var(--moat-space-16) 200px; display: flex; flex-wrap: wrap; gap: var(--moat-space-12); align-items: center }
+/* ── Founder chapter (PAR-184) ──
+   "The founder." The editorial person-chapter between the light
+   proof-principles grid and the navy contact panel: page stays
+   light / light / dark from method to proof to person. One semantic
+   <section> labelled by its H2; DOM order is eyebrow → portrait →
+   text, which is also reading and focus order at every width. The
+   authorised portrait is framed by one original yellow-orb mark
+   peeking from its top-right corner (decorative, aria-hidden); the
+   map → build → loop gesture closes the text column. */
+.founder-section { display: block; padding: 130px var(--moat-space-16) 190px }
+.founder-section .section-eyebrow { margin-bottom: var(--moat-space-8) }
+.founder-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  gap: var(--moat-space-16);
+  align-items: start;
+}
+/* Portrait: the authorised photo, recognisable and never covered —
+   the orb sits behind it and peeks from the top-right corner. */
+.founder-media { position: relative; width: 100%; margin: 40px 40px 0 0 }
 .founder-photo {
-  background: #E9ECEF;
-  border-radius: var(--moat-radius-sm);
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
   aspect-ratio: 1;
-  width: 340px;
-  flex: none;
   object-fit: cover;
   object-position: 52% 42%;
-  display: block;
+  border-radius: var(--moat-radius-sm);
+  background: #E9ECEF;
 }
-.founder-body { flex: 1; min-width: 300px; max-width: 600px }
-.founder-body h2 { margin: 0 0 22px }
+.founder-orb {
+  position: absolute;
+  z-index: 0;
+  top: 16px;
+  right: 16px;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+}
+.founder-body { max-width: 600px }
 .founder-name {
   display: inline-flex;
   align-items: center;
-  gap: 26px;
-  font-size: clamp(28px, 2.8vw, 38px);
-  font-weight: 760;
+  font-family: var(--moat-font-display);
+  font-size: clamp(36px, 3.6vw, 50px);
+  font-weight: 700;
   letter-spacing: -.028em;
-  line-height: 1.06;
+  line-height: 1.04;
 }
 .founder-name-lines { display: flex; flex-direction: column }
-.founder-name-lines span:last-child { padding-left: .6em }
-.founder-mark { display: block; width: 1.6em; height: 1.6em; object-fit: contain; border-radius: 50% }
-.founder-body p { font-size: 18px; line-height: 1.55; color: var(--moat-muted); margin: 0 0 var(--moat-space-4) }
-.founder-links { display: flex; gap: var(--moat-space-4); flex-wrap: wrap; align-items: baseline }
+.founder-name-lines span:last-child { padding-left: .5em }
+.founder-bio { font-size: 18px; line-height: 1.55; color: var(--moat-muted); margin: var(--moat-space-5) 0 0; max-width: 560px }
+.founder-links { display: flex; gap: var(--moat-space-4); flex-wrap: wrap; align-items: baseline; margin-top: var(--moat-space-6) }
 .founder-links .sep { font-family: var(--moat-font-mono); font-size: 12px; color: var(--moat-muted) }
+/* Closes the text column: the original map → build → loop gesture,
+   drawn in once (static with reduced motion), never under the text. */
+.founder-gesture { margin-top: var(--moat-space-10) }
 .mono-link {
   font-family: var(--moat-font-mono);
   font-size: 12px;
@@ -587,9 +616,16 @@ button:hover { opacity: .85 }
   #divider { grid-template-columns: 1fr; padding: 0 var(--moat-space-6) }
   .divider-orb { display: none }
   #divider svg { width: 100%; height: auto }
-  #founder { padding: 0 var(--moat-space-6) 136px; gap: 28px }
-  .founder-photo { width: 100%; max-width: none }
-  .founder-body { min-width: 0 }
+  /* 390px founder chapter: portrait full-width, text stacks below —
+     reading and focus order follow DOM order (portrait, then text). */
+  .founder-section { padding: 100px var(--moat-space-6) 120px }
+  .founder-section .section-eyebrow { margin-bottom: var(--moat-space-6) }
+  .founder-grid { grid-template-columns: 1fr; row-gap: var(--moat-space-10) }
+  .founder-media { margin: 30px 0 0 }
+  .founder-orb { width: 150px; height: 150px; top: 12px; right: 12px }
+  .founder-name { font-size: clamp(30px, 8.4vw, 38px) }
+  .founder-bio { font-size: 17px }
+  .founder-gesture { margin-top: var(--moat-space-8) }
   #contact { padding: 0 12px 24px }
   .contact-panel { grid-template-columns: 1fr; padding: 56px var(--moat-space-6); border-radius: var(--moat-radius-md); gap: 36px }
   #footer { padding: 0 var(--moat-space-6) 36px; flex-direction: column; align-items: flex-start; gap: 14px }
