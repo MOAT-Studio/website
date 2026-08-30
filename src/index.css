@@ -489,7 +489,13 @@ button:hover { opacity: .85 }
   padding-bottom: 2px;
 }
 
-/* ── Contact ── */
+/* ── Contact (PAR-185) ──
+   The finale: the deep-navy inverse panel carries the original yellow
+   dot texture, an editorial "Become uncopyable." heading and a
+   high-contrast, labelled single-column form. The content columns are
+   position:relative so they paint above the dot canvas and scrim — the
+   decoration sits behind, never over the labels or messages. States
+   (sending/sent/error) are signalled in text, never colour alone. */
 #contact { padding: 0 44px 44px }
 .contact-panel {
   background: var(--moat-navy);
@@ -497,37 +503,69 @@ button:hover { opacity: .85 }
   border-radius: var(--moat-radius-lg);
   padding: 104px 72px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--moat-space-16);
   align-items: center;
   position: relative;
   overflow: hidden;
 }
 .contact-copy { position: relative }
+/* Eyebrow on the navy panel: cream label, solar index — the system's
+   night-ground accent. The rule stays a quiet cream hairline. */
+.contact-copy .section-eyebrow { color: var(--moat-cream-60); margin-bottom: var(--moat-space-6) }
+.contact-copy .section-eyebrow-index { color: var(--moat-solar) }
+.contact-copy .section-eyebrow-rule { background: var(--moat-cream-22) }
 .contact-copy h2 {
+  font-family: var(--moat-font-display);
   font-size: clamp(38px, 4.4vw, 58px);
   font-weight: 760;
   letter-spacing: -.028em;
-  line-height: 1;
+  line-height: 1.02;
   margin: 0;
 }
-.contact-copy p { font-size: 19px; line-height: 1.5; color: var(--moat-cream-70); max-width: 430px; margin: 28px 0 0 }
-.contact-form { display: flex; flex-direction: column; gap: var(--moat-space-3); position: relative; z-index: 1 }
+.contact-copy p { font-size: 19px; line-height: 1.5; color: var(--moat-cream-72); max-width: 430px; margin: var(--moat-space-6) 0 0 }
+/* The form: intentionally single-column and readable at every width.
+   A visible mono label sits above each control; the controls sit on a
+   cream-05 ground with a cream-35 border — visible field boundaries on
+   the navy panel, the field text itself at 18.8:1 (AAA) cream. */
+.contact-form { display: flex; flex-direction: column; gap: var(--moat-space-5); position: relative; z-index: 1 }
+.contact-field { display: flex; flex-direction: column; gap: 6px }
+.contact-label {
+  font-family: var(--moat-font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--moat-cream-72);
+}
 .contact-form input,
 .contact-form textarea {
-  background: var(--moat-navy-72);
+  background: var(--moat-cream-05);
   border: 1px solid var(--moat-cream-35);
   border-radius: var(--moat-radius-sm);
-  padding: var(--moat-space-4) 18px;
+  padding: 13px 16px;
   font-family: Figtree, sans-serif;
   font-size: 16px;
   color: var(--moat-cream);
   outline: none;
 }
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: rgba(255, 248, 225, .45) }
+/* Visible focus state on the night ground: a solar outline plus the
+   border warming to solar. Never colour alone — the outline shape
+   carries the state for low-vision readers. */
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  border-color: var(--moat-solar);
+  outline: 2px solid var(--moat-solar);
+  outline-offset: 2px;
+}
 .contact-form textarea { resize: vertical }
 .contact-form .honeypot { position: absolute; left: -9999px; opacity: 0; pointer-events: none }
 .contact-form button:disabled { opacity: .6; cursor: default }
-.form-note { font-size: 14px; color: var(--moat-cream-70); margin: var(--moat-space-1) 0 0 }
+/* Error fallback: a text note (role=alert in markup) with the direct
+   mailto. Solar link on navy; the message is legible cream, not colour-
+   coded. */
+.form-note { font-size: 14.5px; line-height: 1.5; color: var(--moat-cream); margin: var(--moat-space-1) 0 0 }
 .form-note a { color: var(--moat-solar) }
 .contact-form button {
   background: var(--moat-solar);
@@ -541,7 +579,10 @@ button:hover { opacity: .85 }
   cursor: pointer;
 }
 
-/* ── Footer ── */
+/* ── Footer (PAR-185) ──
+   The colophon in the v2 system: a mono line on the paper ground, the
+   map → build → loop gesture mark (decorative) and the preserved
+   destinations as the system's mono links (ink, red underline). */
 #footer {
   padding: 0 var(--moat-space-16) 48px;
   display: flex;
@@ -550,11 +591,12 @@ button:hover { opacity: .85 }
   gap: var(--moat-space-6);
   flex-wrap: wrap;
   font-family: var(--moat-font-mono);
-  font-size: 11.5px;
+  font-size: 12px;
+  letter-spacing: .06em;
   color: var(--moat-muted);
 }
-#footer a { color: var(--moat-muted) }
-.footer-links { display: flex; gap: 22px }
+#footer .mono-link { font-size: 12px; letter-spacing: .06em }
+.footer-links { display: flex; gap: 22px; flex-wrap: wrap; align-items: baseline }
 .footer-gesture { flex: none; opacity: .9 }
 
 /* ── Mobile ── */
