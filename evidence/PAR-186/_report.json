@@ -1,0 +1,195 @@
+{
+  "desktopOverflow": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440
+  },
+  "structure": {
+    "chapters": [
+      {
+        "id": "approach",
+        "tag": "SECTION",
+        "labelledResolvesToH2": true,
+        "heading": "We start where you are",
+        "eyebrow": "Approach / 01"
+      },
+      {
+        "id": "programs",
+        "tag": "SECTION",
+        "labelledResolvesToH2": true,
+        "heading": "Map → Build → Loop",
+        "eyebrow": "Process / 02"
+      },
+      {
+        "id": "proof-principles",
+        "tag": "SECTION",
+        "labelledResolvesToH2": true,
+        "heading": "AI built around your business",
+        "eyebrow": "Proof & principles / 03"
+      },
+      {
+        "id": "founder",
+        "tag": "SECTION",
+        "labelledResolvesToH2": true,
+        "heading": "I am Francisco",
+        "eyebrow": "Founder / 04"
+      },
+      {
+        "id": "contact",
+        "tag": "SECTION",
+        "labelledResolvesToH2": true,
+        "heading": "Become uncopyable",
+        "eyebrow": "Contact / 05"
+      }
+    ],
+    "h1Text": "AI that compounds into a moat.",
+    "h1Family": "Anton, \"Arial Narrow\", Figtree, system-ui, sans-serif",
+    "h1Size": "150px",
+    "headingOutline": [
+      {
+        "level": "H1",
+        "text": "AI that compounds into a moat."
+      },
+      {
+        "level": "H2",
+        "text": "We start where you are"
+      },
+      {
+        "level": "H2",
+        "text": "Map → Build → Loop"
+      },
+      {
+        "level": "H3",
+        "text": "Map"
+      },
+      {
+        "level": "H3",
+        "text": "Build"
+      },
+      {
+        "level": "H3",
+        "text": "Loop"
+      },
+      {
+        "level": "H2",
+        "text": "AI built around your business"
+      },
+      {
+        "level": "H3",
+        "text": "Your workflows"
+      },
+      {
+        "level": "H3",
+        "text": "Your knowledge"
+      },
+      {
+        "level": "H3",
+        "text": "Your judgement"
+      },
+      {
+        "level": "H2",
+        "text": "I am Francisco"
+      },
+      {
+        "level": "H2",
+        "text": "Become uncopyable"
+      }
+    ],
+    "undecoratedMarks": 0,
+    "processSteps": 3,
+    "proofItems": 3
+  },
+  "contactContract": {
+    "name": {
+      "name": "name",
+      "required": true,
+      "labelText": "Name",
+      "labelInA11yTree": true,
+      "placeholder": "Name",
+      "visible": true,
+      "inViewport": true
+    },
+    "email": {
+      "name": "email",
+      "required": true,
+      "labelText": "Work email",
+      "labelInA11yTree": true,
+      "placeholder": "Work email",
+      "visible": true,
+      "inViewport": true
+    },
+    "message": {
+      "name": "message",
+      "required": true,
+      "labelText": "What are you trying to change?",
+      "labelInA11yTree": true,
+      "placeholder": "What are you trying to change?",
+      "visible": true,
+      "inViewport": true
+    },
+    "honeypotOffscreen": true,
+    "buttonText": "Start a conversation→",
+    "externalLinksSecure": true
+  },
+  "focus": [
+    {
+      "sel": ".nav-pill",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(5, 5, 5)"
+    },
+    {
+      "sel": "#contact-name",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(253, 215, 0)"
+    },
+    {
+      "sel": ".rail-stages",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(5, 5, 5)"
+    }
+  ],
+  "narrowOverflow": {
+    "scrollWidth": 390,
+    "innerWidth": 390
+  },
+  "narrowContact": {
+    "name": {
+      "name": "name",
+      "required": true,
+      "labelText": "Name",
+      "labelInA11yTree": true,
+      "placeholder": "Name",
+      "visible": true,
+      "inViewport": true
+    },
+    "email": {
+      "name": "email",
+      "required": true,
+      "labelText": "Work email",
+      "labelInA11yTree": true,
+      "placeholder": "Work email",
+      "visible": true,
+      "inViewport": true
+    },
+    "message": {
+      "name": "message",
+      "required": true,
+      "labelText": "What are you trying to change?",
+      "labelInA11yTree": true,
+      "placeholder": "What are you trying to change?",
+      "visible": true,
+      "inViewport": true
+    },
+    "honeypotOffscreen": true,
+    "buttonText": "Start a conversation→",
+    "externalLinksSecure": true
+  },
+  "assessment": {
+    "closed": true,
+    "focusedId": "hero-title",
+    "hash": ""
+  },
+  "egressViolations": []
+}

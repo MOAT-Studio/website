@@ -1,69 +1,74 @@
 /* ════════════════════════════════════════════════════════════════════
-   MOAT v2 — editorial-orb design tokens (PAR-179)
+   MOAT v3 — editorial-orb design tokens (PAR-186)
 
-   The v2 system is a warm-paper editorial surface with an ink/navy
-   inverse, one solar accent and one red detail. Every colour below is
-   the same value the v1 page already shipped with — only the naming
-   changed, so this slice is visually identical to main.
+   The v3 system is the concept made real: a warm-paper editorial poster
+   with an ink/navy inverse, one solar body and one red detail. The
+   surface changed from the cool grey of v2 to warm cream, the solar
+   accent warmed a step, and display type is now a real condensed face
+   rather than whatever condensed font the reader happened to have.
 
    Colour / contrast (WCAG 2.x, computed):
-     ink on paper        18.0:1   body text — AAA
-     cream on navy       18.8:1   inverse body text — AAA
-     solar on navy       15.2:1   accent on inverse ground — AAA
-     red on paper         5.2:1   detail/mono text — AA (small text ok)
-     muted on paper       5.0:1   secondary text — AA (small text ok)
+     ink on paper        19.7:1   body text — AAA
+     muted on paper       7.0:1   secondary text — AAA
+     cream on navy       18.5:1   inverse body text — AAA
+     solar on navy       13.4:1   accent on inverse ground — AAA
+     navy on solar       13.4:1   badge numerals, solar buttons — AAA
+     red on paper         5.2:1   eyebrow/detail text — AA (small text ok)
      solar on paper       1.2:1   NOT for text — fills, rules, marks only
-     line on paper        1.3:1   borders/dividers — non-text, exempt
+     line on paper        1.2:1   borders/dividers — non-text, exempt
 
    Motion defaults:
      --moat-ease is the single easing curve for the whole page.
-     Durations are short (150–300ms) for state changes; the only
-     long-running animations are decorative (orb drift, divider hue).
-     `prefers-reduced-motion: reduce` removes every non-essential
-     animation/transition (see the block at the bottom of this file);
-     content is never trapped or obscured by motion.
+     Durations are short (150–300ms) for state changes; v3 has no
+     long-running decorative animation at all. `prefers-reduced-motion:
+     reduce` removes every non-essential transition (see the block at
+     the bottom of this file); content is never trapped or obscured.
 
    Type:
-     Body uses Figtree (already authorised and loaded in index.html).
-     Display/eyebrow text prefers a condensed system stack — no font is
-     downloaded; on systems without one it falls back to Figtree.
+     Body uses Figtree and mono detail uses Fira Mono, both already
+     authorised. Display type is Anton — one extra Google Fonts family,
+     no new host (see index.html and scripts/lint.mjs). It is a caps-only
+     poster face: every display style here sets text-transform.
 
    Fonts are the only external fetches in this project (index.html);
-     no new font or image is introduced by v2.
+     every mark on the page — orb, brush strokes, rosette, arrows,
+     diagrams — is original SVG, not an image.
    ════════════════════════════════════════════════════════════════════ */
 :root {
   /* Colour — warm paper surface */
-  --moat-paper: #F8F9FA;
+  --moat-paper: #FCF6EA;
+  --moat-sand: #F0E7D1;
   --moat-ink: #050505;
-  --moat-muted: #6c757d;
-  --moat-line: #D9D9D9;
+  --moat-muted: #4B5163;
+  --moat-line: #E4DBC6;
 
-  /* Colour — ink/navy inverse (hero, contact panel, assessment) */
+  /* Colour — ink/navy inverse (process slab, contact panel, assessment) */
   --moat-navy: #03071E;
-  --moat-cream: #FFF8E1;
+  --moat-cream: #FDF7EB;
 
-  /* Colour — accents */
-  --moat-solar: #FFE100;
+  /* Colour — accents. The solar body reads as one light source, so it
+     carries a pale crown, a soft midtone and a deep foot. */
+  --moat-solar: #FDD700;
+  --moat-solar-pale: #FDF0AE;
+  --moat-solar-soft: #FBE69C;
+  --moat-solar-deep: #B99A05;
   --moat-red: #D00000;
 
   /* Colour — alpha variants (kept as tokens, not inline rgba) */
-  --moat-cream-72: rgba(255, 248, 225, .72);
-  --moat-cream-70: rgba(255, 248, 225, .7);
-  --moat-cream-60: rgba(255, 248, 225, .6);
-  --moat-cream-35: rgba(255, 248, 225, .35);
-  --moat-cream-22: rgba(255, 248, 225, .22);
-  --moat-cream-16: rgba(255, 248, 225, .16);
-  --moat-cream-05: rgba(255, 248, 225, .05);
-  --moat-navy-72: rgba(3, 7, 30, .72);
-  --moat-navy-25: rgba(3, 7, 30, .25);
-  --moat-solar-10: rgba(255, 225, 0, .1);
+  --moat-cream-72: rgba(253, 247, 235, .72);
+  --moat-cream-60: rgba(253, 247, 235, .6);
+  --moat-cream-35: rgba(253, 247, 235, .35);
+  --moat-cream-22: rgba(253, 247, 235, .22);
+  --moat-cream-16: rgba(253, 247, 235, .16);
+  --moat-cream-05: rgba(253, 247, 235, .05);
+  --moat-navy-08: rgba(3, 7, 30, .08);
+  --moat-navy-045: rgba(3, 7, 30, .045);
+  --moat-solar-10: rgba(253, 215, 0, .1);
 
   /* Type */
   --moat-font-body: Figtree, system-ui, sans-serif;
   --moat-font-mono: 'Fira Mono', monospace;
-  /* Condensed display stack — system fonts only, no download. */
-  --moat-font-display: 'Avenir Next Condensed', 'Bahnschrift',
-    'Arial Narrow', Figtree, system-ui, sans-serif;
+  --moat-font-display: Anton, 'Arial Narrow', Figtree, system-ui, sans-serif;
 
   /* Spacing (4px scale) */
   --moat-space-1: 4px;
@@ -81,9 +86,11 @@
   --moat-radius-sm: 8px;
   --moat-radius-md: 24px;
   --moat-radius-lg: 36px;
+  --moat-radius-pill: 999px;
 
   /* Layout */
   --moat-page-max: 1440px;
+  --moat-gutter: 44px;
 
   /* Motion */
   --moat-ease: cubic-bezier(.22, .61, .36, 1);
@@ -110,449 +117,527 @@ a {
 }
 a:hover { opacity: .68 }
 
-::selection { background: var(--moat-solar); color: var(--moat-ink) }
+::selection { background: var(--moat-solar); color: var(--moat-navy) }
 
-/* Visible keyboard focus (PAR-180): ink ring on paper grounds, solar ring
-   on night grounds. The browser default is low-contrast on the hero navy. */
+/* Visible keyboard focus: ink ring on paper grounds, solar ring on the
+   night grounds where an ink ring would disappear. */
 :focus-visible { outline: 2px solid var(--moat-ink); outline-offset: 3px }
-.hero :focus-visible,
+.programs-section :focus-visible,
 .contact-panel :focus-visible { outline-color: var(--moat-solar) }
-
-input::placeholder,
-textarea::placeholder { color: rgba(255, 248, 225, .5) }
+/* The H1 is focused programmatically when the assessment closes; that is
+   a scroll target, not a control, so it takes no visible ring. */
+.hero-title:focus { outline: none }
 
 button { transition: opacity var(--moat-duration-fast) var(--moat-ease) }
 button:hover { opacity: .85 }
 
-@keyframes moatHue {
-  0%, 100% { fill: #FFBA08 }
-  20% { fill: #FFC917 }
-  40% { fill: var(--moat-solar) }
-  60% { fill: #DC2F02 }
-  80% { fill: var(--moat-red) }
-}
-
 .page { max-width: var(--moat-page-max); margin: 0 auto }
 
-/* ── Highlight (yellow rotated marker) ── */
-.hl { position: relative; display: inline-block; padding: .04em .18em .09em }
-.hl-bg { position: absolute; inset: 0; background: var(--moat-solar); border-radius: 5px; transform: rotate(-3.6deg) }
-.hl-text { position: relative; color: var(--moat-navy) }
-
-/* ── Dot-grid canvas + gradient scrim (hero and contact panel) ── */
-.dot-canvas { position: absolute; inset: 0; width: 100%; height: 100% }
-.scrim {
+/* Available to assistive technology, removed from the visual layout.
+   Used for the logo home links and the contact field labels, whose
+   names the concept places inside the control itself. */
+.visually-hidden {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--moat-navy) 6%, var(--moat-navy-72) 52%, var(--moat-navy-25));
-  pointer-events: none;
-}
-
-/* ── Hero (v2 editorial, PAR-180) ── */
-/* Full-bleed: the hero sits outside .page; its content aligns via .hero-inner.
-   The orb composition is layered behind the text: pointer-events stay off it,
-   and every decorative element is aria-hidden in markup. */
-.hero {
-  background: var(--moat-navy);
-  color: var(--moat-cream);
-  border-radius: 0 0 var(--moat-radius-lg) var(--moat-radius-lg);
-  position: relative;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
   overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
-.hero-inner { max-width: var(--moat-page-max); margin: 0 auto; position: relative }
 
-/* Header bar — logo home link left, primary navigation right. */
-.hero-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--moat-space-6);
-  padding: 28px var(--moat-space-16);
-}
-.hero-logo { display: flex; align-items: center; gap: 14px; color: var(--moat-cream) }
-.hero-wordmark { font-size: 17px; font-weight: 600; letter-spacing: -.01em }
-.nav { display: flex; gap: 34px; align-items: center; font-size: 15px }
-.nav-link { color: var(--moat-cream); transition: color var(--moat-duration-fast) var(--moat-ease) }
-.nav-link:hover { opacity: 1; color: var(--moat-solar) }
-.nav-cta {
-  background: var(--moat-solar);
+/* ════════════════════════════════════════════════════════════════════
+   Shared editorial parts
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Display type. Anton is a caps face with a single weight, so scale and
+   line-height do the work that weight used to. */
+.section-title {
+  font-family: var(--moat-font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .002em;
+  line-height: .88;
+  margin: 0;
   color: var(--moat-navy);
-  border-radius: var(--moat-radius-sm);
-  padding: 11px 22px;
-  font-weight: 600;
-  font-size: 14px;
-  transition: background var(--moat-duration-fast) var(--moat-ease);
 }
-.nav-cta:hover { opacity: 1; background: var(--moat-cream) }
-.hero-logo:hover { opacity: 1 }
+/* Semantic responsive line breaks: each .line is a block span, so the
+   text stays real text (selectable, readable) while breaking where the
+   composition intends. */
+.line { display: block }
 
-/* Orb composition — original SVG artwork behind the copy. */
-.hero-orbs { position: absolute; inset: 0; pointer-events: none }
-.hero-orb-main {
-  position: absolute;
-  top: -150px;
-  right: -90px;
-  width: min(46vw, 560px);
-  height: auto;
+/* The solar full stop that ends a display statement. */
+.title-dot {
+  display: inline-block;
+  width: .17em;
+  height: .17em;
+  margin-left: .07em;
+  border-radius: 50%;
+  background: var(--moat-solar);
+  vertical-align: baseline;
 }
-.hero-orb-satellite { position: absolute; top: 46%; right: 27% }
-.hero-gesture { position: absolute; bottom: 13%; right: 6% }
+.title-arrow { color: var(--moat-solar) }
+/* A stage and the arrow it hands off to break as one word. */
+.title-pair { white-space: nowrap }
 
-/* Editorial copy column. */
-.hero-copy { position: relative; padding: 150px var(--moat-space-16) 200px; max-width: 1100px }
-.hero-kicker {
+/* Chapter marker: `LABEL / 0N` in mono caps over a hairline rule. */
+.section-eyebrow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--moat-space-3);
   font-family: var(--moat-font-mono);
   font-size: 12px;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--moat-cream-60);
+  color: var(--moat-red);
+}
+.section-eyebrow-slash { opacity: .6 }
+.section-eyebrow-rule { height: 1px; background: var(--moat-solar); opacity: .55 }
+
+/* Numeral disc — the order marker on process cards and proof columns. */
+.number-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--moat-solar);
+  color: var(--moat-navy);
+  font-family: var(--moat-font-display);
+  font-size: 15px;
+  letter-spacing: .02em;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+/* Mono external link with the red rule under it. */
+.mono-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--moat-space-2);
+  font-family: var(--moat-font-mono);
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--moat-ink);
+  border-bottom: 1px solid var(--moat-red);
+  padding-bottom: 2px;
+}
+.link-glyph { font-size: .92em; line-height: 1 }
+
+/* The red dot + solar rule that closes a reading column. */
+.dot-red { width: 8px; height: 8px; border-radius: 50%; background: var(--moat-red); flex: none }
+.rule-solar { flex: 1; height: 1px; background: var(--moat-solar) }
+
+.brush-mark, .hero-orb, .badge-mark, .ink-arrow { display: block; pointer-events: none }
+.badge-text {
+  font-family: var(--moat-font-display);
+  font-size: 21px;
+  letter-spacing: .01em;
+  fill: var(--moat-navy);
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   Hero (PAR-186)
+   The poster. Full-bleed warm paper; the statement is centred display
+   caps with the solar body cresting from behind it and dry-brush ink at
+   each shoulder. Every decorative layer sits in .hero-marks behind the
+   type with pointer-events off, so nothing can intercept a click or
+   cover the headline.
+   ════════════════════════════════════════════════════════════════════ */
+.hero { background: var(--moat-paper); position: relative; overflow: hidden }
+.hero-inner { max-width: var(--moat-page-max); margin: 0 auto; position: relative }
+
+.hero-bar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--moat-space-6);
+  padding: 26px var(--moat-gutter) 0;
+}
+.hero-logo { display: inline-flex; align-items: center }
+.hero-logo:hover { opacity: 1 }
+.nav { display: flex; gap: 10px; align-items: center }
+/* Two outlined pills for the navigational links, one solid solar pill
+   for the single action — the hierarchy is shape and weight, not colour
+   alone. */
+.nav-pill {
+  border: 1.5px solid var(--moat-navy);
+  border-radius: var(--moat-radius-pill);
+  padding: 13px 26px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--moat-ink);
+  white-space: nowrap;
+  transition: background var(--moat-duration-fast) var(--moat-ease);
+}
+.nav-pill:hover { opacity: 1; background: var(--moat-navy-08) }
+.nav-pill-solid {
+  background: var(--moat-solar);
+  border-color: var(--moat-solar);
+  color: var(--moat-navy);
+  font-weight: 700;
+}
+.nav-pill-solid:hover { opacity: 1; background: var(--moat-solar-soft) }
+
+.hero-stage { position: relative; padding: 150px var(--moat-gutter) 0; text-align: center }
+.hero-marks { position: absolute; inset: 0; pointer-events: none; z-index: 0 }
+.hero-orb-rise {
+  position: absolute;
+  left: 50%;
+  top: 250px;
+  transform: translateX(-51%);
+  width: min(66vw, 950px);
+  height: auto;
+}
+.hero-brush-left { position: absolute; left: -3%; bottom: 2%; width: min(18vw, 235px); height: auto }
+.hero-brush-right { position: absolute; right: -6%; top: 2%; width: min(20vw, 265px); height: auto }
+
+.hero-kicker {
+  position: relative;
+  z-index: 2;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--moat-ink);
   margin: 0 0 var(--moat-space-8);
 }
+.hero-paren {
+  color: var(--moat-solar);
+  font-size: 2.8em;
+  line-height: 0;
+  vertical-align: -.32em;
+  margin: 0 .5em;
+}
 .hero-title {
+  position: relative;
+  z-index: 2;
   font-family: var(--moat-font-display);
-  font-size: clamp(52px, 6.4vw, 100px);
-  font-weight: 700;
-  letter-spacing: -.02em;
-  line-height: .98;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(48px, 10.6vw, 150px);
+  line-height: .86;
+  letter-spacing: -.004em;
+  color: var(--moat-navy);
   margin: 0;
 }
-/* Semantic responsive line breaks: each .line is a block span, so the text
-   stays real text (selectable, readable) while breaking where intended. */
-.hero-title .line { display: block }
-.hero-prop {
-  font-size: 21px;
-  line-height: 1.5;
-  color: var(--moat-cream-72);
-  max-width: 680px;
-  margin: var(--moat-space-10) 0 0;
-}
+/* The concept sets both lines to the same measure; the shorter second
+   line gets there by being set larger, not by tracking it apart. */
+.hero-title .line:last-child { font-size: 1.2em }
+.hero-badge { position: absolute; right: 0; bottom: 3%; z-index: 2; width: min(16vw, 210px); height: auto; transform: rotate(-8deg) }
 
-/* ── Two-column labeled sections (Approach / Programs) ── */
-.section {
+/* The rail sits flush on the hero's bottom edge: a sunken pill naming
+   the operating model, linking down to the chapter that expands it. */
+.process-rail {
+  position: relative;
+  z-index: 2;
+  margin: 130px 9% 0;
+  display: flex;
+  align-items: center;
+  gap: var(--moat-space-10);
+  background: var(--moat-navy-045);
+  border-radius: 52px 52px 0 0;
+  padding: 26px 48px 30px;
+}
+.rail-leader {
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--moat-solar) 0 3px, transparent 3px 10px);
+}
+.rail-stages { display: flex; align-items: center; gap: var(--moat-space-6) }
+.rail-stages:hover { opacity: 1 }
+.rail-stage {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--moat-space-6);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--moat-ink);
+}
+.rail-arrow { color: var(--moat-navy); opacity: .7 }
+.rail-stages:hover .rail-stage { color: var(--moat-red) }
+
+/* ════════════════════════════════════════════════════════════════════
+   Chapter 01 — Approach (PAR-186)
+   Display headline, a heavy bracket, then the reading column, with a
+   soft solar circle bleeding off the right edge behind it all.
+   ════════════════════════════════════════════════════════════════════ */
+.approach-section { position: relative; overflow: hidden; padding: 118px var(--moat-gutter) 132px }
+.approach-circle {
+  position: absolute;
+  right: -130px;
+  top: 40px;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  background: var(--moat-solar-soft);
+  opacity: .6;
+  pointer-events: none;
+}
+.approach-grid {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(180px, 300px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 400px);
   gap: var(--moat-space-16);
   align-items: start;
+  padding-top: 58px;
 }
-#approach { padding: 200px var(--moat-space-16) 160px; display: block }
-.section-label { font-size: 17px; color: var(--moat-muted) }
-.section-title {
-  font-size: clamp(36px, 4.2vw, 58px);
-  font-weight: 760;
-  letter-spacing: -.028em;
-  line-height: 1.02;
-  margin: 0;
+.approach-title {
+  font-size: clamp(40px, 6.4vw, 88px);
+  padding-bottom: var(--moat-space-8);
+  border-bottom: 1px solid var(--moat-line);
 }
-#approach .section-title { margin-top: var(--moat-space-5); max-width: 820px }
+/* The bracket is drawn, not typed: three heavy sides of a box, so it
+   keeps its weight whatever the display face resolves to. */
+.approach-bracket {
+  width: 62px;
+  height: 232px;
+  border: 15px solid var(--moat-navy);
+  border-left: 0;
+  margin-top: var(--moat-space-2);
+}
+.approach-copy p { font-size: 19px; line-height: 1.6; color: var(--moat-ink); margin: 0 0 var(--moat-space-6) }
+.approach-close { display: flex; align-items: center; gap: var(--moat-space-4); margin: var(--moat-space-10) 0 0 }
 
-/* ── Approach chapter (PAR-181) ──
-   The chapter body sits in a 620px reading measure: the deliberate
-   measure, with the orb accent placed outside it. Hierarchy before
-   decoration — the accent is small, quiet and never under the text. */
-.approach-chapter { max-width: 620px }
-/* Ghosted chapter number: a large outlined display numeral that reads
-   as composition, not content — the same rule colour as the hairlines. */
-.approach-number {
-  font-family: var(--moat-font-display);
-  font-size: clamp(88px, 9vw, 148px);
-  font-weight: 700;
-  line-height: .9;
-  letter-spacing: -.04em;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--moat-line);
-  margin: 0 0 var(--moat-space-2);
-}
-@supports not (-webkit-text-stroke: 1px) {
-  .approach-number { color: var(--moat-line) }
-}
-/* The orb accent sits in flow after the copy, right-aligned in the
-   chapter's 620px measure — guaranteed clear of the text at every
-   width, so no absolute positioning can collide at narrow desktop. */
-.approach-orb { margin: var(--moat-space-8) 0 0 auto; pointer-events: none }
-.approach-copy p { font-size: 19px; line-height: 1.6; color: var(--moat-ink); margin: 26px 0 0 }
-.approach-copy h2 + p { margin-top: 56px }
-
-/* ── Divider dots ── */
-#divider {
-  padding: 0 var(--moat-space-16);
-  display: grid;
-  grid-template-columns: minmax(180px, 300px) minmax(0, 1fr);
-  gap: var(--moat-space-16);
-}
-#divider svg { display: block; overflow: visible }
-.divider-orb { margin-top: 14px }
-#divider circle {
-  opacity: .85;
-  animation: moatHue 15s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-  /* 250ms is an off-scale v1 value, kept literal so this slice stays
-     visually identical to main (PAR-179). */
-  transition: transform .25s var(--moat-ease);
-}
-#divider circle:hover { transform: scale(1.45) }
-
-/* ── Process chapter (PAR-182) ──
-   One semantic section, label → heading → inverse stage. The eyebrow
-   and heading sit on the warm paper; the three cards live inside a
-   single dark navy inverse panel — the "process stage" — that reads as
-   a deliberate dark slab between the paper chapters. */
-.programs-section { display: block; padding: 150px var(--moat-space-16) 200px }
-.programs-section .section-eyebrow { margin-bottom: var(--moat-space-4) }
-.programs-section .section-title { margin: 0 0 var(--moat-space-8); max-width: 760px }
-.process-stage {
+/* ════════════════════════════════════════════════════════════════════
+   Chapter 02 — Process (PAR-186)
+   A full-bleed navy slab between the two paper chapters, so the method
+   reads as its own act. Halftone stipple bleeds in from both edges; the
+   three cream cards are skewed off square with their content
+   counter-skewed back to level, so the type itself never tilts.
+   ════════════════════════════════════════════════════════════════════ */
+.programs-section {
   background: var(--moat-navy);
   color: var(--moat-cream);
-  border-radius: var(--moat-radius-lg);
-  padding: 64px 56px 72px;
-  display: grid;
-  /* Five emitted children alternate card → arrow → card → arrow → card, so
-     the tracks must alternate too: each card takes a 1fr track (at least
-     its content width) and each arrow takes its own 44px auto track.
-     Plain `repeat(3, 1fr) auto auto` put the arrows in the wide tracks and
-     the last card in a shrinking auto track. */
-  grid-template-columns: minmax(auto, 1fr) auto minmax(auto, 1fr) auto minmax(auto, 1fr);
-  align-items: stretch;
-  column-gap: 40px;
-  row-gap: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 84px 0 108px;
 }
-.process-card {
-  background: var(--moat-cream-05);
-  border: 1px solid var(--moat-cream-16);
-  border-radius: var(--moat-radius-md);
-  padding: 28px 26px 30px;
-  display: flex;
-  flex-direction: column;
+.programs-section::before,
+.programs-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 170px;
+  background-image: radial-gradient(var(--moat-cream) 1.1px, transparent 1.2px);
+  background-size: 11px 11px;
+  opacity: .13;
+  pointer-events: none;
 }
-/* The number is the primary order marker — large, solar, display
-   type — so sequence is read at a glance and never by colour alone. */
-.process-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--moat-space-4) }
-.process-num {
-  font-family: var(--moat-font-display);
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--moat-solar);
-  letter-spacing: -.02em;
-  line-height: 1;
+.programs-section::before { left: 0 }
+.programs-section::after { right: 0 }
+.programs-inner { position: relative; max-width: var(--moat-page-max); margin: 0 auto; padding: 0 var(--moat-gutter) }
+.programs-section .section-eyebrow { color: var(--moat-solar) }
+.programs-section .section-eyebrow-rule { background: var(--moat-solar); opacity: .45 }
+.programs-title {
+  text-align: center;
+  color: var(--moat-cream);
+  font-size: clamp(44px, 7.6vw, 108px);
+  margin: var(--moat-space-10) 0 var(--moat-space-12);
 }
-.process-name { font-size: 24px; font-weight: 700; letter-spacing: -.01em; color: var(--moat-cream); margin: 0 }
-.process-body {
-  font-size: 17px;
-  line-height: 1.55;
-  color: var(--moat-cream-72);
-  margin: 18px 0 0;
-}
-.process-meta {
-  font-family: var(--moat-font-mono);
-  font-size: 12px;
-  letter-spacing: .04em;
-  color: var(--moat-solar);
-  margin: var(--moat-space-5) 0 0;
-}
-/* Original arrow connector: one line, arrowhead and three dots (pure
-   SVG, aria-hidden in markup). Sits in its own grid columns between the
-   cards, centred vertically. */
-.process-arrow {
-  width: 44px;
-  height: 16px;
-  align-self: center;
-  display: block;
-  overflow: visible;
-}
-.process-arrow line,
-.process-arrow path {
-  fill: none;
-  stroke: var(--moat-cream-35);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.process-arrow circle { fill: var(--moat-solar) }
 
-/* ── Proof-principles chapter (PAR-183) ──
-   "Built around your business." The editorial bridge between the navy
-   inverse process stage and the founder chapter. Deliberately light:
-   it stays on the warm paper (no inverse panel) so the dark slab reads
-   as process and this chapter reads as claim — the page alternates
-   dark / light / light as it moves from method to proof to person.
-   Three numbered principles in a 3-up editorial grid, each opening
-   with one small original diagram (orbit / overlap / focus). */
-.proof-section { display: block; padding: 120px var(--moat-space-16) 160px }
-.proof-section .section-eyebrow { margin-bottom: var(--moat-space-4) }
-.proof-section .section-title { margin: 0 0 var(--moat-space-5); max-width: 760px }
-.proof-intro { font-size: 19px; line-height: 1.55; color: var(--moat-muted); max-width: 680px; margin: 0 0 var(--moat-space-12) }
-.proof-grid {
+.process-stage {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: var(--moat-space-8);
-  row-gap: 0;
+  column-gap: 26px;
 }
-/* Each principle: a quiet hairline-top rule, the small diagram, the
-   number + name baseline row, then the explanatory copy. Order is
-   carried by number, position and the DOM order of the list — never
-   by colour alone. */
-.proof-item { border-top: 1px solid var(--moat-line); padding-top: var(--moat-space-5) }
-.proof-diagram { width: 56px; height: 56px; display: block; margin: 0 0 var(--moat-space-6) }
-/* Quiet colouring of the three original diagrams: rings and strokes in
-   the rule colour, one solid solar point per diagram so the accent
-   appears once and small. */
-.proof-diagram ellipse,
-.proof-diagram circle { fill: none; stroke: var(--moat-line); stroke-width: 1.5 }
-.proof-diagram path { fill: var(--moat-cream-05); stroke: var(--moat-line); stroke-width: 1.5 }
-.proof-diagram ellipse:first-of-type,
-.proof-diagram circle:first-of-type { stroke: var(--moat-ink); stroke-width: 2 }
-.proof-diagram circle[r="4.5"],
-.proof-diagram circle[r="3"],
-.proof-diagram circle[r="15"] { fill: var(--moat-solar); stroke: none }
-.proof-item-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--moat-space-4) }
-.proof-name { font-size: 22px; font-weight: 700; letter-spacing: -.01em; margin: 0 }
-/* The number is the primary order marker — display type, red detail
-   (5.2:1 on paper, AA) — mirroring the solar numbers on the navy stage. */
-.proof-num {
+.process-card { background: var(--moat-cream); color: var(--moat-navy); position: relative }
+/* Each card is pasted at its own angle; the first sits highest and on
+   top, so the eye reads left to right down the stagger. */
+.process-card-1 { transform: skewY(-2.2deg); z-index: 3 }
+.process-card-2 { transform: skewY(1.9deg); margin-top: 34px; z-index: 2 }
+.process-card-3 { transform: skewY(-1.5deg); margin-top: 70px; z-index: 1 }
+.process-card-inner { position: relative; padding: 34px 32px 40px; min-height: 272px }
+.process-card-1 .process-card-inner { transform: skewY(2.2deg) }
+.process-card-2 .process-card-inner { transform: skewY(-1.9deg) }
+.process-card-3 .process-card-inner { transform: skewY(1.5deg) }
+.process-name {
   font-family: var(--moat-font-display);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--moat-red);
-  letter-spacing: -.02em;
-  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 62px;
+  line-height: .9;
+  letter-spacing: .002em;
+  color: var(--moat-navy);
+  margin: var(--moat-space-6) 0 0;
 }
-.proof-body { font-size: 16.5px; line-height: 1.55; color: var(--moat-muted); margin: var(--moat-space-4) 0 0 }
+.process-underline { display: block; width: 44px; height: 3px; background: var(--moat-solar); margin: var(--moat-space-4) 0 0 }
+.process-body { font-size: 17px; line-height: 1.5; color: var(--moat-navy); margin: var(--moat-space-4) 0 0 }
+/* The hand-off, drawn in ink. It lives inside the card it leaves, so
+   the list still announces exactly three steps. */
+.process-link { position: absolute; right: 22px; top: 47%; width: 96px; height: auto }
 
-/* ── Founder chapter (PAR-184) ──
-   "The founder." The editorial person-chapter between the light
-   proof-principles grid and the navy contact panel: page stays
-   light / light / dark from method to proof to person. One semantic
-   <section> labelled by its H2; DOM order is eyebrow → portrait →
-   text, which is also reading and focus order at every width. The
-   authorised portrait is framed by one original yellow-orb mark
-   peeking from its top-right corner (decorative, aria-hidden); the
-   map → build → loop gesture closes the text column. */
-.founder-section { display: block; padding: 130px var(--moat-space-16) 190px }
-.founder-section .section-eyebrow { margin-bottom: var(--moat-space-8) }
-.founder-grid {
+/* ════════════════════════════════════════════════════════════════════
+   Chapter 03 — Proof & principles (PAR-186)
+   A heavy display claim on the left; on the right the three places the
+   work is grounded, divided by solar hairlines, each closing with one
+   original diagram.
+   ════════════════════════════════════════════════════════════════════ */
+.proof-section { padding: 108px var(--moat-gutter) 120px }
+.proof-grid {
   display: grid;
-  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1.5fr);
   gap: var(--moat-space-16);
   align-items: start;
+  padding-top: 52px;
 }
-/* Portrait: the authorised photo, recognisable and never covered —
-   the orb sits behind it and peeks from the top-right corner. */
-.founder-media { position: relative; width: 100%; margin: 40px 40px 0 0 }
-.founder-photo {
-  position: relative;
+.proof-title { font-size: clamp(44px, 6.2vw, 86px) }
+.proof-columns {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.proof-item { padding: 0 var(--moat-space-6); border-left: 1px solid var(--moat-solar) }
+.proof-item:first-child { border-left: 0; padding-left: 0 }
+.proof-name {
+  font-family: var(--moat-font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 31px;
+  line-height: .94;
+  letter-spacing: .002em;
+  color: var(--moat-navy);
+  margin: var(--moat-space-5) 0 0;
+}
+.proof-body { font-size: 16.5px; line-height: 1.55; color: var(--moat-muted); margin: var(--moat-space-4) 0 0 }
+.proof-diagram { width: 118px; height: 118px; display: block; margin: var(--moat-space-8) 0 0 }
+.proof-core { fill: var(--moat-solar) }
+.proof-ring { fill: none; stroke: var(--moat-navy); stroke-width: 1.6 }
+.proof-stroke { fill: none; stroke: var(--moat-navy); stroke-width: 5.5; stroke-linecap: round; stroke-linejoin: round }
+
+/* ════════════════════════════════════════════════════════════════════
+   Chapter 04 — Founder (PAR-186)
+   The name in display caps, the bio column, and the portrait as a
+   medallion: a painted sand ground, a solar halo, and the photograph
+   itself reduced to a navy → solar duotone by an inline SVG filter.
+   ════════════════════════════════════════════════════════════════════ */
+.founder-section { padding: 96px var(--moat-gutter) 88px }
+.founder-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 330px) minmax(0, 400px);
+  gap: var(--moat-space-12);
+  align-items: start;
+  padding-top: 52px;
+}
+.founder-title { font-size: clamp(44px, 6.2vw, 86px) }
+.founder-name { color: var(--moat-navy) }
+.founder-bio { font-size: 18px; line-height: 1.5; color: var(--moat-ink); margin: var(--moat-space-2) 0 0 }
+.founder-close { display: flex; align-items: center; gap: var(--moat-space-4); margin: var(--moat-space-8) 0 0 }
+.founder-links { list-style: none; margin: var(--moat-space-8) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--moat-space-4); align-items: flex-start }
+
+.founder-media { position: relative; aspect-ratio: 1 }
+.founder-wash { position: absolute; left: -6%; top: 0; width: 112%; height: auto; opacity: .9; z-index: 0 }
+.founder-disc {
+  position: absolute;
+  left: 8%;
+  top: 2%;
+  width: 84%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--moat-solar);
   z-index: 1;
+}
+/* The authorised photograph is a full-length shot; the concept wants a
+   head-and-shoulders medallion, so the frame clips a circle and the
+   image is scaled about the face rather than being replaced. */
+.founder-frame {
+  position: relative;
+  z-index: 2;
+  width: 78%;
+  margin: 6% auto 0;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.founder-photo {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
   object-fit: cover;
-  object-position: 52% 42%;
-  border-radius: var(--moat-radius-sm);
-  background: #E9ECEF;
+  transform: scale(2.7);
+  transform-origin: 54% 38%;
 }
-.founder-orb {
-  position: absolute;
-  z-index: 0;
-  top: 16px;
-  right: 16px;
-  width: 200px;
-  height: 200px;
-  pointer-events: none;
+/* The duotone is progressive enhancement: without SVG filter support
+   the reader simply gets the plain, recognisable photograph. */
+@supports (filter: url('#x')) {
+  /* Lift contrast before the ramp so the subject lands in navy and the
+     ground behind him lands in solar, rather than both in the middle. */
+  .founder-photo { filter: grayscale(1) contrast(1.45) brightness(1.04) url('#moat-duotone') }
 }
-.founder-body { max-width: 600px }
-.founder-name {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--moat-font-display);
-  font-size: clamp(36px, 3.6vw, 50px);
-  font-weight: 700;
-  letter-spacing: -.028em;
-  line-height: 1.04;
-}
-.founder-name-lines { display: flex; flex-direction: column }
-.founder-name-lines span:last-child { padding-left: .5em }
-.founder-bio { font-size: 18px; line-height: 1.55; color: var(--moat-muted); margin: var(--moat-space-5) 0 0; max-width: 560px }
-.founder-links { display: flex; gap: var(--moat-space-4); flex-wrap: wrap; align-items: baseline; margin-top: var(--moat-space-6) }
-.founder-links .sep { font-family: var(--moat-font-mono); font-size: 12px; color: var(--moat-muted) }
-/* Closes the text column: the original map → build → loop gesture,
-   drawn in once (static with reduced motion), never under the text. */
-.founder-gesture { margin-top: var(--moat-space-10) }
-.mono-link {
-  font-family: var(--moat-font-mono);
-  font-size: 12px;
-  letter-spacing: .06em;
-  color: var(--moat-ink);
-  border-bottom: 1px solid var(--moat-red);
-  padding-bottom: 2px;
-}
+.founder-duotone-defs { position: absolute; width: 0; height: 0; overflow: hidden }
 
-/* ── Contact (PAR-185) ──
-   The finale: the deep-navy inverse panel carries the original yellow
-   dot texture, an editorial "Become uncopyable." heading and a
-   high-contrast, labelled single-column form. The content columns are
-   position:relative so they paint above the dot canvas and scrim — the
-   decoration sits behind, never over the labels or messages. States
-   (sending/sent/error) are signalled in text, never colour alone. */
-#contact { padding: 0 44px 44px }
+/* ════════════════════════════════════════════════════════════════════
+   Chapter 05 — Contact (PAR-186)
+   The finale: a navy panel with the solar body cresting out of its
+   bottom-left corner, the display heading, and the form as three
+   outlined fields over one solar action.
+   ════════════════════════════════════════════════════════════════════ */
+#contact { position: relative; padding: 0 var(--moat-gutter) var(--moat-space-10) }
+.contact-brush { position: absolute; right: 14%; top: -78px; z-index: 2; width: 210px; height: auto }
 .contact-panel {
   background: var(--moat-navy);
   color: var(--moat-cream);
   border-radius: var(--moat-radius-lg);
-  padding: 104px 72px;
+  padding: 76px 68px 92px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--moat-space-16);
-  align-items: center;
+  align-items: start;
   position: relative;
   overflow: hidden;
 }
-.contact-copy { position: relative }
-/* Eyebrow on the navy panel: cream label, solar index — the system's
-   night-ground accent. The rule stays a quiet cream hairline. */
-.contact-copy .section-eyebrow { color: var(--moat-cream-60); margin-bottom: var(--moat-space-6) }
-.contact-copy .section-eyebrow-index { color: var(--moat-solar) }
-.contact-copy .section-eyebrow-rule { background: var(--moat-cream-22) }
-.contact-copy h2 {
-  font-family: var(--moat-font-display);
-  font-size: clamp(38px, 4.4vw, 58px);
-  font-weight: 760;
-  letter-spacing: -.028em;
-  line-height: 1.02;
-  margin: 0;
+.contact-panel::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  background-image: radial-gradient(var(--moat-cream) 1.1px, transparent 1.2px);
+  background-size: 11px 11px;
+  opacity: .12;
+  pointer-events: none;
 }
-.contact-copy p { font-size: 19px; line-height: 1.5; color: var(--moat-cream-72); max-width: 430px; margin: var(--moat-space-6) 0 0 }
-/* The form: intentionally single-column and readable at every width.
-   A visible mono label sits above each control; the controls sit on a
-   cream-05 ground with a cream-35 border — visible field boundaries on
-   the navy panel, the field text itself at 18.8:1 (AAA) cream. */
-.contact-form { display: flex; flex-direction: column; gap: var(--moat-space-5); position: relative; z-index: 1 }
-.contact-field { display: flex; flex-direction: column; gap: 6px }
-.contact-label {
-  font-family: var(--moat-font-mono);
-  font-size: 12px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--moat-cream-72);
-}
+.contact-marks { position: absolute; inset: 0; pointer-events: none; z-index: 0 }
+.contact-orb { position: absolute; left: 4%; bottom: -54%; width: min(34vw, 430px); height: auto }
+.contact-copy { position: relative; z-index: 1 }
+.contact-copy .section-eyebrow { color: var(--moat-solar); margin-bottom: var(--moat-space-10) }
+.contact-copy .section-eyebrow-rule { background: var(--moat-solar); opacity: .45 }
+.contact-title { color: var(--moat-cream); font-size: clamp(44px, 6vw, 90px) }
+.contact-copy p { font-size: 19px; line-height: 1.5; color: var(--moat-cream-72); max-width: 340px; margin: var(--moat-space-6) 0 0 }
+
+.contact-form { display: flex; flex-direction: column; gap: var(--moat-space-4); position: relative; z-index: 1 }
+.contact-field { display: flex; flex-direction: column }
 .contact-form input,
 .contact-form textarea {
-  background: var(--moat-cream-05);
+  background: transparent;
   border: 1px solid var(--moat-cream-35);
   border-radius: var(--moat-radius-sm);
-  padding: 13px 16px;
-  font-family: Figtree, sans-serif;
+  padding: 16px 18px;
+  font-family: var(--moat-font-body);
   font-size: 16px;
   color: var(--moat-cream);
   outline: none;
 }
 .contact-form input::placeholder,
-.contact-form textarea::placeholder { color: rgba(255, 248, 225, .45) }
-/* Visible focus state on the night ground: a solar outline plus the
-   border warming to solar. Never colour alone — the outline shape
-   carries the state for low-vision readers. */
+.contact-form textarea::placeholder { color: var(--moat-cream-72) }
+/* Visible focus on the night ground: a solar outline plus the border
+   warming to solar. Never colour alone — the outline shape carries the
+   state for low-vision readers. */
 .contact-form input:focus-visible,
 .contact-form textarea:focus-visible {
   border-color: var(--moat-solar);
@@ -561,135 +646,126 @@ button:hover { opacity: .85 }
 }
 .contact-form textarea { resize: vertical }
 .contact-form .honeypot { position: absolute; left: -9999px; opacity: 0; pointer-events: none }
-.contact-form button:disabled { opacity: .6; cursor: default }
-/* Error fallback: a text note (role=alert in markup) with the direct
-   mailto. Solar link on navy; the message is legible cream, not colour-
-   coded. */
-.form-note { font-size: 14.5px; line-height: 1.5; color: var(--moat-cream); margin: var(--moat-space-1) 0 0 }
-.form-note a { color: var(--moat-solar) }
 .contact-form button {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--moat-space-3);
   background: var(--moat-solar);
   color: var(--moat-navy);
   border: none;
-  border-radius: var(--moat-radius-sm);
-  padding: var(--moat-space-4);
-  font-family: Figtree, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: var(--moat-radius-pill);
+  padding: 17px 32px;
+  margin-top: var(--moat-space-3);
+  font-family: var(--moat-font-body);
+  font-size: 17px;
+  font-weight: 700;
   cursor: pointer;
 }
+.contact-form button:disabled { opacity: .6; cursor: default }
+/* Error fallback: a text note (role=alert in markup) with the direct
+   mailto. The message is legible cream, not colour-coded. */
+.form-note { font-size: 14.5px; line-height: 1.5; color: var(--moat-cream); margin: var(--moat-space-1) 0 0 }
+.form-note a { color: var(--moat-solar) }
 
-/* ── Footer (PAR-185) ──
-   The colophon in the v2 system: a mono line on the paper ground, the
-   map → build → loop gesture mark (decorative) and the preserved
-   destinations as the system's mono links (ink, red underline). */
+/* ════════════════════════════════════════════════════════════════════
+   Footer (PAR-186)
+   The colophon as one mono line on the warm paper, divided by solar
+   ticks. franciscovarisco.com is not repeated here — it is one scroll
+   up, in the founder chapter.
+   ════════════════════════════════════════════════════════════════════ */
 #footer {
-  padding: 0 var(--moat-space-16) 48px;
+  padding: var(--moat-space-8) var(--moat-gutter) var(--moat-space-12);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: var(--moat-space-6);
   flex-wrap: wrap;
   font-family: var(--moat-font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   letter-spacing: .06em;
   color: var(--moat-muted);
 }
-#footer .mono-link { font-size: 12px; letter-spacing: .06em }
-.footer-links { display: flex; gap: 22px; flex-wrap: wrap; align-items: baseline }
-.footer-gesture { flex: none; opacity: .9 }
+.footer-logo { display: inline-flex; margin-right: var(--moat-space-2) }
+.footer-logo:hover { opacity: 1 }
+.footer-tick { width: 1px; height: 22px; background: var(--moat-solar); flex: none }
+.footer-link { display: inline-flex; align-items: center; gap: var(--moat-space-2); color: var(--moat-ink) }
 
-/* ── Mobile ── */
+/* ════════════════════════════════════════════════════════════════════
+   Narrow screens (PAR-186)
+   The poster becomes a column. Nothing is hidden that carries meaning:
+   the skew comes off the process cards, the multi-column grids collapse
+   in DOM order, and the decorative marks shrink rather than disappear.
+   ════════════════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
-  .hero { border-radius: 0 0 var(--moat-radius-md) var(--moat-radius-md) }
-  /* Intentional two-row header: logo on its own row, full navigation below.
-     No links are hidden — the desktop pill row would clip at 390px. */
-  .hero-bar { flex-wrap: wrap; padding: 18px var(--moat-space-6) }
-  .hero-logo svg { width: 54px; height: 54px }
-  .nav { gap: 18px; font-size: 14px; flex-basis: 100%; order: 2 }
-  /* Full-width nav row: give every link a comfortable, consistent tap target. */
-  .nav a { line-height: 1; padding: 9px 0 }
-  .nav-cta { padding: 9px 16px; font-size: 13px }
-  .hero-copy { padding: 96px var(--moat-space-6) 120px }
-  .hero-kicker { margin-bottom: var(--moat-space-5) }
-  .hero-title { font-size: clamp(38px, 10.5vw, 46px) }
-  .hero-prop { font-size: 17px; margin-top: var(--moat-space-6) }
-  .hero-orb-main { top: -120px; right: -60px; width: min(78vw, 340px) }
-  .hero-orb-satellite { display: none }
-  .hero-gesture { width: 150px; bottom: 8%; right: 4% }
-  #approach { grid-template-columns: 1fr; gap: 22px; padding-left: var(--moat-space-6); padding-right: var(--moat-space-6) }
-  #approach { padding-top: 128px; padding-bottom: 96px }
-  /* 390px chapter: the accent stays in flow, left-aligned under the
-     copy so hierarchy never fights decoration. */
-  .approach-orb { margin-left: 0 }
-  /* 390px process chapter: the inverse stage keeps the navy slab, and the
-     three cards stack in one column with the arrow rotated to a vertical
-     connector — order is still carried by number, name and position. */
-  .programs-section { padding-top: 96px; padding-bottom: 136px; padding-left: var(--moat-space-6); padding-right: var(--moat-space-6) }
-  .programs-section .section-eyebrow { margin-bottom: var(--moat-space-3) }
-  .programs-section .section-title { margin-bottom: var(--moat-space-6) }
-  .process-stage {
-    padding: 36px 22px 40px;
-    border-radius: var(--moat-radius-md);
-    grid-template-columns: 1fr;
-    column-gap: 0;
-    row-gap: 22px;
-  }
-  .process-card { padding: 24px 20px 26px }
-  .process-body { font-size: 16px }
-  /* Same original arrow geometry, turned 90° for the stacked layout. */
-  .process-arrow {
-    width: 16px;
-    height: 44px;
-    transform: rotate(90deg);
-    align-self: center;
-  }
-  /* 390px proof chapter: the three principles form a readable single-
-     column sequence; the diagrams stay small and quiet above each one. */
-  .proof-section { padding: 96px var(--moat-space-6) 110px }
-  .proof-section .section-eyebrow { margin-bottom: var(--moat-space-3) }
-  .proof-section .section-title { margin-bottom: var(--moat-space-5) }
-  .proof-intro { font-size: 17px; margin-bottom: var(--moat-space-8) }
-  .proof-grid { grid-template-columns: 1fr; row-gap: var(--moat-space-10) }
-  .proof-diagram { width: 48px; height: 48px }
-  .proof-name { font-size: 20px }
-  .proof-body { font-size: 16px }
-  .approach-copy p, .approach-copy h2 + p { margin-top: 28px; font-size: 17px }
-  #divider { grid-template-columns: 1fr; padding: 0 var(--moat-space-6) }
-  .divider-orb { display: none }
-  #divider svg { width: 100%; height: auto }
-  /* 390px founder chapter: portrait full-width, text stacks below —
-     reading and focus order follow DOM order (portrait, then text). */
-  .founder-section { padding: 100px var(--moat-space-6) 120px }
-  .founder-section .section-eyebrow { margin-bottom: var(--moat-space-6) }
-  .founder-grid { grid-template-columns: 1fr; row-gap: var(--moat-space-10) }
-  .founder-media { margin: 30px 0 0 }
-  .founder-orb { width: 150px; height: 150px; top: 12px; right: 12px }
-  .founder-name { font-size: clamp(30px, 8.4vw, 38px) }
+  :root { --moat-gutter: 20px }
+
+  /* Intentional two-row header: logo on its own row, full navigation
+     below. No links are hidden — the desktop pill row clips at 390px. */
+  .hero-bar { flex-wrap: wrap; padding-top: 16px }
+  .nav { flex-basis: 100%; order: 2; gap: 8px; padding-top: var(--moat-space-4) }
+  .nav-pill { padding: 10px 15px; font-size: 13.5px }
+  .hero-stage { padding: 68px var(--moat-gutter) 96px }
+  .hero-kicker { font-size: 15px; margin-bottom: var(--moat-space-5) }
+  .hero-paren { font-size: 1.7em; margin: 0 .3em }
+  .hero-title { font-size: clamp(34px, 11.6vw, 54px); line-height: .92 }
+  /* At this measure the second line already fills the width — setting it
+     larger, as the desktop composition does, would push it off-screen. */
+  .hero-title .line:last-child { font-size: 1em }
+  .hero-orb-rise { width: min(86vw, 360px); top: 200px }
+  .hero-brush-left { width: 96px; bottom: 2% }
+  .hero-brush-right { width: 104px; top: -2% }
+  .hero-badge { width: 84px; height: 84px; right: 0; bottom: 6px }
+  .process-rail { margin: 54px var(--moat-space-3) 0; padding: 16px var(--moat-space-5); gap: var(--moat-space-4) }
+  .rail-leader { display: none }
+  .rail-stages { width: 100%; justify-content: center; gap: var(--moat-space-3) }
+  .rail-stage { gap: var(--moat-space-3); font-size: 13px; letter-spacing: .1em }
+
+  .approach-section { padding: 72px var(--moat-gutter) 80px }
+  .approach-grid { grid-template-columns: 1fr; gap: var(--moat-space-8); padding-top: var(--moat-space-10) }
+  .approach-circle { right: -140px; top: 30px; width: 260px; height: 260px }
+  /* The bracket lies down and thins out: it is a mark, not a message. */
+  /* A short rule rather than a full-width bar: at 390px a heavy bar
+     directly under the title's hairline reads as a mistake. */
+  .approach-bracket { width: 88px; height: 22px; border-width: 7px; border-left: 0; border-right: 0 }
+  .approach-copy p { font-size: 17px }
+
+  .programs-section { padding: 64px 0 76px }
+  .programs-section::before, .programs-section::after { width: 60px }
+  .programs-title { font-size: clamp(40px, 13vw, 62px); margin: var(--moat-space-8) 0 var(--moat-space-8) }
+  /* One column, square to the page — a stack of tilted cards is a wall
+     of wasted width at 390px. */
+  .process-stage { grid-template-columns: 1fr; gap: var(--moat-space-5) }
+  .process-card, .process-card-inner { transform: none }
+  .process-card-2, .process-card-3 { margin: 0 }
+  .process-card-inner { padding: 26px 22px 30px; min-height: 0 }
+  .process-name { font-size: 42px }
+  /* Same ink-arrow geometry, turned 90° into a vertical connector. */
+  .process-link { position: static; display: block; margin: var(--moat-space-5) auto 0; width: 44px; transform: rotate(90deg) }
+
+  .proof-section { padding: 76px var(--moat-gutter) 84px }
+  .proof-grid { grid-template-columns: 1fr; gap: var(--moat-space-10); padding-top: var(--moat-space-10) }
+  .proof-columns { grid-template-columns: 1fr; row-gap: var(--moat-space-10) }
+  .proof-item { padding: 0; border-left: 0; border-top: 1px solid var(--moat-solar); padding-top: var(--moat-space-6) }
+  .proof-item:first-child { border-top: 1px solid var(--moat-solar); padding-top: var(--moat-space-6) }
+  .proof-diagram { width: 96px; height: 96px }
+
+  .founder-section { padding: 72px var(--moat-gutter) 84px }
+  .founder-grid { grid-template-columns: 1fr; gap: var(--moat-space-8); padding-top: var(--moat-space-10) }
+  .founder-media { max-width: 340px; margin: var(--moat-space-4) auto 0 }
   .founder-bio { font-size: 17px }
-  .founder-gesture { margin-top: var(--moat-space-8) }
-  #contact { padding: 0 12px 24px }
-  .contact-panel { grid-template-columns: 1fr; padding: 56px var(--moat-space-6); border-radius: var(--moat-radius-md); gap: 36px }
-  #footer { padding: 0 var(--moat-space-6) 36px; flex-direction: column; align-items: flex-start; gap: 14px }
-}
 
-/* ── Map your Moat (PAR-170 POC) ── */
-/* Hero entry point. .hero-copy is pointer-events:none; re-enable for the CTA. */
-.hero-actions { display: flex; align-items: center; gap: var(--moat-space-5); margin-top: 44px; pointer-events: auto; flex-wrap: wrap }
-.hero-cta {
-  background: var(--moat-solar);
-  color: var(--moat-navy);
-  border: none;
-  border-radius: var(--moat-radius-sm);
-  padding: var(--moat-space-4) 30px;
-  font-family: Figtree, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.hero-cta:hover { opacity: 1; background: var(--moat-cream) }
-.hero-cta-note { font-family: var(--moat-font-mono); font-size: 12px; color: var(--moat-cream-60) }
+  #contact { padding: 0 var(--moat-space-3) var(--moat-space-6) }
+  .contact-brush { width: 130px; top: -34px; right: 6% }
+  .contact-panel { grid-template-columns: 1fr; padding: 48px var(--moat-space-6) 56px; border-radius: var(--moat-radius-md); gap: var(--moat-space-10) }
+  .contact-panel::after { width: 60px }
+  .contact-orb { width: 72vw; left: 8%; bottom: -30% }
+  .contact-copy p { font-size: 17px; max-width: none }
+  .contact-form button { width: 100%; justify-content: center }
 
+  #footer { gap: var(--moat-space-4); row-gap: var(--moat-space-3) }
+  .footer-logo { flex-basis: 100%; margin-bottom: var(--moat-space-2) }
+  .footer-tick { display: none }
+}
 /* Full-screen night panel; solar is the only accent on night ground. */
 .moat-assess {
   position: fixed;
@@ -832,73 +908,15 @@ button:hover { opacity: .85 }
   .moat-controls { margin-top: 36px }
   .moat-scores { gap: 36px; margin-top: 32px }
   .moat-gate, .moat-detailed { padding: 22px var(--moat-space-5) }
-  .hero-actions { margin-top: 34px }
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   MOAT v2 primitives (PAR-179)
-
-   Small, original building blocks for the forthcoming section work.
-   Each renders pure CSS/SVG — no external images, fonts or fetches.
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ── Section eyebrow: mono index + label + hairline rule ──
-   Replaces the bare .section-label text in v2 sections. The label
-   keeps the exact colour/size of the old .section-label so existing
-   sections read unchanged; the index and rule are new. */
-.section-eyebrow {
-  display: flex;
-  align-items: baseline;
-  gap: var(--moat-space-3);
-  font-family: var(--moat-font-mono);
-  font-size: 12px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--moat-muted);
-}
-.section-eyebrow-index { color: var(--moat-red) }
-.section-eyebrow-rule { flex: 1; height: 1px; background: var(--moat-line); align-self: center }
-
-/* ── Orb mark: the v2 signature object ──
-   A solid solar core with a dashed orbit ring and one red satellite.
-   The whole group drifts slowly (decorative); the core is static so
-   reduced-motion users still get the full mark. */
-.orb-mark { display: block; overflow: visible }
-@keyframes moatOrbDrift {
-  from { transform: rotate(0deg) }
-  to { transform: rotate(360deg) }
-}
-.orb-mark-orbit {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: moatOrbDrift 48s linear infinite;
-}
-
-/* ── Gesture mark: three hand-drawn strokes (map → build → loop) ──
-   Ink, solar and red arcs that read as a single continuous gesture.
-   Strokes draw in once on load (decorative); with reduced motion they
-   render fully drawn. */
-.gesture-mark { display: block; overflow: visible }
-@keyframes moatGestureDraw {
-  from { stroke-dashoffset: var(--moat-gesture-length, 100) }
-  to { stroke-dashoffset: 0 }
-}
-.gesture-mark path {
-  fill: none;
-  stroke-linecap: round;
-  stroke-dasharray: var(--moat-gesture-length, 100);
-  animation: moatGestureDraw var(--moat-duration-med) var(--moat-ease) both;
-}
-
-/* ── Reduced motion: remove non-essential animation/transition ──
-   Content is never trapped or obscured — only the movement goes. */
+/* ── Reduced motion: remove non-essential transitions ──
+   v3 has no long-running decorative animation to stop; what remains is
+   the short state-change transitions. Content is never trapped or
+   obscured — only the movement goes. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto }
-  #divider circle,
-  .orb-mark-orbit,
-  .gesture-mark path { animation: none }
   a, button,
-  .nav-link, .nav-cta,
-  #divider circle,
+  .nav-pill,
   .moat-progress-fill { transition: none }
 }

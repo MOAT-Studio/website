@@ -1,11 +1,11 @@
-import GestureMark from './GestureMark.jsx'
+import MoatLogo from './MoatLogo.jsx'
 
 /**
- * v2 footer (PAR-185): the colophon, brought into the editorial-orb
- * system. Text and external destinations are preserved exactly — the
- * copyright line, the two secure external links (target=_blank +
- * noopener noreferrer) and the mailto. The map → build → loop gesture
- * mark closes the footer as a decorative, aria-hidden mark.
+ * v3 footer (PAR-186): the colophon as a single line of mono meta on
+ * the warm paper — the tile logo, the copyright, where we are, and the
+ * two preserved external destinations, divided by short solar ticks.
+ * Text and destinations are unchanged: the two external links keep
+ * target=_blank with noopener noreferrer, and the mailto is untouched.
  *
  * <footer> is a semantic landmark (implicit role contentinfo), so the
  * colophon reads as the page's closing region rather than a plain div.
@@ -13,13 +13,21 @@ import GestureMark from './GestureMark.jsx'
 export default function Footer() {
   return (
     <footer id="footer">
-      <span>© 2026 moat studio</span>
-      <GestureMark width={180} decorative className="footer-gesture" />
-      <span className="footer-links">
-        <a href="https://franciscovarisco.com" target="_blank" rel="noopener noreferrer" className="mono-link">franciscovarisco.com</a>
-        <a href="https://linkedin.com/in/xicovarisco" target="_blank" rel="noopener noreferrer" className="mono-link">linkedin</a>
-        <a href="mailto:francisco@moatstudio.ai" className="mono-link">email</a>
-      </span>
+      <a href="#top" className="footer-logo">
+        <MoatLogo size={54} tone="ink" />
+        <span className="visually-hidden">MOAT Studio — back to top</span>
+      </a>
+      <span className="footer-tick" aria-hidden="true" />
+      <span className="footer-item">&copy; 2026 MOAT Studio</span>
+      <span className="footer-tick" aria-hidden="true" />
+      <span className="footer-item">Brisbane, Australia</span>
+      <span className="footer-tick" aria-hidden="true" />
+      <a href="https://linkedin.com/in/xicovarisco" target="_blank" rel="noopener noreferrer" className="footer-item footer-link">
+        LinkedIn<span className="link-glyph" aria-hidden="true">&#8599;</span>
+      </a>
+      <a href="mailto:francisco@moatstudio.ai" className="footer-item footer-link">
+        Email<span className="link-glyph" aria-hidden="true">&#8594;</span>
+      </a>
     </footer>
   )
 }
