@@ -359,6 +359,69 @@ button:hover { opacity: .85 }
 .rail-stages:hover .rail-stage { color: var(--moat-red) }
 
 /* ════════════════════════════════════════════════════════════════════
+   Map your Moat banner
+   The "find your starting point" band: a slim full-bleed navy strip
+   between the hero rail and the Approach chapter, carrying the one
+   entry point into the assessment overlay. The halftone stipple runs
+   across the whole strip (unlike the process slab, where it only bleeds
+   in from the edges) so the band reads as a printed interlude, not a
+   fourth chapter.
+   ════════════════════════════════════════════════════════════════════ */
+.moat-banner {
+  position: relative;
+  overflow: hidden;
+  background: var(--moat-navy);
+  color: var(--moat-cream);
+  padding: 44px 0 48px;
+}
+.moat-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--moat-cream) 1.1px, transparent 1.2px);
+  background-size: 11px 11px;
+  opacity: .13;
+  pointer-events: none;
+}
+.moat-banner :focus-visible { outline-color: var(--moat-solar) }
+.moat-banner-inner {
+  position: relative;
+  max-width: var(--moat-page-max);
+  margin: 0 auto;
+  padding: 0 var(--moat-gutter);
+}
+.moat-banner-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--moat-space-6);
+  margin: 0 0 var(--moat-space-6);
+  font-family: var(--moat-font-mono);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--moat-solar);
+}
+.moat-banner-rule { width: 150px; height: 1px; background: var(--moat-solar); opacity: .45 }
+.moat-banner-row { display: flex; align-items: center; gap: var(--moat-space-12); flex-wrap: wrap }
+.moat-banner-cta {
+  background: var(--moat-solar);
+  color: var(--moat-navy);
+  border-radius: var(--moat-radius-md);
+  padding: 18px 34px;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background var(--moat-duration-fast) var(--moat-ease);
+}
+.moat-banner-cta:hover { opacity: 1; background: var(--moat-solar-soft) }
+.moat-banner-note {
+  font-family: var(--moat-font-mono);
+  font-size: 16px;
+  letter-spacing: .06em;
+  color: var(--moat-cream-72);
+}
+
+/* ════════════════════════════════════════════════════════════════════
    Chapter 01 — Approach (PAR-186)
    Display headline, a heavy bracket, then the reading column, with a
    soft solar circle bleeding off the right edge behind it all.
@@ -710,6 +773,12 @@ button:hover { opacity: .85 }
   .rail-leader { display: none }
   .rail-stages { width: 100%; justify-content: center; gap: var(--moat-space-3) }
   .rail-stage { gap: var(--moat-space-3); font-size: 13px; letter-spacing: .1em }
+
+  .moat-banner { padding: 36px 0 40px }
+  .moat-banner-rule { flex: 1; width: auto }
+  .moat-banner-row { gap: var(--moat-space-6) }
+  .moat-banner-cta { padding: 15px 28px; font-size: 16px }
+  .moat-banner-note { font-size: 13.5px }
 
   .approach-section { padding: 72px var(--moat-gutter) 80px }
   .approach-grid { grid-template-columns: 1fr; gap: var(--moat-space-8); padding-top: var(--moat-space-10) }
