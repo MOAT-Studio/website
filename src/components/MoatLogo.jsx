@@ -1,5 +1,14 @@
-/** MOAT tile logo: four letter glyphs cut out of solid tiles, the O in yellow. */
-export default function MoatLogo({ size = 73 }) {
+/**
+ * MOAT tile logo: four letter glyphs cut out of solid tiles, the O in
+ * yellow. `tone` picks the ground it is standing on — 'cream' for the
+ * night panels (cream tiles, letters knocked through to the navy) and
+ * 'ink' for the warm-paper header and footer (navy tiles, letters
+ * knocked through to the paper, with the O's glyph painted back in navy
+ * so it stays legible on the solar tile).
+ */
+export default function MoatLogo({ size = 73, tone = 'ink' }) {
+  const ink = tone === 'ink'
+  const tile = ink ? 'var(--moat-navy)' : 'var(--moat-cream)'
   return (
     <svg viewBox="0 0 260 260" width={size} height={size} role="img" aria-label="MOAT Studio">
       <defs>
@@ -16,10 +25,11 @@ export default function MoatLogo({ size = 73 }) {
         <symbol id="tile-a" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-a)" /></symbol>
         <symbol id="tile-t" viewBox="0 0 110 110"><rect width="110" height="110" fill="currentColor" mask="url(#cut-t)" /></symbol>
       </defs>
-      <g style={{ color: '#FFF8E1' }}><use href="#tile-m" x="13" y="13" width="110" height="110" /></g>
-      <g style={{ color: '#FFE100' }}><use href="#tile-o" x="137" y="13" width="110" height="110" /></g>
-      <g style={{ color: '#FFF8E1' }}><use href="#tile-a" x="13" y="137" width="110" height="110" /></g>
-      <g style={{ color: '#FFF8E1' }}><use href="#tile-t" x="137" y="137" width="110" height="110" /></g>
+      <g style={{ color: tile }}><use href="#tile-m" x="13" y="13" width="110" height="110" /></g>
+      <g style={{ color: 'var(--moat-solar)' }}><rect x="137" y="13" width="110" height="110" fill="currentColor" /></g>
+      <g style={{ color: 'var(--moat-navy)' }}><use href="#glyph-o" x="155" y="31" width="74" height="74" /></g>
+      <g style={{ color: tile }}><use href="#tile-a" x="13" y="137" width="110" height="110" /></g>
+      <g style={{ color: tile }}><use href="#tile-t" x="137" y="137" width="110" height="110" /></g>
     </svg>
   )
 }

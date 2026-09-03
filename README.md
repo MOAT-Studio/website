@@ -26,28 +26,44 @@ npm run preview    # serve the production build locally
 npm run lint       # zero-dependency checks: JSX syntax, CSS structure, external fetches, v2 tokens
 ```
 
-## MOAT v2 design tokens (PAR-179)
+## MOAT v3 design system (PAR-186)
 
-The editorial-orb visual foundation lives in `src/index.css` as
-`--moat-*` custom properties: warm paper surface, ink/navy inverse, one
-solar accent (`#FFE100`) and one red detail (`#D00000`), plus spacing,
-radii, a condensed-display system font stack (no fonts downloaded) and a
-single motion easing/duration pair.
+The editorial-orb visual system lives in `src/index.css` as `--moat-*`
+custom properties: a warm paper surface (`#FCF6EA`), an ink/navy inverse
+(`#03071E` / `#FDF7EB`), one solar body (`#FDD700`, plus a pale crown, a
+soft midtone and a deep foot) and one red detail (`#D00000`), alongside
+spacing, radii, a page gutter and a single motion easing/duration pair.
 
-Contrast (WCAG 2.x): ink on paper 18.0:1, cream on navy 18.8:1, solar on
-navy 15.2:1 (all AAA); red and muted text on paper ~5:1 (AA). Solar is
-never used for text on the paper surface — fills, rules and marks only.
+Type: body is Figtree, mono detail is Fira Mono, and display is **Anton**
+— a caps-only poster face loaded from the same Google Fonts stylesheet
+(v2 relied on whatever condensed font the reader happened to have
+installed, which is why the headline used to look different on every
+machine). Every display style sets `text-transform: uppercase`.
 
-Motion: state changes use 200–300ms on `--moat-ease`; the only
-long-running animations are decorative (orb drift, divider hue). Under
-`prefers-reduced-motion: reduce` every non-essential animation and
-transition is removed, `DotCanvas` renders a single static frame, and no
-content is trapped or obscured.
+Contrast (WCAG 2.x): ink on paper 19.7:1, muted on paper 7.0:1, cream on
+navy 18.5:1, solar on navy and navy on solar 13.4:1 (all AAA); red on
+paper 5.2:1 (AA). Solar is never used for text on the paper surface —
+fills, rules and marks only.
 
-Reusable v2 primitives in `src/components/`: `SectionEyebrow` (mono
-index + label + hairline rule), `OrbMark` (solar core, dashed orbit, red
-satellite) and `GestureMark` (ink/solar/red map → build → loop strokes).
-All render original CSS/SVG only — no external image or font fetches.
+Motion: state changes use 200–300ms on `--moat-ease`. v3 has no
+long-running decorative animation; under `prefers-reduced-motion: reduce`
+the remaining transitions are removed and no content is trapped or
+obscured.
+
+Every mark on the page is original SVG rendered from the tokens — no
+image assets beyond the founder photograph, and no icon library.
+Reusable primitives in `src/components/`: `SectionEyebrow` (`LABEL / 0N`
+over a hairline), `HeroOrb` (the solar body, `rise` and `sphere`),
+`BrushMark` (dry-brush ink, roughened by an SVG turbulence filter),
+`InkArrow`, `NumberBadge` and `ProcessRail`.
+
+## Evidence
+
+`node scripts/capture-par-186-evidence.mjs` (after `npm run build`)
+captures desktop and narrow screenshots plus a structure, contrast,
+overflow and focus report into `evidence/PAR-186/`. It serves `dist/`
+from a local static server and aborts every non-font external request,
+so no live contact-form submission can leave the page.
 
 ## Deploy
 
@@ -62,11 +78,12 @@ Any static host (Netlify, Cloudflare Pages, GitHub Pages) works the same way.
 
 - `index.html` — Vite entry (fonts, meta)
 - `src/App.jsx` — page composition
-- `src/components/` — one component per section (`Hero`, `Approach`, `Divider`, `Programs`, `Founder`, `Contact`, `Footer`) plus shared pieces (`DotCanvas`, `Highlight`, `MoatLogo`)
-- `src/index.css` — all styling, including the ≤900px mobile breakpoint
+- `src/components/` — one component per section (`Hero`, `Approach`, `Programs`, `ProofPrinciples`, `Founder`, `Contact`, `Footer`) plus the shared marks (`SectionEyebrow`, `HeroOrb`, `BrushMark`, `UncopyableBadge`, `InkArrow`, `NumberBadge`, `ProcessRail`, `MoatLogo`) and the `MapYourMoat` assessment
+- `src/index.css` — all styling, including the ≤900px narrow breakpoint
 - `public/assets/` — images, served at `/assets/*`
 
-The contact form is presentational — no backend is wired yet.
+The contact form posts to FormSubmit. The `Map your moat` assessment has no
+button in the page; it opens from the `/#map-your-moat` deep link on load.
 
 ## License
 

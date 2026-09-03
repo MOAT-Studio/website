@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import Hero from './components/Hero.jsx'
 import Approach from './components/Approach.jsx'
-import Divider from './components/Divider.jsx'
 import Programs from './components/Programs.jsx'
 import ProofPrinciples from './components/ProofPrinciples.jsx'
 import Founder from './components/Founder.jsx'
@@ -19,24 +18,24 @@ export default function App() {
     if (window.location.hash === '#map-your-moat') setAssessmentOpen(true)
   }, [])
 
-  const openAssessment = useCallback(() => {
-    setAssessmentOpen(true)
-    history.replaceState(null, '', '#map-your-moat')
-  }, [])
-
   const closeAssessment = useCallback(() => {
     setAssessmentOpen(false)
     history.replaceState(null, '', window.location.pathname + window.location.search)
-    document.getElementById('map-your-moat-cta')?.focus()
+    // The hero CTA that used to open the assessment is gone (PAR-186), so
+    // return focus to the top of the page rather than dropping it on <body>.
+    document.getElementById('hero-title')?.focus()
   }, [])
 
   return (
     <>
-      <Hero onOpenAssessment={openAssessment} />
+      <Hero />
       <div className="page">
         <Approach />
-        <Divider />
-        <Programs />
+      </div>
+      {/* The process slab is full-bleed: it sits outside .page so the navy
+          runs edge to edge, and manages its own max-width inside. */}
+      <Programs />
+      <div className="page">
         <ProofPrinciples />
         <Founder />
         <Contact />

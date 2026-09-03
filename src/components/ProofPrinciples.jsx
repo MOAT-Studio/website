@@ -1,73 +1,49 @@
+import { Fragment } from 'react'
+import NumberBadge from './NumberBadge.jsx'
 import SectionEyebrow from './SectionEyebrow.jsx'
 
 /**
- * Original principle diagram for "Your workflows" (PAR-183): three
- * dashed loops in horizontal orbit around one solid solar core. The
- * loops are the work that turns; the core is the advantage that stays.
- * Pure SVG, pure v2 tokens — no external assets. Decorative: hidden
- * from assistive technology in markup.
+ * Original principle diagram for "Your workflows" (PAR-186): a
+ * hand-drawn arrow turning all the way around a solid solar core. The
+ * loop is the work that turns; the core is the advantage that stays.
+ * Pure SVG, pure tokens — no external assets. Decorative: hidden from
+ * assistive technology in markup.
  */
 function WorkflowsDiagram() {
   return (
-    <svg
-      viewBox="0 0 120 120"
-      className="proof-diagram"
-      role="presentation"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <circle cx="60" cy="60" r="15" />
-      <ellipse cx="60" cy="60" rx="46" ry="18" />
-      <ellipse cx="60" cy="60" rx="46" ry="18" transform="rotate(60 60 60)" />
-      <ellipse cx="60" cy="60" rx="46" ry="18" transform="rotate(120 60 60)" />
-      <circle cx="106" cy="60" r="3" />
+    <svg viewBox="0 0 120 120" className="proof-diagram" role="presentation" aria-hidden="true" focusable="false">
+      <circle className="proof-core" cx="60" cy="60" r="30" />
+      <path className="proof-stroke" d="M60 12a48 48 0 1 1-40 21" />
+      <path className="proof-stroke" d="M86 88 L92 108 L72 106" />
     </svg>
   )
 }
 
 /**
- * Original principle diagram for "Your knowledge" (PAR-183): two
- * overlapping rings (two circles, even-odd fill so the lens reads as
- * the shared centre) with one solar point where they meet. Pure SVG,
- * pure v2 tokens. Decorative: hidden from assistive technology.
+ * Original principle diagram for "Your knowledge" (PAR-186): two thin
+ * rings that overlap, with the shared lens filled solar — the place
+ * your data and your context meet. Pure SVG, pure tokens. Decorative.
  */
 function KnowledgeDiagram() {
   return (
-    <svg
-      viewBox="0 0 120 120"
-      className="proof-diagram"
-      role="presentation"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path
-        d="M60 22a38 38 0 1 0 0 76 38 38 0 1 0 0-76Z M60 22a38 38 0 1 1 0 76 38 38 0 1 1 0-76Z"
-        fillRule="evenodd"
-      />
-      <circle cx="60" cy="60" r="4.5" />
+    <svg viewBox="0 0 120 120" className="proof-diagram" role="presentation" aria-hidden="true" focusable="false">
+      <path className="proof-core" d="M60 31.2A34 34 0 0 1 60 88.8 34 34 0 0 1 60 31.2Z" />
+      <circle className="proof-ring" cx="42" cy="60" r="34" />
+      <circle className="proof-ring" cx="78" cy="60" r="34" />
     </svg>
   )
 }
 
 /**
- * Original principle diagram for "Your judgement" (PAR-183): concentric
- * focus rings — dashed outer field, solid inner target — one solar
- * point at the centre of gravity. Pure SVG, pure v2 tokens.
- * Decorative: hidden from assistive technology.
+ * Original principle diagram for "Your judgement" (PAR-186): the solar
+ * body held inside four crop marks — the call is framed, and it stays
+ * yours. Pure SVG, pure tokens. Decorative.
  */
 function JudgementDiagram() {
   return (
-    <svg
-      viewBox="0 0 120 120"
-      className="proof-diagram"
-      role="presentation"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <circle cx="60" cy="60" r="46" />
-      <circle cx="60" cy="60" r="30" />
-      <circle cx="60" cy="60" r="14" />
-      <circle cx="60" cy="60" r="4.5" />
+    <svg viewBox="0 0 120 120" className="proof-diagram" role="presentation" aria-hidden="true" focusable="false">
+      <circle className="proof-core" cx="60" cy="60" r="33" />
+      <path className="proof-stroke" d="M14 38V14h24M106 38V14H82M14 82v24h24M106 82v24H82" />
     </svg>
   )
 }
@@ -75,71 +51,70 @@ function JudgementDiagram() {
 const PRINCIPLES = [
   {
     num: '01',
-    name: 'Your workflows',
-    body: 'The work starts from your operations, not a template. We map the workflows you already run — the steps, the hand-offs, the moments where a decision is made — and build only where they create advantage.',
+    name: ['Your', 'workflows'],
+    body: 'We embed AI into the processes that already move your business forward.',
     Diagram: WorkflowsDiagram,
   },
   {
     num: '02',
-    name: 'Your knowledge',
-    body: 'The advantage you hold — your market, your customers, your craft — is the raw material we work from. We encode it with your team, in your terms, so the system keeps understanding the business long after the build.',
+    name: ['Your', 'knowledge'],
+    body: 'We connect your data and context so AI understands what matters.',
     Diagram: KnowledgeDiagram,
   },
   {
     num: '03',
-    name: 'Your judgement',
-    body: 'You stay the one who decides. The system surfaces what it has learned; the call stays yours. Judgement is what a model can’t offer — which is exactly why we build around yours.',
+    name: ['Your', 'judgement'],
+    body: 'We design for human oversight so better decisions compound over time.',
     Diagram: JudgementDiagram,
   },
 ]
 
 /**
- * v2 editorial chapter 03 (PAR-183): "AI built around your business."
+ * v3 editorial chapter 03 (PAR-186): "AI built around your business."
  *
- * The proof-principles chapter is the editorial bridge between the
- * process chapter (#programs) and the founder: three numbered
- * principles — Your workflows, Your knowledge, Your judgement — that
- * show the work is grounded in the client's operation rather than
- * generic AI theatre. Each principle's supporting copy is derived from
- * the site's existing proposition (the hero's core statement) and says
- * nothing unverifiable: no client claims, no benchmarks, no outcomes.
+ * The editorial bridge between the navy process slab and the founder: a
+ * heavy display claim on the left, and on the right the three places
+ * the work is actually grounded — your workflows, your knowledge, your
+ * judgement — each with one original diagram beneath it. The chapter
+ * stays on the warm paper so the slab above it reads as method and this
+ * reads as claim.
  *
- * #proof-principles is a semantic <section> labelled by its H2 ("Built
- * around your business."), so it resolves to one labelled region with a
- * real heading. The three principles form an ordered list; each item
- * keeps its number, heading and explanatory text in the DOM. Each
- * principle carries one original decorative diagram (orbit, overlap,
- * focus — pure SVG, aria-hidden in markup), presented as a light
- * editorial grid on the warm paper, in contrast to the navy inverse
- * process stage directly above it.
+ * #proof-principles is a semantic <section> labelled by its H2. The
+ * three principles are an ordered list; each keeps its numeral, heading
+ * and explanatory text in the DOM, and every diagram is aria-hidden.
+ * Nothing here is unverifiable: no client claims, no benchmarks, no
+ * outcomes.
  */
 export default function ProofPrinciples() {
   return (
-    <section
-      id="proof-principles"
-      aria-labelledby="proof-principles-title"
-      className="proof-section"
-    >
-      <SectionEyebrow index="03" label="Proof" />
-      <h2 id="proof-principles-title" className="section-title">
-        Built around your business.
-      </h2>
-      <p className="proof-intro">
-        The proof of the approach sits in three places the tools never touch:
-        the work you do, the knowledge you hold, and the calls you make.
-      </p>
-      <ol className="proof-grid" aria-label="Three principles: your workflows, your knowledge, your judgement">
-        {PRINCIPLES.map(({ num, name, body, Diagram }) => (
-          <li key={num} className="proof-item">
-            <Diagram />
-            <div className="proof-item-head">
-              <h3 className="proof-name">{name}</h3>
-              <span className="proof-num">{num}</span>
-            </div>
-            <p className="proof-body">{body}</p>
-          </li>
-        ))}
-      </ol>
+    <section id="proof-principles" aria-labelledby="proof-principles-title" className="proof-section">
+      <SectionEyebrow index="03" label="Proof & principles" />
+      <div className="proof-grid">
+        <h2 id="proof-principles-title" className="section-title proof-title">
+          <span className="line">AI built</span>{' '}
+          <span className="line">around your</span>{' '}
+          <span className="line">
+            business<span className="title-dot" aria-hidden="true" />
+          </span>
+        </h2>
+        <ol className="proof-columns" aria-label="Three principles: your workflows, your knowledge, your judgement">
+          {PRINCIPLES.map(({ num, name, body, Diagram }) => (
+            <li key={num} className="proof-item">
+              <NumberBadge>{num}</NumberBadge>
+              <h3 className="proof-name">
+                {name.map((w, i) => (
+                  <Fragment key={w}>
+                    {i > 0 && ' '}
+                    <span className="line">{w}</span>
+                  </Fragment>
+                ))}
+              </h3>
+              <p className="proof-body">{body}</p>
+              <Diagram />
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   )
 }

@@ -78,18 +78,25 @@ check('prefers-reduced-motion block', css.includes('@media (prefers-reduced-moti
 for (const token of ['--moat-paper', '--moat-navy', '--moat-solar', '--moat-red', '--moat-ease']) {
   check(`token ${token}`, css.includes(`${token}:`))
 }
-// OrbMark and GestureMark carry their colours inline, so they must use the
-// tokens directly. SectionEyebrow is styled from index.css, so instead check
-// that its classes are token-styled there.
-for (const prim of ['OrbMark.jsx', 'GestureMark.jsx']) {
+// The SVG marks carry their colours inline, so they must use the tokens
+// directly. SectionEyebrow is styled from index.css, so instead check that
+// its classes are token-styled there.
+for (const prim of ['BrushMark.jsx', 'HeroOrb.jsx', 'InkArrow.jsx']) {
   const code = readFileSync(join(root, 'src', 'components', prim), 'utf8')
   check(`${prim} uses v2 tokens`, code.includes('var(--moat-'))
 }
 {
   const start = css.indexOf('.section-eyebrow {')
-  const end = css.indexOf('/* ── Orb mark', start)
+  const end = css.indexOf('/* Numeral disc', start)
   const eyebrow = css.slice(start, end === -1 ? undefined : end)
   check('SectionEyebrow classes use v2 tokens', eyebrow.includes('var(--moat-'))
+}
+// 6. The display face must be loaded, not merely named — v2 relied on a
+//    system condensed stack that most readers did not have (PAR-186).
+{
+  const html = readFileSync(join(root, 'index.html'), 'utf8')
+  check('Anton display face is loaded', /fonts\.googleapis\.com\/css2\?[^"']*family=Anton/.test(html))
+  check('display token points at Anton', /--moat-font-display:\s*Anton/.test(css))
 }
 
 console.log(failures === 0 ? '\nlint: all checks passed' : `\nlint: ${failures} check(s) failed`)
