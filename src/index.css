@@ -1058,11 +1058,13 @@ html.ink-armed [data-ink]:not(.is-inked) .ink-draw { stroke-dashoffset: 1 }
 
 /* Every solar hairline prints left to right as its chapter is read. */
 html.ink-armed .section-eyebrow-rule,
+html.ink-armed .moat-banner-rule,
 html.ink-armed .rule-solar {
   transform-origin: left center;
   transition: scale var(--moat-duration-slow) var(--moat-ease-stamp);
 }
 html.ink-armed [data-ink]:not(.is-inked) .section-eyebrow-rule,
+html.ink-armed [data-ink]:not(.is-inked) .moat-banner-rule,
 html.ink-armed [data-ink]:not(.is-inked).approach-close .rule-solar,
 html.ink-armed [data-ink]:not(.is-inked).founder-close .rule-solar { scale: 0 1 }
 

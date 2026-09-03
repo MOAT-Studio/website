@@ -12,7 +12,7 @@ export default function MoatBanner({ onOpen }) {
   return (
     <section className="moat-banner" aria-label="Map your moat assessment">
       <div className="moat-banner-inner">
-        <p className="moat-banner-eyebrow">
+        <p className="moat-banner-eyebrow" data-ink>
           Find your starting point
           <span className="moat-banner-rule" aria-hidden="true" />
         </p>

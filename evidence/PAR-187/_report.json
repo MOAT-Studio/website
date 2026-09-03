@@ -1,7 +1,7 @@
 {
   "restingState": {
     "armed": true,
-    "dataInkTotal": 12,
+    "dataInkTotal": 13,
     "stillUndrawn": [],
     "samples": {
       "eyebrowRule": {
@@ -43,9 +43,9 @@
     }
   },
   "finishedPrint": {
-    "animatedAtRest": "1e9c165bffb61134",
-    "javascriptDisabled": "6fd0f941397e876a",
-    "reducedMotion": "6fd0f941397e876a",
+    "animatedAtRest": "3d03cbc16115d1b4",
+    "javascriptDisabled": "3f1124d2293c562e",
+    "reducedMotion": "3f1124d2293c562e",
     "staticPathsIdentical": true
   },
   "noArmingFlash": {
@@ -53,8 +53,18 @@
     "scaleAt40ms": "none"
   },
   "layoutShift": {
-    "total": 0,
-    "entries": []
+    "total": 0.029497090908725567,
+    "entries": [
+      {
+        "value": 0.029497090908725567,
+        "atMs": 46,
+        "sources": [
+          "#text",
+          "#text",
+          "NAV"
+        ]
+      }
+    ]
   },
   "narrowOverflow": {
     "scrollWidth": 390,
