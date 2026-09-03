@@ -8,6 +8,7 @@ import Founder from './components/Founder.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 import MapYourMoat from './components/MapYourMoat.jsx'
+import MoatBanner from './components/MoatBanner.jsx'
 
 export default function App() {
   const [assessmentOpen, setAssessmentOpen] = useState(false)
@@ -18,17 +19,22 @@ export default function App() {
     if (window.location.hash === '#map-your-moat') setAssessmentOpen(true)
   }, [])
 
+  const openAssessment = useCallback(() => setAssessmentOpen(true), [])
+
   const closeAssessment = useCallback(() => {
     setAssessmentOpen(false)
     history.replaceState(null, '', window.location.pathname + window.location.search)
-    // The hero CTA that used to open the assessment is gone (PAR-186), so
-    // return focus to the top of the page rather than dropping it on <body>.
-    document.getElementById('hero-title')?.focus()
+    // Hand focus back to the banner CTA that opens the assessment; the
+    // hero title is the fallback for the #map-your-moat deep-link path.
+    const trigger =
+      document.getElementById('map-your-moat-cta') || document.getElementById('hero-title')
+    trigger?.focus()
   }, [])
 
   return (
     <>
       <Hero />
+      <MoatBanner onOpen={openAssessment} />
       <div className="page">
         <Approach />
       </div>
