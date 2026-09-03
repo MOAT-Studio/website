@@ -81,7 +81,7 @@ for (const token of ['--moat-paper', '--moat-navy', '--moat-solar', '--moat-red'
 // The SVG marks carry their colours inline, so they must use the tokens
 // directly. SectionEyebrow is styled from index.css, so instead check that
 // its classes are token-styled there.
-for (const prim of ['BrushMark.jsx', 'HeroOrb.jsx', 'UncopyableBadge.jsx', 'InkArrow.jsx']) {
+for (const prim of ['BrushMark.jsx', 'HeroOrb.jsx', 'InkArrow.jsx']) {
   const code = readFileSync(join(root, 'src', 'components', prim), 'utf8')
   check(`${prim} uses v2 tokens`, code.includes('var(--moat-'))
 }

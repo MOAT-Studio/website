@@ -153,7 +153,7 @@ const measureStructure = (page) =>
       headingOutline: headings,
       // Every decorative mark must be out of the accessibility tree.
       undecoratedMarks: [
-        ...document.querySelectorAll('.brush-mark, .hero-orb, .badge-mark, .ink-arrow, .proof-diagram, .title-dot, .section-eyebrow-rule'),
+        ...document.querySelectorAll('.brush-mark, .hero-orb, .ink-arrow, .proof-diagram, .title-dot, .section-eyebrow-rule'),
       ].filter((el) => el.getAttribute('aria-hidden') !== 'true').length,
       processSteps: document.querySelectorAll('.process-stage > li').length,
       proofItems: document.querySelectorAll('.proof-columns > li').length,

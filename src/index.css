@@ -61,8 +61,8 @@
   --moat-cream-22: rgba(253, 247, 235, .22);
   --moat-cream-16: rgba(253, 247, 235, .16);
   --moat-cream-05: rgba(253, 247, 235, .05);
+  --moat-navy-28: rgba(3, 7, 30, .28);
   --moat-navy-08: rgba(3, 7, 30, .08);
-  --moat-navy-045: rgba(3, 7, 30, .045);
   --moat-solar-10: rgba(253, 215, 0, .1);
 
   /* Type */
@@ -160,7 +160,7 @@ button:hover { opacity: .85 }
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: .002em;
-  line-height: .88;
+  line-height: 1;
   margin: 0;
   color: var(--moat-navy);
 }
@@ -179,7 +179,10 @@ button:hover { opacity: .85 }
   background: var(--moat-solar);
   vertical-align: baseline;
 }
-.title-arrow { color: var(--moat-solar) }
+/* The arrow glyph is not in the display face, so it falls back to a text
+   font that sets it on the maths axis — well below the middle of these
+   caps. Nudge it up onto the cap centre. */
+.title-arrow { color: var(--moat-solar); display: inline-block; vertical-align: .1em }
 /* A stage and the arrow it hands off to break as one word. */
 .title-pair { white-space: nowrap }
 
@@ -232,14 +235,7 @@ button:hover { opacity: .85 }
 .dot-red { width: 8px; height: 8px; border-radius: 50%; background: var(--moat-red); flex: none }
 .rule-solar { flex: 1; height: 1px; background: var(--moat-solar) }
 
-.brush-mark, .hero-orb, .badge-mark, .ink-arrow { display: block; pointer-events: none }
-.badge-text {
-  font-family: var(--moat-font-display);
-  font-size: 21px;
-  letter-spacing: .01em;
-  fill: var(--moat-navy);
-  text-transform: uppercase;
-}
+.brush-mark, .hero-orb, .ink-arrow { display: block; pointer-events: none }
 
 /* ════════════════════════════════════════════════════════════════════
    Hero (PAR-186)
@@ -322,7 +318,7 @@ button:hover { opacity: .85 }
   font-weight: 400;
   text-transform: uppercase;
   font-size: clamp(48px, 10.6vw, 150px);
-  line-height: .86;
+  line-height: 1;
   letter-spacing: -.004em;
   color: var(--moat-navy);
   margin: 0;
@@ -330,7 +326,6 @@ button:hover { opacity: .85 }
 /* The concept sets both lines to the same measure; the shorter second
    line gets there by being set larger, not by tracking it apart. */
 .hero-title .line:last-child { font-size: 1.2em }
-.hero-badge { position: absolute; right: 0; bottom: 3%; z-index: 2; width: min(16vw, 210px); height: auto; transform: rotate(-8deg) }
 
 /* The rail sits flush on the hero's bottom edge: a sunken pill naming
    the operating model, linking down to the chapter that expands it. */
@@ -341,14 +336,12 @@ button:hover { opacity: .85 }
   display: flex;
   align-items: center;
   gap: var(--moat-space-10);
-  background: var(--moat-navy-045);
-  border-radius: 52px 52px 0 0;
   padding: 26px 48px 30px;
 }
 .rail-leader {
   flex: 1;
   height: 1px;
-  background: repeating-linear-gradient(90deg, var(--moat-solar) 0 3px, transparent 3px 10px);
+  background: repeating-linear-gradient(90deg, var(--moat-navy-28) 0 3px, transparent 3px 10px);
 }
 .rail-stages { display: flex; align-items: center; gap: var(--moat-space-6) }
 .rail-stages:hover { opacity: 1 }
@@ -357,7 +350,7 @@ button:hover { opacity: .85 }
   align-items: center;
   gap: var(--moat-space-6);
   font-size: 19px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--moat-ink);
@@ -402,7 +395,7 @@ button:hover { opacity: .85 }
   height: 232px;
   border: 15px solid var(--moat-navy);
   border-left: 0;
-  margin-top: var(--moat-space-2);
+  align-self: center;
 }
 .approach-copy p { font-size: 19px; line-height: 1.6; color: var(--moat-ink); margin: 0 0 var(--moat-space-6) }
 .approach-close { display: flex; align-items: center; gap: var(--moat-space-4); margin: var(--moat-space-10) 0 0 }
@@ -457,9 +450,9 @@ button:hover { opacity: .85 }
 /* Each card is pasted at its own angle; the first sits highest and on
    top, so the eye reads left to right down the stagger. */
 .process-card-1 { transform: skewY(-2.2deg); z-index: 3 }
-.process-card-2 { transform: skewY(1.9deg); margin-top: 34px; z-index: 2 }
-.process-card-3 { transform: skewY(-1.5deg); margin-top: 70px; z-index: 1 }
-.process-card-inner { position: relative; padding: 34px 32px 40px; min-height: 272px }
+.process-card-2 { transform: skewY(1.9deg); margin-top: 28px; z-index: 2 }
+.process-card-3 { transform: skewY(-1.5deg); margin-top: 56px; z-index: 1 }
+.process-card-inner { position: relative; padding: 30px 30px 34px; min-height: 176px }
 .process-card-1 .process-card-inner { transform: skewY(2.2deg) }
 .process-card-2 .process-card-inner { transform: skewY(-1.9deg) }
 .process-card-3 .process-card-inner { transform: skewY(1.5deg) }
@@ -467,7 +460,7 @@ button:hover { opacity: .85 }
   font-family: var(--moat-font-display);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 62px;
+  font-size: 52px;
   line-height: .9;
   letter-spacing: .002em;
   color: var(--moat-navy);
@@ -477,7 +470,7 @@ button:hover { opacity: .85 }
 .process-body { font-size: 17px; line-height: 1.5; color: var(--moat-navy); margin: var(--moat-space-4) 0 0 }
 /* The hand-off, drawn in ink. It lives inside the card it leaves, so
    the list still announces exactly three steps. */
-.process-link { position: absolute; right: 22px; top: 47%; width: 96px; height: auto }
+.process-link { position: absolute; right: 20px; top: 44%; width: 82px; height: auto }
 
 /* ════════════════════════════════════════════════════════════════════
    Chapter 03 — Proof & principles (PAR-186)
@@ -618,7 +611,6 @@ button:hover { opacity: .85 }
 .contact-copy .section-eyebrow { color: var(--moat-solar); margin-bottom: var(--moat-space-10) }
 .contact-copy .section-eyebrow-rule { background: var(--moat-solar); opacity: .45 }
 .contact-title { color: var(--moat-cream); font-size: clamp(44px, 6vw, 90px) }
-.contact-copy p { font-size: 19px; line-height: 1.5; color: var(--moat-cream-72); max-width: 340px; margin: var(--moat-space-6) 0 0 }
 
 .contact-form { display: flex; flex-direction: column; gap: var(--moat-space-4); position: relative; z-index: 1 }
 .contact-field { display: flex; flex-direction: column }
@@ -707,14 +699,13 @@ button:hover { opacity: .85 }
   .hero-stage { padding: 68px var(--moat-gutter) 96px }
   .hero-kicker { font-size: 15px; margin-bottom: var(--moat-space-5) }
   .hero-paren { font-size: 1.7em; margin: 0 .3em }
-  .hero-title { font-size: clamp(34px, 11.6vw, 54px); line-height: .92 }
+  .hero-title { font-size: clamp(34px, 11.6vw, 54px); line-height: 1.02 }
   /* At this measure the second line already fills the width — setting it
      larger, as the desktop composition does, would push it off-screen. */
   .hero-title .line:last-child { font-size: 1em }
   .hero-orb-rise { width: min(86vw, 360px); top: 200px }
   .hero-brush-left { width: 96px; bottom: 2% }
   .hero-brush-right { width: 104px; top: -2% }
-  .hero-badge { width: 84px; height: 84px; right: 0; bottom: 6px }
   .process-rail { margin: 54px var(--moat-space-3) 0; padding: 16px var(--moat-space-5); gap: var(--moat-space-4) }
   .rail-leader { display: none }
   .rail-stages { width: 100%; justify-content: center; gap: var(--moat-space-3) }
@@ -738,7 +729,7 @@ button:hover { opacity: .85 }
   .process-card, .process-card-inner { transform: none }
   .process-card-2, .process-card-3 { margin: 0 }
   .process-card-inner { padding: 26px 22px 30px; min-height: 0 }
-  .process-name { font-size: 42px }
+  .process-name { font-size: 40px }
   /* Same ink-arrow geometry, turned 90° into a vertical connector. */
   .process-link { position: static; display: block; margin: var(--moat-space-5) auto 0; width: 44px; transform: rotate(90deg) }
 
@@ -759,7 +750,6 @@ button:hover { opacity: .85 }
   .contact-panel { grid-template-columns: 1fr; padding: 48px var(--moat-space-6) 56px; border-radius: var(--moat-radius-md); gap: var(--moat-space-10) }
   .contact-panel::after { width: 60px }
   .contact-orb { width: 72vw; left: 8%; bottom: -30% }
-  .contact-copy p { font-size: 17px; max-width: none }
   .contact-form button { width: 100%; justify-content: center }
 
   #footer { gap: var(--moat-space-4); row-gap: var(--moat-space-3) }

@@ -23,10 +23,10 @@ export default function Footer() {
       <span className="footer-item">Brisbane, Australia</span>
       <span className="footer-tick" aria-hidden="true" />
       <a href="https://linkedin.com/in/xicovarisco" target="_blank" rel="noopener noreferrer" className="footer-item footer-link">
-        LinkedIn<span className="link-glyph" aria-hidden="true">&#8599;</span>
+        LinkedIn
       </a>
       <a href="mailto:francisco@moatstudio.ai" className="footer-item footer-link">
-        Email<span className="link-glyph" aria-hidden="true">&#8594;</span>
+        Email
       </a>
     </footer>
   )

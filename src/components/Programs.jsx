@@ -37,9 +37,7 @@ export default function Programs() {
           <span className="title-pair">
             Build <span className="title-arrow" aria-hidden="true">&#8594;</span>
           </span>{' '}
-          <span className="title-pair">
-            Loop<span className="title-dot" aria-hidden="true" />
-          </span>
+          <span className="title-pair">Loop</span>
         </h2>
         <ol className="process-stage" aria-label="Our process: Map, Build, Loop">
           {PROGRAMS.map((p, i) => (

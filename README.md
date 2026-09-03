@@ -55,8 +55,7 @@ image assets beyond the founder photograph, and no icon library.
 Reusable primitives in `src/components/`: `SectionEyebrow` (`LABEL / 0N`
 over a hairline), `HeroOrb` (the solar body, `rise` and `sphere`),
 `BrushMark` (dry-brush ink, roughened by an SVG turbulence filter),
-`UncopyableBadge` (the scalloped seal), `InkArrow`, `NumberBadge` and
-`ProcessRail`.
+`InkArrow`, `NumberBadge` and `ProcessRail`.
 
 ## Evidence
 

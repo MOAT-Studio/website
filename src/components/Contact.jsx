@@ -67,7 +67,6 @@ export default function Contact() {
               uncopyable<span className="title-dot" aria-hidden="true" />
             </span>
           </h2>
-          <p>Tell us what you&rsquo;re trying to change.</p>
         </div>
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="contact-field">
