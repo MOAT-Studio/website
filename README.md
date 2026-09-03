@@ -45,10 +45,19 @@ navy 18.5:1, solar on navy and navy on solar 13.4:1 (all AAA); red on
 paper 5.2:1 (AA). Solar is never used for text on the paper surface —
 fills, rules and marks only.
 
-Motion: state changes use 200–300ms on `--moat-ease`. v3 has no
-long-running decorative animation; under `prefers-reduced-motion: reduce`
-the remaining transitions are removed and no content is trapped or
-obscured.
+Motion (PAR-187): the page is already printed — motion is the pressroom.
+Only three things move. The sun rises once, on load. The ink draws itself
+the first time you see it. Paper lands with the weight of a stamp. Nothing
+fades in: opacity may assist a physical gesture but never carries an
+entrance alone, so no word and no control is ever invisible.
+
+Scroll reveals are authored as `html.ink-armed [data-ink]:not(.is-inked)`
+and only `src/useInkReveal.js` — one `IntersectionObserver` for the whole
+page — adds `ink-armed`. The DOM default is therefore the finished state:
+with JavaScript off, failed, or `prefers-reduced-motion: reduce`, the page
+renders exactly as it does at rest, with no fallback path to get wrong.
+Everything animates `transform` / `translate` / `scale` / `opacity` /
+`stroke-dashoffset` only, so CLS stays at zero.
 
 Every mark on the page is original SVG rendered from the tokens — no
 image assets beyond the founder photograph, and no icon library.

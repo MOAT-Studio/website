@@ -1,0 +1,74 @@
+{
+  "restingState": {
+    "armed": true,
+    "dataInkTotal": 13,
+    "stillUndrawn": [],
+    "samples": {
+      "eyebrowRule": {
+        "scale": "none",
+        "translate": "none",
+        "opacity": "0.45",
+        "strokeDashoffset": "0px"
+      },
+      "processCard": {
+        "scale": "none",
+        "translate": "none",
+        "opacity": "1",
+        "strokeDashoffset": "0px"
+      },
+      "inkArrow": {
+        "scale": "none",
+        "translate": "none",
+        "opacity": "1",
+        "strokeDashoffset": "0px"
+      },
+      "proofDiagram": {
+        "scale": "none",
+        "translate": "none",
+        "opacity": "1",
+        "strokeDashoffset": "0px"
+      },
+      "contactOrb": {
+        "scale": "none",
+        "translate": "none",
+        "opacity": "1",
+        "strokeDashoffset": "0px"
+      },
+      "contactBrush": {
+        "scale": "none",
+        "translate": "none",
+        "opacity": "1",
+        "strokeDashoffset": "0px"
+      }
+    }
+  },
+  "finishedPrint": {
+    "animatedAtRest": "3d03cbc16115d1b4",
+    "javascriptDisabled": "3f1124d2293c562e",
+    "reducedMotion": "3f1124d2293c562e",
+    "staticPathsIdentical": true
+  },
+  "noArmingFlash": {
+    "approachRuleOnScreenAtLoad": true,
+    "scaleAt40ms": "none"
+  },
+  "layoutShift": {
+    "total": 0.029497090908725567,
+    "entries": [
+      {
+        "value": 0.029497090908725567,
+        "atMs": 46,
+        "sources": [
+          "#text",
+          "#text",
+          "NAV"
+        ]
+      }
+    ]
+  },
+  "narrowOverflow": {
+    "scrollWidth": 390,
+    "innerWidth": 390
+  },
+  "egressViolations": []
+}

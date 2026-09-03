@@ -99,5 +99,24 @@ for (const prim of ['BrushMark.jsx', 'HeroOrb.jsx', 'InkArrow.jsx']) {
   check('display token points at Anton', /--moat-font-display:\s*Anton/.test(css))
 }
 
+// 7. Motion safety (PAR-187). The reduced-motion block must be the
+//    catch-all, not a list of selectors that silently falls behind the next
+//    keyframe; and no scroll-reveal from-state may exist outside the
+//    JS-applied `.ink-armed` scope, or content could hang undrawn with
+//    JavaScript disabled.
+{
+  const reduceBlock = css.slice(css.indexOf('@media (prefers-reduced-motion: reduce)'))
+  check('reduced-motion collapses all animation', reduceBlock.includes('animation-duration: .01ms'))
+  check('reduced-motion collapses all transitions', reduceBlock.includes('transition-duration: .01ms'))
+
+  const undrawn = [...css.matchAll(/^[^\n{]*\[data-ink\]:not\(\.is-inked\)[^\n{]*\{/gm)]
+  const unscoped = undrawn.filter((m) => !m[0].includes('html.ink-armed'))
+  check(
+    'every [data-ink] from-state is scoped to .ink-armed',
+    unscoped.length === 0,
+    `unscoped: ${unscoped.map((m) => m[0].trim()).join(' | ')}`,
+  )
+}
+
 console.log(failures === 0 ? '\nlint: all checks passed' : `\nlint: ${failures} check(s) failed`)
 process.exit(failures === 0 ? 0 : 1)
