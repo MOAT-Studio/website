@@ -403,13 +403,19 @@ button:hover { opacity: .85 }
 }
 .moat-banner-rule { width: 150px; height: 1px; background: var(--moat-solar); opacity: .45 }
 .moat-banner-row { display: flex; align-items: center; gap: var(--moat-space-12); flex-wrap: wrap }
+/* The one action on the band follows the solid-solar CTA standard set
+   by the nav "Get in touch" pill and the contact submit: pill radius,
+   pointer cursor, solar-soft hover with no opacity dim. */
 .moat-banner-cta {
   background: var(--moat-solar);
   color: var(--moat-navy);
-  border-radius: var(--moat-radius-md);
-  padding: 18px 34px;
-  font-size: 18px;
+  border: none;
+  border-radius: var(--moat-radius-pill);
+  padding: 17px 32px;
+  font-family: var(--moat-font-body);
+  font-size: 17px;
   font-weight: 700;
+  cursor: pointer;
   white-space: nowrap;
   transition: background var(--moat-duration-fast) var(--moat-ease);
 }
@@ -777,7 +783,7 @@ button:hover { opacity: .85 }
   .moat-banner { padding: 36px 0 40px }
   .moat-banner-rule { flex: 1; width: auto }
   .moat-banner-row { gap: var(--moat-space-6) }
-  .moat-banner-cta { padding: 15px 28px; font-size: 16px }
+  .moat-banner-cta { padding: 14px 26px; font-size: 16px }
   .moat-banner-note { font-size: 13.5px }
 
   .approach-section { padding: 72px var(--moat-gutter) 80px }
