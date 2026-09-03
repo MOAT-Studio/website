@@ -7,7 +7,10 @@ import { useId } from 'react'
  *
  * On narrow screens CSS rotates this same geometry 90° into a vertical
  * connector (see index.css) — one drawing, both orientations.
- * Decorative: aria-hidden.
+ *
+ * Both paths carry pathLength="1" so a single stroke-dashoffset value
+ * draws either of them regardless of their real length (PAR-187): the
+ * shaft sweeps first, the head lands last. Decorative: aria-hidden.
  */
 export default function InkArrow({ width = 96, tone = 'ink', className }) {
   const id = useId().replace(/:/g, '')
@@ -29,8 +32,8 @@ export default function InkArrow({ width = 96, tone = 'ink', className }) {
         </filter>
       </defs>
       <g filter={`url(#ink-${id})`} fill="none" stroke={stroke} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 24 C28 12, 54 12, 84 19" />
-        <path d="M70 8 L86 19 L68 30" />
+        <path className="ink-draw" data-draw="1" pathLength="1" d="M6 24 C28 12, 54 12, 84 19" />
+        <path className="ink-draw" data-draw="2" pathLength="1" d="M70 8 L86 19 L68 30" />
       </g>
     </svg>
   )

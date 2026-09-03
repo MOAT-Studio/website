@@ -53,7 +53,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" aria-labelledby="contact-title">
+    <section id="contact" aria-labelledby="contact-title" data-ink>
       <BrushMark shape="sweep" width={210} className="contact-brush" />
       <div className="contact-panel">
         <div className="contact-marks" aria-hidden="true">
