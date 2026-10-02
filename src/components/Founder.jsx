@@ -34,7 +34,7 @@ export default function Founder() {
 
         <div className="founder-body">
           <p className="founder-bio">Twenty years building technology inside real businesses.</p>
-          <p className="founder-close" aria-hidden="true">
+          <p className="founder-close" aria-hidden="true" data-ink>
             <span className="dot-red" />
             <span className="rule-solar" />
           </p>

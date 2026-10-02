@@ -39,7 +39,7 @@ export default function Programs() {
           </span>{' '}
           <span className="title-pair">Loop</span>
         </h2>
-        <ol className="process-stage" aria-label="Our process: Map, Build, Loop">
+        <ol className="process-stage" data-ink aria-label="Our process: Map, Build, Loop">
           {PROGRAMS.map((p, i) => (
             <li key={p.num} className={`process-card process-card-${i + 1}`}>
               <div className="process-card-inner">

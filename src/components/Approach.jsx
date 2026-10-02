@@ -29,7 +29,7 @@ export default function Approach() {
           <p>
             Then we design AI that fits the way you work and compounds over time.
           </p>
-          <p className="approach-close" aria-hidden="true">
+          <p className="approach-close" aria-hidden="true" data-ink>
             <span className="dot-red" />
             <span className="rule-solar" />
           </p>

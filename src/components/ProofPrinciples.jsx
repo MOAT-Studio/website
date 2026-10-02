@@ -8,13 +8,16 @@ import SectionEyebrow from './SectionEyebrow.jsx'
  * loop is the work that turns; the core is the advantage that stays.
  * Pure SVG, pure tokens — no external assets. Decorative: hidden from
  * assistive technology in markup.
+ *
+ * On reveal (PAR-187) the loop draws and the arrowhead lands, while the
+ * core never moves — the motion states the same thing the copy does.
  */
 function WorkflowsDiagram() {
   return (
     <svg viewBox="0 0 120 120" className="proof-diagram" role="presentation" aria-hidden="true" focusable="false">
       <circle className="proof-core" cx="60" cy="60" r="30" />
-      <path className="proof-stroke" d="M60 12a48 48 0 1 1-40 21" />
-      <path className="proof-stroke" d="M86 88 L92 108 L72 106" />
+      <path className="proof-stroke ink-draw" data-draw="1" pathLength="1" d="M60 12a48 48 0 1 1-40 21" />
+      <path className="proof-stroke ink-draw" data-draw="2" pathLength="1" d="M86 88 L92 108 L72 106" />
     </svg>
   )
 }
@@ -27,9 +30,9 @@ function WorkflowsDiagram() {
 function KnowledgeDiagram() {
   return (
     <svg viewBox="0 0 120 120" className="proof-diagram" role="presentation" aria-hidden="true" focusable="false">
-      <path className="proof-core" d="M60 31.2A34 34 0 0 1 60 88.8 34 34 0 0 1 60 31.2Z" />
-      <circle className="proof-ring" cx="42" cy="60" r="34" />
-      <circle className="proof-ring" cx="78" cy="60" r="34" />
+      <path className="proof-core proof-flood" d="M60 31.2A34 34 0 0 1 60 88.8 34 34 0 0 1 60 31.2Z" />
+      <circle className="proof-ring ink-draw" data-draw="1" pathLength="1" cx="42" cy="60" r="34" />
+      <circle className="proof-ring ink-draw" data-draw="2" pathLength="1" cx="78" cy="60" r="34" />
     </svg>
   )
 }
@@ -43,7 +46,10 @@ function JudgementDiagram() {
   return (
     <svg viewBox="0 0 120 120" className="proof-diagram" role="presentation" aria-hidden="true" focusable="false">
       <circle className="proof-core" cx="60" cy="60" r="33" />
-      <path className="proof-stroke" d="M14 38V14h24M106 38V14H82M14 82v24h24M106 82v24H82" />
+      <path className="proof-stroke ink-draw" data-draw="1" pathLength="1" d="M14 38V14h24" />
+      <path className="proof-stroke ink-draw" data-draw="2" pathLength="1" d="M106 38V14H82" />
+      <path className="proof-stroke ink-draw" data-draw="3" pathLength="1" d="M14 82v24h24" />
+      <path className="proof-stroke ink-draw" data-draw="4" pathLength="1" d="M106 82v24H82" />
     </svg>
   )
 }
@@ -99,7 +105,7 @@ export default function ProofPrinciples() {
         </h2>
         <ol className="proof-columns" aria-label="Three principles: your workflows, your knowledge, your judgement">
           {PRINCIPLES.map(({ num, name, body, Diagram }) => (
-            <li key={num} className="proof-item">
+            <li key={num} className="proof-item" data-ink>
               <NumberBadge>{num}</NumberBadge>
               <h3 className="proof-name">
                 {name.map((w, i) => (

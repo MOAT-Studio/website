@@ -7,7 +7,7 @@
  */
 export default function SectionEyebrow({ index, label }) {
   return (
-    <div className="section-eyebrow">
+    <div className="section-eyebrow" data-ink>
       <span className="section-eyebrow-text">
         {label} <span className="section-eyebrow-slash" aria-hidden="true">/</span> {index}
       </span>

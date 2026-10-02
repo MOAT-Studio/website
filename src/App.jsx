@@ -9,9 +9,13 @@ import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 import MapYourMoat from './components/MapYourMoat.jsx'
 import MoatBanner from './components/MoatBanner.jsx'
+import useInkReveal from './useInkReveal.js'
 
 export default function App() {
   const [assessmentOpen, setAssessmentOpen] = useState(false)
+
+  // One observer for every [data-ink] section on the page (PAR-187).
+  useInkReveal()
 
   // #map-your-moat deep-links straight into the assessment. Read in an effect
   // only: production HTML is prerendered and has no window.
